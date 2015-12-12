@@ -332,17 +332,13 @@ var mainState = {
       var character = characters.first;
 
       while (characters.position < characters.total) {
-        var happiness = 0;
-
-        happiness += this.calculatePersonHappiness(
+        character.personHappiness = this.calculatePersonHappiness(
           character.rawData, characters
         );
 
-        happiness += this.calculateRoomHappiness(
+        character.roomHappiness = this.calculateRoomHappiness(
           character.rawData, roomName
         );
-
-        character.happiness = happiness;
 
         character = characters.next;
       }
