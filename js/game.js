@@ -74,7 +74,17 @@ var loadState = {
     this.load.image('male',   'assets/characters/male.png');
     this.load.image('female', 'assets/characters/female.png');
 
-    this.load.json('room-data', 'assets/data/rooms.json');
+    this.load.json('room-data',  'assets/data/rooms.json');
+    this.load.json('trait-data', 'assets/data/traits.json');
+
+    this.load.json('character-data',  'assets/data/characters/index.json');
+    this.load.json('cook-data',       'assets/data/characters/cook.json');
+    this.load.json('gardener-data',   'assets/data/characters/gardener.json');
+    this.load.json('lady-data',       'assets/data/characters/lady.json');
+    this.load.json('lord-data',       'assets/data/characters/lord.json');
+    this.load.json('maid-data',       'assets/data/characters/maid.json');
+    this.load.json('mother-data',     'assets/data/characters/mother.json');
+    this.load.json('stable-boy-data', 'assets/data/characters/stable-boy.json');
 
     this.load.physics('physics-data', 'assets/data/physics.json');
 
@@ -226,9 +236,16 @@ var mainState = {
   addCharacters: function addCharacters() {
     this.characters = this.add.group();
 
-    this.addCharacter(500, 0, 'male');
+    var characterData = this.cache.getJSON('character-data');
 
-    this.addCharacter(1000, 0, 'female');
+    for (var i = 0; i < characterData.all.length; i++) {
+      var data = this.cache.getJSON(characterData.all[i] + '-data');
+
+      this.addCharacter(
+        this.rnd.integerInRange(0, this.world.width), 0,
+        data.assets[0]
+      );
+    }
   },
 
   addCharacter: function addCharacter(x, y, assetName) {
