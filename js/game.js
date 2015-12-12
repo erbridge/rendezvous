@@ -2,7 +2,6 @@
 
 'use strict';
 
-// TODO: Specify fonts.
 window.WebFontConfig = {
   google: {
     families: [
@@ -23,6 +22,22 @@ window.startGame = function startGame() {
   game.state.start('load');
 };
 
+var displayState = function displayState(game, stateLabel) {
+  var stateDisplay = game.add.text(
+    0, 0,
+    'state: ' + stateLabel,
+    {
+      font:     'Lora',
+      fontSize: 36,
+
+      fill:   '#fff',
+      stroke: '#000',
+
+      strokeThickness: 3,
+    }
+  );
+};
+
 var loadState = {
   preload: function preload() {
     this.load.script(
@@ -36,7 +51,7 @@ var loadState = {
     this.scale.pageAlignHorizontally = true;
     this.scale.pageAlignVertically   = true;
 
-    // TODO: Load the assets.
+    displayState(this.game, 'loading');
 
     this.load.onLoadComplete.add(function() {
       this.state.start('main');
@@ -49,6 +64,8 @@ var loadState = {
 var mainState = {
   create: function create() {
     this.setupPhysics();
+
+    displayState(this.game, 'main');
   },
 
   update: function update() {},
