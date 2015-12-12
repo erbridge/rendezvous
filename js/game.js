@@ -165,9 +165,8 @@ var mainState = {
 
     touchedBody.toLocalFrame(localPointInBody, physicsPos);
 
-    this.pointerConstraint = this.physics.p2.createRevoluteConstraint(
+    this.pointerConstraint = this.physics.p2.createLockConstraint(
       this.pointerBody,
-      [ 0, 0 ],
       touchedBody,
       [
         this.physics.p2.mpxi(localPointInBody[0]),
