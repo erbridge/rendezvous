@@ -73,9 +73,7 @@ var mainState = {
 
     this.setupScene();
 
-    this.addCharacter(500, 0, 'male');
-
-    this.addCharacter(1000, 0, 'female');
+    this.addCharacters();
 
     if (DEBUG) {
       displayState(this.game, 'main');
@@ -108,8 +106,16 @@ var mainState = {
     floor.body.static = true;
   },
 
-  addCharacter: function addCharacter(x, y, asset) {
-    var character = this.add.sprite(x, y, asset);
+  addCharacters: function addCharacters() {
+    this.characters = this.add.group();
+
+    this.addCharacter(500, 0, 'male');
+
+    this.addCharacter(1000, 0, 'female');
+  },
+
+  addCharacter: function addCharacter(x, y, assetName) {
+    var character = this.characters.create(x, y, assetName);
 
     this.physics.p2.enable(character, DEBUG);
 
