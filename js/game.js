@@ -57,6 +57,8 @@ var loadState = {
     this.load.image('male',   'assets/characters/male.png');
     this.load.image('female', 'assets/characters/female.png');
 
+    this.load.json('room-data', 'assets/data/rooms.json');
+
     this.load.physics('physics-data', 'assets/data/physics.json');
 
     this.load.onLoadComplete.add(function() {
@@ -70,8 +72,8 @@ var loadState = {
 var mainState = {
   create: function create() {
     this.setupPhysics();
-
     this.setupScene();
+    this.setupRooms();
 
     this.addCharacters();
 
@@ -104,6 +106,31 @@ var mainState = {
     floor.body.loadPolygon('physics-data', 'floor');
 
     floor.body.static = true;
+  },
+
+  setupRooms: function setupRooms() {
+    this.rooms = {};
+
+    var roomData = this.cache.getJSON('room-data');
+
+    for (var roomName in roomData) {
+      var data = roomData[roomName];
+
+      var shape = new Phaser.Polygon(data.bounds);
+
+      if (DEBUG) {
+        var debugShape = this.add.graphics();
+
+        debugShape.lineStyle(1, 0x000000);
+        debugShape.beginFill(0x000000, 0.5);
+        debugShape.drawPolygon(shape);
+        debugShape.endFill();
+      }
+
+      this.rooms[roomName] = {
+        shape: shape,
+      };
+    }
   },
 
   addCharacters: function addCharacters() {
