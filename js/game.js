@@ -17,18 +17,6 @@ window.WebFontConfig = {
   },
 };
 
-window.startGame = function startGame() {
-  var game = new Phaser.Game(
-    GAME_WIDTH, GAME_HEIGHT,
-    Phaser.AUTO
-  );
-
-  game.state.add('load', loadState);
-  game.state.add('main', mainState);
-
-  game.state.start('load');
-};
-
 var displayState = function displayState(game, stateLabel) {
   var stateDisplay = game.add.text(
     0, 0,
@@ -127,6 +115,18 @@ var mainState = {
 
     return character;
   },
+};
+
+window.startGame = function startGame() {
+  var game = new Phaser.Game(
+    GAME_WIDTH, GAME_HEIGHT,
+    Phaser.AUTO
+  );
+
+  game.state.add('load', loadState);
+  game.state.add('main', mainState);
+
+  game.state.start('load');
 };
 
 })();
