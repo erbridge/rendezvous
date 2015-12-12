@@ -57,7 +57,7 @@ var loadState = {
     this.load.image('male',   'assets/characters/male.png');
     this.load.image('female', 'assets/characters/female.png');
 
-    this.load.physics('physics-data', 'assets/physics.json');
+    this.load.physics('physics-data', 'assets/data/physics.json');
 
     this.load.onLoadComplete.add(function() {
       this.state.start('main');
