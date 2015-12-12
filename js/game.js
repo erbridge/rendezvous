@@ -91,7 +91,7 @@ var mainState = {
   },
 
   setupScene: function setupScene() {
-    this.add.sprite(0, 0, 'background');
+    this.add.image(0, 0, 'background');
 
     var floor = this.add.sprite(0, 0, 'null');
 
