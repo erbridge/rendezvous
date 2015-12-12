@@ -28,8 +28,8 @@
 
   "people": {
 
-    "likes": [],
+    "loves": [],
 
-    "dislikes": []
+    "hates": []
   }
 }
