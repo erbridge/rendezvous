@@ -90,6 +90,9 @@ var mainState = {
   setupPhysics: function setupPhysics() {
     this.physics.startSystem(Phaser.Physics.P2JS);
 
+    this.floorCollisionGroup     = this.physics.p2.createCollisionGroup();
+    this.characterCollisionGroup = this.physics.p2.createCollisionGroup();
+
     // FIXME: Do we need this?
     this.physics.setBoundsToWorld();
 
@@ -107,6 +110,9 @@ var mainState = {
 
     floor.body.clearShapes();
     floor.body.loadPolygon('physics-data', 'floor');
+
+    floor.body.setCollisionGroup(this.floorCollisionGroup);
+    floor.body.collides(this.characterCollisionGroup);
 
     floor.body.static = true;
   },
@@ -201,6 +207,9 @@ var mainState = {
     var character = this.characters.create(x, y, assetName);
 
     this.physics.p2.enable(character, DEBUG);
+
+    character.body.setCollisionGroup(this.characterCollisionGroup);
+    character.body.collides(this.floorCollisionGroup);
 
     return character;
   },
