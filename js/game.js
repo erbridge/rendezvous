@@ -74,6 +74,7 @@ var mainState = {
     this.setupPhysics();
     this.setupScene();
     this.setupRooms();
+    this.setupInput();
 
     this.addCharacters();
 
@@ -131,6 +132,59 @@ var mainState = {
         shape: shape,
       };
     }
+  },
+
+  setupInput: function setupInput() {
+    this.pointerBody = new p2.Body();
+
+    this.physics.p2.world.addBody(this.pointerBody);
+
+    this.input.onDown.add(this.onPointerDown, this);
+    this.input.onUp.add(this.onPointerUp, this);
+    this.input.addMoveCallback(this.onPointerMove, this);
+  },
+
+  onPointerDown: function onPointerDown(pointer) {
+    var bodies = this.physics.p2.hitTest(
+      pointer.position,
+      this.characters.children
+    );
+
+    if (!bodies.length) {
+      return;
+    }
+
+    var physicsPos = [
+      this.physics.p2.pxmi(pointer.position.x),
+      this.physics.p2.pxmi(pointer.position.y),
+    ];
+
+    var touchedBody = bodies[0];
+
+    var localPointInBody = [ 0, 0 ];
+
+    touchedBody.toLocalFrame(localPointInBody, physicsPos);
+
+    this.pointerConstraint = this.physics.p2.createRevoluteConstraint(
+      this.pointerBody,
+      [ 0, 0 ],
+      touchedBody,
+      [
+        this.physics.p2.mpxi(localPointInBody[0]),
+        this.physics.p2.mpxi(localPointInBody[1]),
+      ]
+    );
+  },
+
+  onPointerUp: function onPointerUp() {
+    this.physics.p2.removeConstraint(this.pointerConstraint);
+
+    delete this.pointerConstraint;
+  },
+
+  onPointerMove: function onPointerMove(pointer) {
+    this.pointerBody.position[0] = this.physics.p2.pxmi(pointer.position.x);
+    this.pointerBody.position[1] = this.physics.p2.pxmi(pointer.position.y);
   },
 
   addCharacters: function addCharacters() {
