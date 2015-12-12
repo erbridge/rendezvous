@@ -83,7 +83,9 @@ var mainState = {
     }
   },
 
-  update: function update() {},
+  update: function update() {
+    this.updateRooms();
+  },
 
   setupPhysics: function setupPhysics() {
     this.physics.startSystem(Phaser.Physics.P2JS);
@@ -145,6 +147,7 @@ var mainState = {
   },
 
   onPointerDown: function onPointerDown(pointer) {
+    // FIMXE: Only do this for the alive children...
     var bodies = this.physics.p2.hitTest(
       pointer.position,
       this.characters.children
@@ -200,6 +203,24 @@ var mainState = {
     this.physics.p2.enable(character, DEBUG);
 
     return character;
+  },
+
+  updateRooms: function updateRooms() {
+    this.characters.forEachAlive(this.updateRoom, this);
+  },
+
+  updateRoom: function updateRoom(character) {
+    if (character.position.equals(character.previousPosition)) {
+      return;
+    }
+
+    for (var roomName in this.rooms) {
+      var room = this.rooms[roomName];
+
+      if (room.shape.contains(character.position.x, character.position.y)) {
+        character.room = roomName;
+      }
+    }
   },
 };
 
