@@ -270,7 +270,7 @@ var mainState = {
       this.addCharacter(
         this.rnd.integerInRange(x.min, x.max),
         (y.min + y.max) / 2,
-        data.assets[0]
+        this.rnd.pick(data.assets)
       );
     }
   },
