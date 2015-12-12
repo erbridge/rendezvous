@@ -93,8 +93,7 @@ var mainState = {
     this.floorCollisionGroup     = this.physics.p2.createCollisionGroup();
     this.characterCollisionGroup = this.physics.p2.createCollisionGroup();
 
-    // FIXME: Do we need this?
-    this.physics.setBoundsToWorld();
+    this.physics.p2.updateBoundsCollisionGroup();
 
     this.physics.p2.gravity.y = GRAVITY;
   },
