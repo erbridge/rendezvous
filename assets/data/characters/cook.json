@@ -1,0 +1,35 @@
+{
+  "name": "Gruel",
+
+  "assets": [
+    "male",
+    "female"
+  ],
+
+  "rooms": {
+
+    "home": "kitchen",
+
+    "likes": [],
+
+    "dislikes": [
+      "kitchen"
+    ]
+  },
+
+  "traits": {
+
+    "own": [],
+
+    "likes": [],
+
+    "dislikes": []
+  },
+
+  "people": {
+
+    "likes": [],
+
+    "dislikes": []
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "Sir John",
+
+  "assets": [
+    "male"
+  ],
+
+  "rooms": {
+
+    "home": "master-bedroom",
+
+    "likes": [
+      "stables",
+      "hallway"
+    ],
+
+    "dislikes": [
+      "master-bedroom"
+    ]
+  },
+
+  "traits": {
+
+    "own": [
+      "smelly",
+      "rich"
+    ],
+
+    "likes": [
+      "servant",
+      "violent"
+    ],
+
+    "dislikes": [
+      "rich"
+    ]
+  },
+
+  "people": {
+
+    "likes": [],
+
+    "dislikes": [
+      "lady"
+    ]
+  }
+}

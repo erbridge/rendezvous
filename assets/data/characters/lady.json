@@ -1,0 +1,48 @@
+{
+  "name": "Lady Josephine",
+
+  "assets": [
+    "female"
+  ],
+
+  "rooms": {
+
+    "home": "master-bedroom",
+
+    "likes": [
+      "stables",
+      "bathroom"
+    ],
+
+    "dislikes": [
+      "master-bedroom"
+    ]
+  },
+
+  "traits": {
+
+    "own": [
+      "haughty",
+      "rich"
+    ],
+
+    "likes": [
+      "rich"
+    ],
+
+    "dislikes": [
+      "smelly"
+    ]
+  },
+
+  "people": {
+
+    "likes": [
+      "stable-boy"
+    ],
+
+    "dislikes": [
+      "lord"
+    ]
+  }
+}

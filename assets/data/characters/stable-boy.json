@@ -1,0 +1,35 @@
+{
+  "name": "James",
+
+  "assets": [
+    "male",
+    "female"
+  ],
+
+  "rooms": {
+
+    "home": "stable",
+
+    "likes": [
+      "stable"
+    ],
+
+    "dislikes": []
+  },
+
+  "traits": {
+
+    "own": [],
+
+    "likes": [],
+
+    "dislikes": []
+  },
+
+  "people": {
+
+    "likes": [],
+
+    "dislikes": []
+  }
+}

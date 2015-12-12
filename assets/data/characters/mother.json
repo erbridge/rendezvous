@@ -1,0 +1,32 @@
+{
+  "name": "Gertrude",
+
+  "assets": [
+    "female"
+  ],
+
+  "rooms": {
+
+    "home": "guest-bedroom",
+
+    "likes": [],
+
+    "dislikes": []
+  },
+
+  "traits": {
+
+    "own": [],
+
+    "likes": [],
+
+    "dislikes": []
+  },
+
+  "people": {
+
+    "likes": [],
+
+    "dislikes": []
+  }
+}

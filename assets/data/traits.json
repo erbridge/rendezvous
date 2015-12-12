@@ -1,0 +1,18 @@
+{
+  "positive": [
+    "kind",
+    "rich",
+    "beautiful"
+  ],
+
+  "neutral": [
+    "servant"
+  ],
+
+  "negative": [
+    "violent",
+    "smelly",
+    "haughty",
+    "dirty"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "Isabella",
+
+  "assets": [
+    "female"
+  ],
+
+  "rooms": {
+
+    "home": "parlour",
+
+    "likes": [],
+
+    "dislikes": []
+  },
+
+  "traits": {
+
+    "own": [],
+
+    "likes": [],
+
+    "dislikes": []
+  },
+
+  "people": {
+
+    "likes": [],
+
+    "dislikes": []
+  }
+}
