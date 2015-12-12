@@ -114,6 +114,8 @@ var mainState = {
     this.constrainCharacters();
 
     this.updateRooms();
+
+    this.updateCharacters();
   },
 
   setupPhysics: function setupPhysics() {
@@ -238,7 +240,9 @@ var mainState = {
     var characterData = this.cache.getJSON('character-data');
 
     for (var i = 0; i < characterData.all.length; i++) {
-      var data = this.cache.getJSON(characterData.all[i] + '-data');
+      var type = characterData.all[i];
+
+      var data = this.cache.getJSON(type + '-data');
 
       var room = this.rooms[data.rooms.home];
 
@@ -269,13 +273,18 @@ var mainState = {
       this.addCharacter(
         this.rnd.integerInRange(x.min, x.max),
         (y.min + y.max) / 2,
-        this.rnd.pick(data.assets)
+        this.rnd.pick(data.assets),
+        type,
+        data
       );
     }
   },
 
-  addCharacter: function addCharacter(x, y, assetName) {
+  addCharacter: function addCharacter(x, y, assetName, type, rawData) {
     var character = this.characters.create(x, y, assetName);
+
+    character.type    = type;
+    character.rawData = rawData;
 
     this.physics.p2.enable(character, DEBUG);
 
@@ -309,6 +318,106 @@ var mainState = {
         character.room = roomName;
       }
     }
+  },
+
+  updateCharacters: function updateCharacters() {
+    for (var roomName in this.rooms) {
+      var characters = this.characters.filter(
+        function isInRoom(character) {
+          return character.room === roomName;
+        },
+        true
+      );
+
+      var character = characters.first;
+
+      while (characters.position < characters.total) {
+        var happiness = 0;
+
+        happiness += this.calculatePersonHappiness(
+          character.rawData, characters
+        );
+
+        happiness += this.calculateRoomHappiness(
+          character.rawData, roomName
+        );
+
+        character.happiness = happiness;
+
+        character = characters.next;
+      }
+    }
+  },
+
+  // Assume we only have one of each type.
+  calculatePersonHappiness: function calculatePersonHappiness(
+    characterData, characters
+  ) {
+    for (var i = 0; i < characterData.people.hates.length; i++) {
+      if (!characters.getByKey('type', characterData.people.hates[i])) {
+        continue;
+      }
+
+      return -1;
+    }
+
+    for (var j = 0; j < characterData.people.loves.length; j++) {
+      if (!characters.getByKey('type', characterData.people.loves[j])) {
+        continue;
+      }
+
+      return 1;
+    }
+
+    var happiness = 0;
+
+    for (var k = 0; k < characters.list.length; k++) {
+      var target = characters.list[k];
+
+      if (target.type === characterData.type) {
+        continue;
+      }
+
+      var trait;
+
+      for (var l = 0; l < characterData.traits.dislikes; l++) {
+        trait = characterData.traits.dislikes[l];
+
+        if (target.rawData.traits.own.indexOf(trait) !== -1) {
+          happiness--;
+        }
+      }
+
+      for (var m = 0; m < characterData.traits.likes; m++) {
+        trait = characterData.traits.likes[m];
+
+        if (target.rawData.traits.own.indexOf(trait) !== -1) {
+          happiness++;
+        }
+      }
+    }
+
+    if (happiness < 0) {
+      return -1;
+    }
+
+    if (happiness > 0) {
+      return 1;
+    }
+
+    return 0;
+  },
+
+  calculateRoomHappiness: function calculateRoomHappiness(characterData, roomName) {
+    if (characterData.rooms.dislikes.indexOf(roomName) !== -1) {
+      return -1;
+    }
+
+    if (characterData.rooms.likes.indexOf(roomName) !== -1) {
+      return 1;
+    }
+
+    return 0;
   },
 };
 
