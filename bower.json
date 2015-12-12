@@ -1,0 +1,7 @@
+{
+  "name": "rendezvous",
+  "private": true,
+  "dependencies": {
+    "phaser": "~2.4.4"
+  }
+}
