@@ -47,9 +47,17 @@ var loadState = {
 };
 
 var mainState = {
-  create: function create() {},
+  create: function create() {
+    this.setupPhysics();
+  },
 
   update: function update() {},
+
+  setupPhysics: function setupPhysics() {
+    this.physics.startSystem(Phaser.Physics.P2JS);
+
+    this.physics.setBoundsToWorld();
+  },
 };
 
 })();
