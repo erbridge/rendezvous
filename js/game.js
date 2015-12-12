@@ -181,7 +181,6 @@ var mainState = {
   },
 
   onPointerDown: function onPointerDown(pointer) {
-    // FIMXE: Only do this for the alive children...
     var bodies = this.physics.p2.hitTest(
       pointer.position,
       this.characters.children
@@ -289,13 +288,13 @@ var mainState = {
   },
 
   constrainCharacters: function constrainCharacters() {
-    this.characters.forEachAlive(function constrain(character) {
+    this.characters.forEachExists(function constrainCharacter(character) {
       constrainVelocity(character, MAX_CHARACTER_VELOCITY);
     }, this);
   },
 
   updateRooms: function updateRooms() {
-    this.characters.forEachAlive(this.updateRoom, this);
+    this.characters.forEachExists(this.updateRoom, this);
   },
 
   updateRoom: function updateRoom(character) {
