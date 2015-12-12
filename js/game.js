@@ -4,6 +4,9 @@
 
 var DEBUG = true;
 
+var GAME_WIDTH  = 1920;
+var GAME_HEIGHT = 1080;
+
 window.WebFontConfig = {
   google: {
     families: [
@@ -14,7 +17,7 @@ window.WebFontConfig = {
 
 window.startGame = function startGame() {
   var game = new Phaser.Game(
-    1920, 1080,
+    GAME_WIDTH, GAME_HEIGHT,
     Phaser.AUTO
   );
 
