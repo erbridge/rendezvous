@@ -64,8 +64,10 @@ var loadState = {
 
     this.load.image('null',       'assets/null.png');
     this.load.image('background', 'assets/background.png');
-    this.load.image('male',       'assets/characters/male.png');
-    this.load.image('female',     'assets/characters/female.png');
+    this.load.image('moon',       'assets/moon.png');
+
+    this.load.image('male',   'assets/characters/male.png');
+    this.load.image('female', 'assets/characters/female.png');
 
     this.load.physics('physics-data', 'assets/physics.json');
 
@@ -105,6 +107,8 @@ var mainState = {
 
   setupScene: function setupScene() {
     this.add.image(0, 0, 'background');
+
+    this.add.image(80, 100, 'moon');
 
     var floor = this.add.sprite(0, 0, 'null');
 
