@@ -205,13 +205,17 @@ var mainState = {
   },
 
   onPointerUp: function onPointerUp() {
-    this.physics.p2.removeConstraint(this.pointerConstraint);
+    if (this.pointerConstraint) {
+      this.physics.p2.removeConstraint(this.pointerConstraint);
 
-    delete this.pointerConstraint;
+      delete this.pointerConstraint;
+    }
 
-    this.touchedCharacterBody.collides(this.floorCollisionGroup);
+    if (this.touchedCharacterBody) {
+      this.touchedCharacterBody.collides(this.floorCollisionGroup);
 
-    delete this.touchedCharacterBody;
+      delete this.touchedCharacterBody;
+    }
   },
 
   onPointerMove: function onPointerMove(pointer) {
