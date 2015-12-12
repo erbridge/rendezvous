@@ -168,26 +168,30 @@ var mainState = {
       this.physics.p2.pxmi(pointer.position.y),
     ];
 
-    var touchedBody = bodies[0];
-
     var localPointInBody = [ 0, 0 ];
 
-    touchedBody.toLocalFrame(localPointInBody, physicsPos);
+    this.touchedCharacterBody = bodies[0].parent;
+
+    this.touchedCharacterBody.toLocalFrame(localPointInBody, physicsPos);
 
     this.pointerConstraint = this.physics.p2.createLockConstraint(
       this.pointerBody,
-      touchedBody,
+      this.touchedCharacterBody,
       [
         this.physics.p2.mpxi(localPointInBody[0]),
         this.physics.p2.mpxi(localPointInBody[1]),
       ]
     );
+
+    this.touchedCharacterBody.removeCollisionGroup(this.floorCollisionGroup);
   },
 
   onPointerUp: function onPointerUp() {
     this.physics.p2.removeConstraint(this.pointerConstraint);
 
     delete this.pointerConstraint;
+
+    this.touchedCharacterBody.collides(this.floorCollisionGroup);
   },
 
   onPointerMove: function onPointerMove(pointer) {
