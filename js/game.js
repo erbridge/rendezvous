@@ -7,6 +7,8 @@ var DEBUG = true;
 var GAME_WIDTH  = 1920;
 var GAME_HEIGHT = 1080;
 
+var GRAVITY = 1000;
+
 window.WebFontConfig = {
   google: {
     families: [
@@ -62,6 +64,8 @@ var loadState = {
 
     this.load.image('null',       'assets/null.png');
     this.load.image('background', 'assets/background.png');
+    this.load.image('male',       'assets/characters/male.png');
+    this.load.image('female',     'assets/characters/female.png');
 
     this.load.physics('physics-data', 'assets/physics.json');
 
@@ -79,6 +83,10 @@ var mainState = {
 
     this.setupScene();
 
+    this.addCharacter(500, 0, 'male');
+
+    this.addCharacter(1000, 0, 'female');
+
     if (DEBUG) {
       displayState(this.game, 'main');
     }
@@ -91,6 +99,8 @@ var mainState = {
 
     // FIXME: Do we need this?
     this.physics.setBoundsToWorld();
+
+    this.physics.p2.gravity.y = GRAVITY;
   },
 
   setupScene: function setupScene() {
@@ -104,6 +114,14 @@ var mainState = {
     floor.body.loadPolygon('physics-data', 'floor');
 
     floor.body.static = true;
+  },
+
+  addCharacter: function addCharacter(x, y, asset) {
+    var character = this.add.sprite(x, y, asset);
+
+    this.physics.p2.enable(character, DEBUG);
+
+    return character;
   },
 };
 
