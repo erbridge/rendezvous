@@ -191,6 +191,8 @@ var mainState = {
     delete this.pointerConstraint;
 
     this.touchedCharacterBody.collides(this.floorCollisionGroup);
+
+    delete this.touchedCharacterBody;
   },
 
   onPointerMove: function onPointerMove(pointer) {
