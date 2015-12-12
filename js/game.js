@@ -2,6 +2,8 @@
 
 'use strict';
 
+var DEBUG = true;
+
 window.WebFontConfig = {
   google: {
     families: [
@@ -51,7 +53,9 @@ var loadState = {
     this.scale.pageAlignHorizontally = true;
     this.scale.pageAlignVertically   = true;
 
-    displayState(this.game, 'loading');
+    if (DEBUG) {
+      displayState(this.game, 'loading');
+    }
 
     this.load.onLoadComplete.add(function() {
       this.state.start('main');
@@ -65,7 +69,9 @@ var mainState = {
   create: function create() {
     this.setupPhysics();
 
-    displayState(this.game, 'main');
+    if (DEBUG) {
+      displayState(this.game, 'main');
+    }
   },
 
   update: function update() {},
