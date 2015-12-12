@@ -8,10 +8,10 @@
 
   "rooms": {
 
-    "home": "stable",
+    "home": "stables",
 
     "likes": [
-      "stable"
+      "stables"
     ],
 
     "dislikes": []
