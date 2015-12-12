@@ -241,8 +241,35 @@ var mainState = {
     for (var i = 0; i < characterData.all.length; i++) {
       var data = this.cache.getJSON(characterData.all[i] + '-data');
 
+      var room = this.rooms[data.rooms.home];
+
+      var roomPoints = room.shape.toNumberArray();
+
+      var x = {
+        min: this.world.width,
+        max: 0,
+      };
+
+      var y = {
+        min: this.world.height,
+        max: 0,
+      };
+
+      for (var j = 0; j < roomPoints.length; j++) {
+        var coord = roomPoints[j];
+
+        if (j % 2) {
+          y.min = Math.min(y.min, coord);
+          y.max = Math.max(y.max, coord);
+        } else {
+          x.min = Math.min(x.min, coord);
+          x.max = Math.max(x.max, coord);
+        }
+      }
+
       this.addCharacter(
-        this.rnd.integerInRange(0, this.world.width), 0,
+        this.rnd.integerInRange(x.min, x.max),
+        (y.min + y.max) / 2,
         data.assets[0]
       );
     }
