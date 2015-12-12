@@ -236,6 +236,8 @@ var mainState = {
 
     this.physics.p2.enable(character, DEBUG);
 
+    character.body.fixedRotation = true;
+
     character.body.setCollisionGroup(this.characterCollisionGroup);
     character.body.collides(this.floorCollisionGroup);
 
