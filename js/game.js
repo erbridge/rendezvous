@@ -7,7 +7,9 @@ var DEBUG = true;
 var GAME_WIDTH  = 1920;
 var GAME_HEIGHT = 1080;
 
-var GRAVITY = 1000;
+var GRAVITY = 10000;
+
+var MAX_CHARACTER_VELOCITY = 50;
 
 window.WebFontConfig = {
   google: {
@@ -31,6 +33,21 @@ var displayState = function displayState(game, stateLabel) {
       strokeThickness: 3,
     }
   );
+};
+
+var constrainVelocity = function constrainVelocity(sprite, maxVelocity) {
+  var vx = sprite.body.data.velocity[0];
+  var vy = sprite.body.data.velocity[1];
+
+  if (vx * vx + vy * vy > maxVelocity * maxVelocity) {
+    var angle = Math.atan2(vy, vx);
+
+    vx = Math.cos(angle) * maxVelocity;
+    vy = Math.sin(angle) * maxVelocity;
+
+    sprite.body.data.velocity[0] = vx;
+    sprite.body.data.velocity[1] = vy;
+  }
 };
 
 var loadState = {
@@ -84,6 +101,8 @@ var mainState = {
   },
 
   update: function update() {
+    this.constrainCharacters();
+
     this.updateRooms();
   },
 
@@ -217,6 +236,12 @@ var mainState = {
     character.body.collides(this.floorCollisionGroup);
 
     return character;
+  },
+
+  constrainCharacters: function constrainCharacters() {
+    this.characters.forEachAlive(function constrain(character) {
+      constrainVelocity(character, MAX_CHARACTER_VELOCITY);
+    }, this);
   },
 
   updateRooms: function updateRooms() {
