@@ -57,7 +57,8 @@ var loadState = {
       displayState(this.game, 'loading');
     }
 
-    this.load.image('house', 'assets/house.jpg');
+    this.load.image('null',       'assets/null.png');
+    this.load.image('background', 'assets/background.png');
 
     this.load.physics('physics-data', 'assets/physics.json');
 
@@ -73,7 +74,7 @@ var mainState = {
   create: function create() {
     this.setupPhysics();
 
-    this.createHouse();
+    this.setupScene();
 
     if (DEBUG) {
       displayState(this.game, 'main');
@@ -85,20 +86,21 @@ var mainState = {
   setupPhysics: function setupPhysics() {
     this.physics.startSystem(Phaser.Physics.P2JS);
 
+    // FIXME: Do we need this?
     this.physics.setBoundsToWorld();
   },
 
-  createHouse: function createHouse() {
-    this.house = this.add.sprite(
-      this.world.centerX, this.world.centerY, 'house'
-    );
+  setupScene: function setupScene() {
+    this.add.sprite(0, 0, 'background');
 
-    this.physics.p2.enable(this.house, DEBUG);
+    var floor = this.add.sprite(0, 0, 'null');
 
-    this.house.body.clearShapes();
-    this.house.body.loadPolygon('physics-data', 'house');
+    this.physics.p2.enable(floor, DEBUG);
 
-    this.house.body.static = true;
+    floor.body.clearShapes();
+    floor.body.loadPolygon('physics-data', 'floor');
+
+    floor.body.static = true;
   },
 };
 
