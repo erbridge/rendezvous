@@ -47,8 +47,14 @@
 
   "people": {
 
-    "loves": [],
+    "loves": [
+      "maid",
+      "stable-boy"
+    ],
 
-    "hates": []
+    "hates": [
+      "lady",
+      "lord"
+    ]
   }
 }

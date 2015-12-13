@@ -43,8 +43,13 @@
 
   "people": {
 
-    "loves": [],
+    "loves": [
+      "lord",
+      "gardener"
+    ],
 
-    "hates": []
+    "hates": [
+      "cook"
+    ]
   }
 }

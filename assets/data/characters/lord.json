@@ -45,7 +45,13 @@
 
   "people": {
 
-    "loves": [],
+    "loves": [
+      "mother",
+      "maid",
+      "stable-boy",
+      "cook",
+      "gardener"
+    ],
 
     "hates": [
       "lady"
