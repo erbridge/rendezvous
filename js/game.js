@@ -509,18 +509,18 @@ var mainState = {
 
       if (xMinDistance > 0) {
         direction += 'right';
-        distanceSquared = xMinDistance * xMinDistance;
+        distanceSquared += xMinDistance * xMinDistance;
       } else if (xMaxDistance > 0) {
         direction += 'left';
-        distanceSquared = xMaxDistance * xMaxDistance;
+        distanceSquared += xMaxDistance * xMaxDistance;
       }
 
       if (yMinDistance > 0) {
         direction += 'down';
-        distanceSquared = distanceSquared + yMinDistance * yMinDistance;
+        distanceSquared += yMinDistance * yMinDistance;
       } else if (yMaxDistance > 0) {
         direction += 'up';
-        distanceSquared = distanceSquared + yMaxDistance * yMaxDistance;
+        distanceSquared += yMaxDistance * yMaxDistance;
       }
 
       if (distanceSquared < roomDistanceSquared) {
