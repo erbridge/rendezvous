@@ -39,12 +39,12 @@
 
   "people": {
 
-    "loves": [
-      "mother"
-    ],
+    "loves": {
+      "mother": []
+    },
 
-    "hates": [
-      "lady"
-    ]
+    "hates": {
+      "lady": []
+    }
   }
 }

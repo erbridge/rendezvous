@@ -40,13 +40,20 @@
 
   "people": {
 
-    "loves": [
-      "stable-boy"
-    ],
+    "loves": {
+      "stable-boy": [
+        "Oh, you take my breath away..."
+      ]
+    },
 
-    "hates": [
-      "lord",
-      "mother"
-    ]
+    "hates": {
+      "lord": [
+        "Get away from me you loathesome man...",
+        "Shoo!"
+      ],
+      "mother": [
+        "Stop fussing, mother!"
+      ]
+    }
   }
 }

@@ -41,8 +41,8 @@
 
   "people": {
 
-    "loves": [],
+    "loves": {},
 
-    "hates": []
+    "hates": {}
   }
 }

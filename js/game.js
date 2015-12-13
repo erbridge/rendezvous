@@ -326,6 +326,12 @@ var mainState = {
 
       labelY -= character.roomHappinessLabel.height;
 
+      character.responseLabel = this.game.add.text(0, labelY, '', style);
+      character.responseLabel.anchor.set(0.5, 1);
+      character.addChild(character.responseLabel);
+
+      labelY -= character.responseLabel.height;
+
       var typeLabel = this.game.add.text(0, labelY, character.type, style);
       typeLabel.anchor.set(0.5, 1);
       character.addChild(typeLabel);
@@ -402,30 +408,39 @@ var mainState = {
       }
     }
 
+    this.characters.forEachExists(this.maybeSetResponse, this);
     this.characters.forEachExists(this.updateCharacterPosition, this);
   },
 
   // Assume we only have one of each type.
   getPersonReaction: function getPersonReaction(characterData, characters) {
-    for (var i = 0; i < characterData.people.hates.length; i++) {
-      if (!characters.getByKey('type', characterData.people.hates[i])) {
+    var hatedTypes = Object.keys(characterData.people.hates);
+
+    for (var i = 0; i < hatedTypes.length; i++) {
+      var hatedType = hatedTypes[i];
+
+      if (!characters.getByKey('type', hatedType)) {
         continue;
       }
 
       return {
         happiness: -1,
-        responses: [],
+        responses: characterData.people.hates[hatedType],
       };
     }
 
-    for (var j = 0; j < characterData.people.loves.length; j++) {
-      if (!characters.getByKey('type', characterData.people.loves[j])) {
+    var lovedTypes = Object.keys(characterData.people.loves);
+
+    for (var j = 0; j < lovedTypes.length; j++) {
+      var lovedType = lovedTypes[j];
+
+      if (!characters.getByKey('type', lovedType)) {
         continue;
       }
 
       return {
         happiness: 1,
-        responses: [],
+        responses: characterData.people.loves[lovedType],
       };
     }
 
@@ -497,6 +512,20 @@ var mainState = {
       happiness: 0,
       responses: [],
     };
+  },
+
+  maybeSetResponse: function maybeSetResponse(character) {
+    if (character === this.touchedCharacter) {
+      delete character.response;
+
+      return;
+    }
+
+    if (character.response) {
+      return;
+    }
+
+    character.response = this.rnd.pick(character.personReaction.responses);
   },
 
   updateCharacterPosition: function updateCharacterPosition(character) {
@@ -651,6 +680,8 @@ var mainState = {
       character.roomHappinessLabel.setText(
         character.roomReaction ? character.roomReaction.happiness : 0
       );
+
+      character.responseLabel.setText(character.response || '');
     }
   },
 };
