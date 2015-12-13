@@ -353,6 +353,10 @@ var mainState = {
   },
 
   updateRoom: function updateRoom(character) {
+    if (character === this.touchedCharacter) {
+      return;
+    }
+
     if (character.position.equals(character.previousPosition)) {
       return;
     }
