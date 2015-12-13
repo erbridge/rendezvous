@@ -13,7 +13,6 @@ var MAX_CHARACTER_SPEED = 1000;
 
 var FLOOR_THICKNESS    = 25;
 var ROOM_WIDTH_PADDING = 50;
-var ROOM_WIDTH_GUTTER  = 25;
 
 window.WebFontConfig = {
   google: {
@@ -162,9 +161,8 @@ var mainState = {
 
       var bounds = this.calculateRoomBounds(room);
 
-      // FIXME: I have no idea what's going on here...
       room.floor.body.setRectangle(
-        bounds.x.max - bounds.x.min + 2 * ROOM_WIDTH_GUTTER,
+        bounds.x.max - bounds.x.min,
         FLOOR_THICKNESS,
         bounds.x.min + (bounds.x.max - bounds.x.min) / 2,
         bounds.y.max - FLOOR_THICKNESS / 2
