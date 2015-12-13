@@ -2,7 +2,8 @@
 
 'use strict';
 
-var DEBUG = false;
+var GAME_DEBUG    = true;
+var PHYSICS_DEBUG = false;
 
 var GAME_WIDTH  = 1920;
 var GAME_HEIGHT = 1080;
@@ -66,7 +67,7 @@ var loadState = {
     this.scale.pageAlignHorizontally = true;
     this.scale.pageAlignVertically   = true;
 
-    if (DEBUG) {
+    if (GAME_DEBUG) {
       displayState(this.game, 'loading');
     }
 
@@ -114,7 +115,7 @@ var mainState = {
 
     this.setupForeground();
 
-    if (DEBUG) {
+    if (GAME_DEBUG) {
       displayState(this.game, 'main');
     }
   },
@@ -162,7 +163,7 @@ var mainState = {
 
       room.floor = this.add.graphics();
 
-      this.physics.p2.enable(room.floor, DEBUG, false);
+      this.physics.p2.enable(room.floor, PHYSICS_DEBUG, false);
 
       var bounds = this.calculateRoomBounds(room);
 
@@ -178,7 +179,7 @@ var mainState = {
 
       room.floor.body.static = true;
 
-      if (DEBUG) {
+      if (GAME_DEBUG) {
         var debugShape = this.add.graphics();
 
         debugShape.lineStyle(1, 0x000000);
@@ -293,14 +294,14 @@ var mainState = {
     character.name    = rawData.name;
     character.rawData = rawData;
 
-    this.physics.p2.enable(character, DEBUG, false);
+    this.physics.p2.enable(character, PHYSICS_DEBUG, false);
 
     character.body.fixedRotation = true;
 
     character.body.setCollisionGroup(this.characterCollisionGroup);
     character.body.collides(this.floorCollisionGroup);
 
-    if (DEBUG) {
+    if (GAME_DEBUG) {
       var style = {
         font:     'Lora',
         fontSize: 24,
@@ -642,7 +643,7 @@ var mainState = {
   },
 
   renderCharacterInfo: function renderCharacterInfo(character) {
-    if (DEBUG) {
+    if (GAME_DEBUG) {
       character.personHappinessLabel.setText(
         character.personReaction ? character.personReaction.happiness : 0
       );
