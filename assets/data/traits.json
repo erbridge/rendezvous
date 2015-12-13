@@ -1,4 +1,39 @@
 {
+  "arrogant": {
+    "positive": "I love a {gender} who's sure of themself!",
+    "neutral": "",
+    "negative": ""
+  },
+  "beautiful": {
+    "positive": "",
+    "neutral": "",
+    "negative": ""
+  },
+  "boring": {
+    "positive": "",
+    "neutral": "",
+    "negative": "Yaaawn..."
+  },
+  "clever": {
+    "positive": "",
+    "neutral": "",
+    "negative": ""
+  },
+  "dexterous": {
+    "positive": "",
+    "neutral": "",
+    "negative": ""
+  },
+  "dirty": {
+    "positive": "",
+    "neutral": "",
+    "negative": ""
+  },
+  "innocent": {
+    "positive": "",
+    "neutral": "",
+    "negative": ""
+  },
   "kind": {
     "positive": "You're too kind.",
     "neutral": "",
@@ -9,37 +44,7 @@
     "neutral": "",
     "negative": "Why don't you take your money somewhere else, {title}?"
   },
-  "beautiful": {
-    "positive": "",
-    "neutral": "",
-    "negative": ""
-  },
-  "clever": {
-    "positive": "",
-    "neutral": "",
-    "negative": ""
-  },
-  "stupid": {
-    "positive": "",
-    "neutral": "",
-    "negative": ""
-  },
-  "dexterous": {
-    "positive": "",
-    "neutral": "",
-    "negative": ""
-  },
-  "athletic": {
-    "positive": "",
-    "neutral": "You're in pretty good shape for a {type}",
-    "negative": ""
-  },
   "servant": {
-    "positive": "",
-    "neutral": "",
-    "negative": ""
-  },
-  "violent": {
     "positive": "",
     "neutral": "",
     "negative": ""
@@ -49,22 +54,7 @@
     "neutral": "",
     "negative": ""
   },
-  "arrogant": {
-    "positive": "I love a {gender} who's sure of themself!",
-    "neutral": "",
-    "negative": ""
-  },
-  "dirty": {
-    "positive": "",
-    "neutral": "",
-    "negative": ""
-  },
-  "boring": {
-    "positive": "",
-    "neutral": "",
-    "negative": "Yaaawn..."
-  },
-  "innocent": {
+  "stupid": {
     "positive": "",
     "neutral": "",
     "negative": ""
@@ -74,7 +64,7 @@
     "neutral": "",
     "negative": "You can't trust someone who doesn't eat meat..."
   },
-  "shy": {
+  "violent": {
     "positive": "",
     "neutral": "",
     "negative": ""
