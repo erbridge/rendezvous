@@ -162,7 +162,7 @@ var mainState = {
 
       room.floor = this.add.graphics();
 
-      this.physics.p2.enable(room.floor, DEBUG);
+      this.physics.p2.enable(room.floor, DEBUG, false);
 
       var bounds = this.calculateRoomBounds(room);
 
@@ -293,7 +293,7 @@ var mainState = {
     character.name    = rawData.name;
     character.rawData = rawData;
 
-    this.physics.p2.enable(character, DEBUG);
+    this.physics.p2.enable(character, DEBUG, false);
 
     character.body.fixedRotation = true;
 
