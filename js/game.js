@@ -297,13 +297,13 @@ var mainState = {
       character.personHappinessLabel.anchor.set(0.5, 1);
       character.addChild(character.personHappinessLabel);
 
-      labelY -= character.personHappinessLabel.height / 2 + 5;
+      labelY -= character.personHappinessLabel.height;
 
       character.roomHappinessLabel = this.game.add.text(0, labelY, 0, style);
       character.roomHappinessLabel.anchor.set(0.5, 1);
       character.addChild(character.roomHappinessLabel);
 
-      labelY -= character.roomHappinessLabel.height / 2 + 5;
+      labelY -= character.roomHappinessLabel.height;
 
       var typeLabel = this.game.add.text(0, labelY, character.type, style);
       typeLabel.anchor.set(0.5, 1);
