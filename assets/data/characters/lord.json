@@ -24,33 +24,23 @@
   "traits": {
 
     "own": [
-      "smelly",
+      "boring",
       "rich",
-      "stupid",
-      "boring"
+      "smelly",
+      "stupid"
     ],
 
     "likes": [
-      "servant",
-      "violent",
-      "beautiful"
+      "servant"
     ],
 
-    "dislikes": [
-      "rich",
-      "stupid",
-      "innocent"
-    ]
+    "dislikes": []
   },
 
   "people": {
 
     "loves": [
-      "mother",
-      "maid",
-      "stable-boy",
-      "cook",
-      "gardener"
+      "mother"
     ],
 
     "hates": [

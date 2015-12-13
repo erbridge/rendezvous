@@ -25,28 +25,26 @@
 
     "own": [
       "servant",
+      "dexterous",
       "dirty",
-      "beautiful",
-      "kind",
-      "dexterous"
+      "smelly"
     ],
 
     "likes": [
       "beautiful",
-      "dexterous"
+      "boring",
+      "clever"
     ],
 
     "dislikes": [
-      "violent",
-      "clever"
+      "arrogant",
+      "stupid"
     ]
   },
 
   "people": {
 
-    "loves": [
-      "maid"
-    ],
+    "loves": [],
 
     "hates": []
   }

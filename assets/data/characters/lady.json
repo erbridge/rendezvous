@@ -10,14 +10,14 @@
     "home": "master-bedroom",
 
     "likes": [
-      "stables",
       "bathroom",
-      "garden"
+      "garden",
+      "stables"
     ],
 
     "dislikes": [
-      "master-bedroom",
-      "dungeon"
+      "dungeon",
+      "master-bedroom"
     ]
   },
 
@@ -25,26 +25,22 @@
 
     "own": [
       "arrogant",
+      "clever",
       "rich",
       "vegetarian"
     ],
 
     "likes": [
-      "dirty",
-      "dexterous"
+      "dexterous",
+      "dirty"
     ],
 
-    "dislikes": [
-      "smelly",
-      "servant",
-      "boring"
-    ]
+    "dislikes": []
   },
 
   "people": {
 
     "loves": [
-      "gardener",
       "stable-boy"
     ],
 

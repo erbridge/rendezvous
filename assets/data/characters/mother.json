@@ -24,37 +24,29 @@
 
     "own": [
       "arrogant",
-      "clever",
-      "rich",
-      "violent"
+      "beautiful",
+      "rich"
     ],
 
     "likes": [
-      "athletic",
-      "clever",
-      "arrogant"
+      "arrogant",
+      "violent"
     ],
 
     "dislikes": [
-      "shy",
-      "innocent",
-      "vegetarian",
-      "stupid"
+      "beautiful",
+      "dirty",
+      "innocent"
     ]
   },
 
   "people": {
 
-    "loves": [
-      "cook"
-    ],
+    "loves": [],
 
     "hates": [
       "lord",
-      "lady",
-      "maid",
-      "gardener",
-      "stable-boy"
+      "lady"
     ]
   }
 }

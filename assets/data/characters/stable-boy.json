@@ -22,35 +22,25 @@
   "traits": {
 
     "own": [
-      "servant",
       "dirty",
-      "smelly",
       "innocent",
-      "athletic",
-      "vegetarian"
+      "kind",
+      "servant"
     ],
 
     "likes": [
-      "vegetarian",
-      "kind",
-      "rich"
+      "beautiful"
     ],
 
     "dislikes": [
-      "servant",
       "clever"
     ]
   },
 
   "people": {
 
-    "loves": [
-      "mother",
-      "maid"
-    ],
+    "loves": [],
 
-    "hates": [
-      "lady"
-    ]
+    "hates": []
   }
 }
