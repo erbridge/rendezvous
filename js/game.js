@@ -274,6 +274,7 @@ var mainState = {
     character.position.y -= character.height / 2;
 
     character.type    = type;
+    character.name    = rawData.name;
     character.rawData = rawData;
 
     this.physics.p2.enable(character, DEBUG);
@@ -311,6 +312,12 @@ var mainState = {
       var typeLabel = this.game.add.text(0, labelY, character.type, style);
       typeLabel.anchor.set(0.5, 1);
       character.addChild(typeLabel);
+
+      labelY -= typeLabel.height;
+
+      var nameLabel = this.game.add.text(0, labelY, character.name, style);
+      nameLabel.anchor.set(0.5, 1);
+      character.addChild(nameLabel);
     }
 
     return character;
