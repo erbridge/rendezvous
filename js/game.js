@@ -2,7 +2,7 @@
 
 'use strict';
 
-var DEBUG = true;
+var DEBUG = false;
 
 var GAME_WIDTH  = 1920;
 var GAME_HEIGHT = 1080;
@@ -70,9 +70,12 @@ var loadState = {
       displayState(this.game, 'loading');
     }
 
-    this.load.image('null',       'assets/null.png');
-    this.load.image('background', 'assets/background.png');
-    this.load.image('moon',       'assets/moon.png');
+    this.load.image('null', 'assets/null.png');
+
+    this.load.image('moon', 'assets/moon.png');
+
+    this.load.image('house-background', 'assets/house-background.png');
+    this.load.image('house-foreground', 'assets/house-foreground.png');
 
     this.load.image('male',   'assets/characters/male.png');
     this.load.image('female', 'assets/characters/female.png');
@@ -108,6 +111,8 @@ var mainState = {
 
     this.addCharacters();
 
+    this.setupForeground();
+
     if (DEBUG) {
       displayState(this.game, 'main');
     }
@@ -137,7 +142,7 @@ var mainState = {
   },
 
   setupScene: function setupScene() {
-    this.add.image(0, 0, 'background');
+    this.add.image(0, 0, 'house-background');
 
     this.add.image(80, 100, 'moon');
 
@@ -187,6 +192,10 @@ var mainState = {
     this.input.onDown.add(this.onPointerDown, this);
     this.input.onUp.add(this.onPointerUp, this);
     this.input.addMoveCallback(this.onPointerMove, this);
+  },
+
+  setupForeground: function setupForeground() {
+    this.add.image(0, 0, 'house-foreground');
   },
 
   onPointerDown: function onPointerDown(pointer) {
@@ -401,13 +410,13 @@ var mainState = {
     for (var k = 0; k < characters.list.length; k++) {
       var target = characters.list[k];
 
-      if (target.type === characterData.type) {
+      if (target.name === characterData.name) {
         continue;
       }
 
       var trait;
 
-      for (var l = 0; l < characterData.traits.dislikes; l++) {
+      for (var l = 0; l < characterData.traits.dislikes.length; l++) {
         trait = characterData.traits.dislikes[l];
 
         if (target.rawData.traits.own.indexOf(trait) !== -1) {
@@ -415,7 +424,8 @@ var mainState = {
         }
       }
 
-      for (var m = 0; m < characterData.traits.likes; m++) {
+
+      for (var m = 0; m < characterData.traits.likes.length; m++) {
         trait = characterData.traits.likes[m];
 
         if (target.rawData.traits.own.indexOf(trait) !== -1) {
