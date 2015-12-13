@@ -14,16 +14,32 @@
       "garden"
     ],
 
-    "dislikes": []
+    "dislikes": [
+      "dungeon",
+      "study",
+      "observatory"
+    ]
   },
 
   "traits": {
 
-    "own": [],
+    "own": [
+      "servant",
+      "dirty",
+      "beautiful",
+      "kind",
+      "dexterous"
+    ],
 
-    "likes": [],
+    "likes": [
+      "beautiful",
+      "dexterous"
+    ],
 
-    "dislikes": []
+    "dislikes": [
+      "violent",
+      "clever"
+    ]
   },
 
   "people": {

@@ -10,20 +10,39 @@
 
     "home": "kitchen",
 
-    "likes": [],
+    "likes": [
+      "bathroom",
+      "guest-bedroom"
+    ],
 
     "dislikes": [
-      "kitchen"
+      "kitchen",
+      "stables",
+      "attic",
+      "dungeon"
     ]
   },
 
   "traits": {
 
-    "own": [],
+    "own": [
+      "servant",
+      "violent",
+      "arrogant",
+      "clever"
+    ],
 
-    "likes": [],
+    "likes": [
+      "kind",
+      "innocent",
+      "beautiful"
+    ],
 
-    "dislikes": []
+    "dislikes": [
+      "vegetarian",
+      "smelly",
+      "dirty"
+    ]
   },
 
   "people": {

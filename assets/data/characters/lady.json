@@ -11,27 +11,33 @@
 
     "likes": [
       "stables",
-      "bathroom"
+      "bathroom",
+      "garden"
     ],
 
     "dislikes": [
-      "master-bedroom"
+      "master-bedroom",
+      "dungeon"
     ]
   },
 
   "traits": {
 
     "own": [
-      "haughty",
-      "rich"
+      "arrogant",
+      "rich",
+      "vegetarian"
     ],
 
     "likes": [
-      "rich"
+      "dirty",
+      "dexterous"
     ],
 
     "dislikes": [
-      "smelly"
+      "smelly",
+      "servant",
+      "boring"
     ]
   },
 
@@ -42,7 +48,8 @@
     ],
 
     "hates": [
-      "lord"
+      "lord",
+      "mother"
     ]
   }
 }

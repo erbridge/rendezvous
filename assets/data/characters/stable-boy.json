@@ -14,22 +14,40 @@
       "stables"
     ],
 
-    "dislikes": []
+    "dislikes": [
+      "study"
+    ]
   },
 
   "traits": {
 
-    "own": [],
+    "own": [
+      "servant",
+      "dirty",
+      "smelly",
+      "innocent",
+      "athletic",
+      "vegetarian"
+    ],
 
-    "likes": [],
+    "likes": [
+      "vegetarian",
+      "kind",
+      "rich"
+    ],
 
-    "dislikes": []
+    "dislikes": [
+      "servant",
+      "clever"
+    ]
   },
 
   "people": {
 
     "loves": [],
 
-    "hates": []
+    "hates": [
+      "lady"
+    ]
   }
 }

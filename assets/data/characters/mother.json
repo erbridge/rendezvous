@@ -9,18 +9,38 @@
 
     "home": "guest-bedroom",
 
-    "likes": [],
+    "likes": [
+      "master-bedroom",
+      "dungeon"
+    ],
 
-    "dislikes": []
+    "dislikes": [
+      "attic",
+      "kitchen"
+    ]
   },
 
   "traits": {
 
-    "own": [],
+    "own": [
+      "arrogant",
+      "clever",
+      "rich",
+      "violent"
+    ],
 
-    "likes": [],
+    "likes": [
+      "athletic",
+      "clever",
+      "arrogant"
+    ],
 
-    "dislikes": []
+    "dislikes": [
+      "shy",
+      "innocent",
+      "vegetarian",
+      "stupid"
+    ]
   },
 
   "people": {

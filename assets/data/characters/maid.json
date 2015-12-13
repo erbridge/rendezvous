@@ -9,18 +9,36 @@
 
     "home": "parlour",
 
-    "likes": [],
+    "likes": [
+      "attic",
+      "observatory",
+      "master-bedroom"
+    ],
 
-    "dislikes": []
+    "dislikes": [
+      "garden"
+    ]
   },
 
   "traits": {
 
-    "own": [],
+    "own": [
+      "servant",
+      "shy",
+      "beautiful"
+    ],
 
-    "likes": [],
+    "likes": [
+      "athletic",
+      "boring",
+      "innocent"
+    ],
 
-    "dislikes": []
+    "dislikes": [
+      "arrogant",
+      "violent",
+      "dirty"
+    ]
   },
 
   "people": {

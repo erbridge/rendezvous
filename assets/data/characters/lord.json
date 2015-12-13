@@ -10,12 +10,14 @@
     "home": "master-bedroom",
 
     "likes": [
-      "stables",
-      "hallway"
+      "hallway",
+      "dungeon",
+      "observatory"
     ],
 
     "dislikes": [
-      "master-bedroom"
+      "master-bedroom",
+      "garden"
     ]
   },
 
@@ -23,16 +25,21 @@
 
     "own": [
       "smelly",
-      "rich"
+      "rich",
+      "stupid",
+      "boring"
     ],
 
     "likes": [
       "servant",
-      "violent"
+      "violent",
+      "beautiful"
     ],
 
     "dislikes": [
-      "rich"
+      "rich",
+      "stupid",
+      "innocent"
     ]
   },
 
