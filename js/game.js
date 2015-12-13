@@ -331,9 +331,15 @@ var mainState = {
   },
 
   constrainCharacters: function constrainCharacters() {
-    this.characters.forEachExists(function constrainCharacter(character) {
-      constrainVelocity(character, MAX_CHARACTER_SPEED);
-    }, this);
+    this.characters.forEachExists(this.constrainCharacter, this);
+  },
+
+  constrainCharacter: function constrainCharacter(character) {
+    if (character === this.touchedCharacter) {
+      return;
+    }
+
+    constrainVelocity(character, MAX_CHARACTER_SPEED);
   },
 
   updateRooms: function updateRooms() {
