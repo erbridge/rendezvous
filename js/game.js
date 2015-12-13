@@ -179,7 +179,7 @@ var mainState = {
 
       room.floor.body.static = true;
 
-      if (GAME_DEBUG) {
+      if (PHYSICS_DEBUG) {
         var debugShape = this.add.graphics();
 
         debugShape.lineStyle(1, 0x000000);
