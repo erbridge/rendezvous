@@ -360,7 +360,9 @@ var mainState = {
       return;
     }
 
-    if (character.position.equals(character.previousPosition)) {
+    if (
+      character.room && character.position.equals(character.previousPosition)
+    ) {
       return;
     }
 
