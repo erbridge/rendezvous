@@ -123,8 +123,6 @@ var mainState = {
   update: function update() {
     this.constrainCharacters();
 
-    this.updateRooms();
-
     this.updateCharacters();
   },
 
@@ -358,33 +356,9 @@ var mainState = {
     constrainVelocity(character, MAX_CHARACTER_SPEED);
   },
 
-  updateRooms: function updateRooms() {
-    this.characters.forEachExists(this.updateRoom, this);
-  },
-
-  updateRoom: function updateRoom(character) {
-    if (character === this.touchedCharacter) {
-      return;
-    }
-
-    if (
-      character.room && character.position.equals(character.previousPosition)
-    ) {
-      return;
-    }
-
-    character.room = null;
-
-    for (var roomName in this.rooms) {
-      var room = this.rooms[roomName];
-
-      if (room.shape.contains(character.position.x, character.position.y)) {
-        character.room = roomName;
-      }
-    }
-  },
-
   updateCharacters: function updateCharacters() {
+    this.characters.forEachExists(this.updateRoom, this);
+
     for (var roomName in this.rooms) {
       var characters = this.characters.filter(
         function isInRoom(character) {
@@ -410,6 +384,28 @@ var mainState = {
 
     this.characters.forEachExists(this.maybeSetResponse, this);
     this.characters.forEachExists(this.updateCharacterPosition, this);
+  },
+
+  updateRoom: function updateRoom(character) {
+    if (character === this.touchedCharacter) {
+      return;
+    }
+
+    if (
+      character.room && character.position.equals(character.previousPosition)
+    ) {
+      return;
+    }
+
+    character.room = null;
+
+    for (var roomName in this.rooms) {
+      var room = this.rooms[roomName];
+
+      if (room.shape.contains(character.position.x, character.position.y)) {
+        character.room = roomName;
+      }
+    }
   },
 
   // Assume we only have one of each type.
