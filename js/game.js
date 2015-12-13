@@ -134,17 +134,17 @@ var mainState = {
 
     this.add.image(80, 100, 'moon');
 
-    var floor = this.add.sprite(0, 0, 'null');
+    var floors = this.add.sprite(0, 0, 'null');
 
-    this.physics.p2.enable(floor, DEBUG);
+    this.physics.p2.enable(floors, DEBUG);
 
-    floor.body.clearShapes();
-    floor.body.loadPolygon('physics-data', 'floor');
+    floors.body.clearShapes();
+    floors.body.loadPolygon('physics-data', 'floors');
 
-    floor.body.setCollisionGroup(this.floorCollisionGroup);
-    floor.body.collides(this.characterCollisionGroup);
+    floors.body.setCollisionGroup(this.floorCollisionGroup);
+    floors.body.collides(this.characterCollisionGroup);
 
-    floor.body.static = true;
+    floors.body.static = true;
   },
 
   setupRooms: function setupRooms() {
