@@ -120,6 +120,10 @@ var mainState = {
     this.updateCharacters();
   },
 
+  render: function render() {
+    this.renderCharactersInfo();
+  },
+
   setupPhysics: function setupPhysics() {
     this.physics.startSystem(Phaser.Physics.P2JS);
 
@@ -275,6 +279,36 @@ var mainState = {
 
     character.body.setCollisionGroup(this.characterCollisionGroup);
     character.body.collides(this.floorCollisionGroup);
+
+    if (DEBUG) {
+      var style = {
+        font:     'Lora',
+        fontSize: 24,
+
+        fill:   '#fff',
+        stroke: '#000',
+
+        strokeThickness: 2,
+      };
+
+      var labelY = -character.height / 2;
+
+      character.personHappinessLabel = this.game.add.text(0, labelY, 0, style);
+      character.personHappinessLabel.anchor.set(0.5, 1);
+      character.addChild(character.personHappinessLabel);
+
+      labelY -= character.personHappinessLabel.height / 2 + 5;
+
+      character.roomHappinessLabel = this.game.add.text(0, labelY, 0, style);
+      character.roomHappinessLabel.anchor.set(0.5, 1);
+      character.addChild(character.roomHappinessLabel);
+
+      labelY -= character.roomHappinessLabel.height / 2 + 5;
+
+      var typeLabel = this.game.add.text(0, labelY, character.type, style);
+      typeLabel.anchor.set(0.5, 1);
+      character.addChild(typeLabel);
+    }
 
     return character;
   },
@@ -539,6 +573,17 @@ var mainState = {
       room:      nearestRoom,
       direction: roomDirection,
     };
+  },
+
+  renderCharactersInfo: function renderCharactersInfo() {
+    this.characters.forEachExists(this.renderCharacterInfo, this);
+  },
+
+  renderCharacterInfo: function renderCharacterInfo(character) {
+    if (DEBUG) {
+      character.personHappinessLabel.setText(character.personHappiness || 0);
+      character.roomHappinessLabel.setText(character.roomHappiness || 0);
+    }
   },
 };
 
