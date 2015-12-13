@@ -11,6 +11,7 @@ var GRAVITY = 10000;
 
 var MAX_CHARACTER_SPEED = 50;
 
+var FLOOR_THICKNESS    = 25;
 var ROOM_WIDTH_PADDING = 50;
 
 window.WebFontConfig = {
@@ -259,7 +260,7 @@ var mainState = {
           bounds.x.min + ROOM_WIDTH_PADDING,
           bounds.x.max - ROOM_WIDTH_PADDING
         ),
-        (bounds.y.min + bounds.y.max) / 2,
+        bounds.y.max - FLOOR_THICKNESS,
         this.rnd.pick(data.assets),
         type,
         data
@@ -269,6 +270,8 @@ var mainState = {
 
   addCharacter: function addCharacter(x, y, assetName, type, rawData) {
     var character = this.characters.create(x, y, assetName);
+
+    character.position.y -= character.height / 2;
 
     character.type    = type;
     character.rawData = rawData;
