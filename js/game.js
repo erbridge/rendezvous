@@ -9,7 +9,7 @@ var GAME_HEIGHT = 1080;
 
 var GRAVITY = 10000;
 
-var MAX_CHARACTER_VELOCITY = 50;
+var MAX_CHARACTER_SPEED = 50;
 
 window.WebFontConfig = {
   google: {
@@ -199,20 +199,20 @@ var mainState = {
 
     var localPointInBody = [ 0, 0 ];
 
-    this.touchedCharacterBody = bodies[0].parent;
+    this.touchedCharacter = bodies[0].parent.sprite;
 
-    this.touchedCharacterBody.toLocalFrame(localPointInBody, physicsPos);
+    this.touchedCharacter.body.toLocalFrame(localPointInBody, physicsPos);
 
     this.pointerConstraint = this.physics.p2.createLockConstraint(
       this.pointerBody,
-      this.touchedCharacterBody,
+      this.touchedCharacter.body,
       [
         this.physics.p2.mpxi(localPointInBody[0]),
         this.physics.p2.mpxi(localPointInBody[1]),
       ]
     );
 
-    this.touchedCharacterBody.removeCollisionGroup(this.floorCollisionGroup);
+    this.touchedCharacter.body.removeCollisionGroup(this.floorCollisionGroup);
   },
 
   onPointerUp: function onPointerUp() {
@@ -222,10 +222,10 @@ var mainState = {
       delete this.pointerConstraint;
     }
 
-    if (this.touchedCharacterBody) {
-      this.touchedCharacterBody.collides(this.floorCollisionGroup);
+    if (this.touchedCharacter) {
+      this.touchedCharacter.body.collides(this.floorCollisionGroup);
 
-      delete this.touchedCharacterBody;
+      delete this.touchedCharacter;
     }
   },
 
@@ -246,33 +246,11 @@ var mainState = {
 
       var room = this.rooms[data.rooms.home];
 
-      var roomPoints = room.shape.toNumberArray();
-
-      var x = {
-        min: this.world.width,
-        max: 0,
-      };
-
-      var y = {
-        min: this.world.height,
-        max: 0,
-      };
-
-      for (var j = 0; j < roomPoints.length; j++) {
-        var coord = roomPoints[j];
-
-        if (j % 2) {
-          y.min = Math.min(y.min, coord);
-          y.max = Math.max(y.max, coord);
-        } else {
-          x.min = Math.min(x.min, coord);
-          x.max = Math.max(x.max, coord);
-        }
-      }
+      var bounds = this.calculateRoomBounds(room);
 
       this.addCharacter(
-        this.rnd.integerInRange(x.min, x.max),
-        (y.min + y.max) / 2,
+        this.rnd.integerInRange(bounds.x.min, bounds.x.max),
+        (bounds.y.min + bounds.y.max) / 2,
         this.rnd.pick(data.assets),
         type,
         data
@@ -298,7 +276,7 @@ var mainState = {
 
   constrainCharacters: function constrainCharacters() {
     this.characters.forEachExists(function constrainCharacter(character) {
-      constrainVelocity(character, MAX_CHARACTER_VELOCITY);
+      constrainVelocity(character, MAX_CHARACTER_SPEED);
     }, this);
   },
 
@@ -310,6 +288,8 @@ var mainState = {
     if (character.position.equals(character.previousPosition)) {
       return;
     }
+
+    character.room = null;
 
     for (var roomName in this.rooms) {
       var room = this.rooms[roomName];
@@ -343,6 +323,8 @@ var mainState = {
         character = characters.next;
       }
     }
+
+    this.characters.forEachExists(this.updateCharacterPosition, this);
   },
 
   // Assume we only have one of each type.
@@ -414,6 +396,144 @@ var mainState = {
     }
 
     return 0;
+  },
+
+  updateCharacterPosition: function updateCharacterPosition(character) {
+    if (character.room) {
+      character.body.data.gravityScale = 1;
+      return;
+    }
+
+    if (character === this.touchedCharacter) {
+      return;
+    }
+
+    character.body.data.gravityScale = 0;
+
+    var data = this.findNearestRoom(character.position.x, character.position.y);
+
+    var speed = 1000;
+    var diagSpeed = speed * Math.sqrt(2);
+
+    switch (data.direction) {
+      case 'left': {
+        character.body.moveLeft(speed);
+        break;
+      }
+      case 'right': {
+        character.body.moveRight(speed);
+        break;
+      }
+      case 'up': {
+        character.body.moveUp(speed);
+        break;
+      }
+      case 'down': {
+        character.body.moveDown(speed);
+        break;
+      }
+      case 'leftup': {
+        character.body.moveLeft(diagSpeed);
+        character.body.moveUp(diagSpeed);
+        break;
+      }
+      case 'leftdown': {
+        character.body.moveLeft(diagSpeed);
+        character.body.moveDown(diagSpeed);
+        break;
+      }
+      case 'rightup': {
+        character.body.moveRight(diagSpeed);
+        character.body.moveUp(diagSpeed);
+        break;
+      }
+      case 'rightdown': {
+        character.body.moveRight(diagSpeed);
+        character.body.moveDown(diagSpeed);
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+  },
+
+  calculateRoomBounds: function calculateRoomBounds(room) {
+    var roomPoints = room.shape.toNumberArray();
+
+    var x = {
+      min: this.world.width,
+      max: 0,
+    };
+
+    var y = {
+      min: this.world.height,
+      max: 0,
+    };
+
+    for (var j = 0; j < roomPoints.length; j++) {
+      var coord = roomPoints[j];
+
+      if (j % 2) {
+        y.min = Math.min(y.min, coord);
+        y.max = Math.max(y.max, coord);
+      } else {
+        x.min = Math.min(x.min, coord);
+        x.max = Math.max(x.max, coord);
+      }
+    }
+
+    return {
+      x: x,
+      y: y,
+    };
+  },
+
+  findNearestRoom: function findNearestRoom(x, y) {
+    var nearestRoom;
+    var roomDirection;
+    var roomDistanceSquared = Number.MAX_VALUE;
+
+    for (var roomName in this.rooms) {
+      var room = this.rooms[roomName];
+
+      var bounds = this.calculateRoomBounds(room);
+
+      var xMinDistance = bounds.x.min - x;
+      var xMaxDistance = x - bounds.x.max;
+      var yMinDistance = bounds.y.min - y;
+      var yMaxDistance = y - bounds.y.max;
+
+      var direction = '';
+      var distanceSquared = 0;
+
+      if (xMinDistance > 0) {
+        direction += 'right';
+        distanceSquared = xMinDistance * xMinDistance;
+      } else if (xMaxDistance > 0) {
+        direction += 'left';
+        distanceSquared = xMaxDistance * xMaxDistance;
+      }
+
+      if (yMinDistance > 0) {
+        direction += 'down';
+        distanceSquared = distanceSquared + yMinDistance * yMinDistance;
+      } else if (yMaxDistance > 0) {
+        direction += 'up';
+        distanceSquared = distanceSquared + yMaxDistance * yMaxDistance;
+      }
+
+      if (distanceSquared < roomDistanceSquared) {
+        nearestRoom = room;
+        roomDirection = direction;
+        roomDistanceSquared = distanceSquared;
+      }
+    }
+
+    return {
+      room:      nearestRoom,
+      direction: roomDirection,
+    };
   },
 };
 
