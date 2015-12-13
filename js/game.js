@@ -134,6 +134,8 @@ var mainState = {
     this.characterCollisionGroup = this.physics.p2.createCollisionGroup();
 
     this.physics.p2.gravity.y = GRAVITY;
+    this.physics.p2.friction = 1;
+    this.physics.p2.restitution = 0;
   },
 
   setupScene: function setupScene() {
