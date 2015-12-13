@@ -387,11 +387,11 @@ var mainState = {
       var character = characters.first;
 
       while (characters.position < characters.total) {
-        character.personHappiness = this.calculatePersonHappiness(
+        character.personReaction = this.getPersonReaction(
           character.rawData, characters
         );
 
-        character.roomHappiness = this.calculateRoomHappiness(
+        character.roomReaction = this.getRoomReaction(
           character.rawData, roomName
         );
 
@@ -403,15 +403,16 @@ var mainState = {
   },
 
   // Assume we only have one of each type.
-  calculatePersonHappiness: function calculatePersonHappiness(
-    characterData, characters
-  ) {
+  getPersonReaction: function getPersonReaction(characterData, characters) {
     for (var i = 0; i < characterData.people.hates.length; i++) {
       if (!characters.getByKey('type', characterData.people.hates[i])) {
         continue;
       }
 
-      return -1;
+      return {
+        happiness: -1,
+        responses: [],
+      };
     }
 
     for (var j = 0; j < characterData.people.loves.length; j++) {
@@ -419,7 +420,10 @@ var mainState = {
         continue;
       }
 
-      return 1;
+      return {
+        happiness: 1,
+        responses: [],
+      };
     }
 
     var happiness = 0;
@@ -452,26 +456,44 @@ var mainState = {
     }
 
     if (happiness < 0) {
-      return -1;
+      return {
+        happiness: -1,
+        responses: [],
+      };
     }
 
     if (happiness > 0) {
-      return 1;
+      return {
+        happiness: 1,
+        responses: [],
+      };
     }
 
-    return 0;
+    return {
+      happiness: 0,
+      responses: [],
+    };
   },
 
-  calculateRoomHappiness: function calculateRoomHappiness(characterData, roomName) {
+  getRoomReaction: function getRoomReaction(characterData, roomName) {
     if (characterData.rooms.dislikes.indexOf(roomName) !== -1) {
-      return -1;
+      return {
+        happiness: -1,
+        responses: [],
+      };
     }
 
     if (characterData.rooms.likes.indexOf(roomName) !== -1) {
-      return 1;
+      return {
+        happiness: 1,
+        responses: [],
+      };
     }
 
-    return 0;
+    return {
+      happiness: 0,
+      responses: [],
+    };
   },
 
   updateCharacterPosition: function updateCharacterPosition(character) {
@@ -619,8 +641,13 @@ var mainState = {
 
   renderCharacterInfo: function renderCharacterInfo(character) {
     if (DEBUG) {
-      character.personHappinessLabel.setText(character.personHappiness || 0);
-      character.roomHappinessLabel.setText(character.roomHappiness || 0);
+      character.personHappinessLabel.setText(
+        character.personReaction ? character.personReaction.happiness : 0
+      );
+
+      character.roomHappinessLabel.setText(
+        character.roomReaction ? character.roomReaction.happiness : 0
+      );
     }
   },
 };
