@@ -13,6 +13,7 @@ var MAX_CHARACTER_SPEED = 1000;
 
 var FLOOR_THICKNESS    = 25;
 var ROOM_WIDTH_PADDING = 50;
+var ROOM_WIDTH_GUTTER  = 25;
 
 window.WebFontConfig = {
   google: {
@@ -70,8 +71,6 @@ var loadState = {
       displayState(this.game, 'loading');
     }
 
-    this.load.image('null', 'assets/null.png');
-
     this.load.image('moon', 'assets/moon.png');
 
     this.load.image('house-background', 'assets/house-background.png');
@@ -91,8 +90,6 @@ var loadState = {
     this.load.json('maid-data',       'assets/data/characters/maid.json');
     this.load.json('mother-data',     'assets/data/characters/mother.json');
     this.load.json('stable-boy-data', 'assets/data/characters/stable-boy.json');
-
-    this.load.physics('physics-data', 'assets/data/physics.json');
 
     this.load.onLoadComplete.add(function() {
       this.state.start('main');
@@ -143,18 +140,6 @@ var mainState = {
     this.add.image(0, 0, 'house-background');
 
     this.add.image(80, 100, 'moon');
-
-    var floors = this.add.sprite(0, 0, 'null');
-
-    this.physics.p2.enable(floors, DEBUG);
-
-    floors.body.clearShapes();
-    floors.body.loadPolygon('physics-data', 'floors');
-
-    floors.body.setCollisionGroup(this.floorCollisionGroup);
-    floors.body.collides(this.characterCollisionGroup);
-
-    floors.body.static = true;
   },
 
   setupRooms: function setupRooms() {
@@ -165,20 +150,39 @@ var mainState = {
     for (var roomName in roomData) {
       var data = roomData[roomName];
 
-      var shape = new Phaser.Polygon(data.bounds);
+      var room = {
+        shape: new Phaser.Polygon(data.bounds),
+      };
+
+      room.floor = this.add.graphics();
+
+      this.physics.p2.enable(room.floor, DEBUG);
+
+      var bounds = this.calculateRoomBounds(room);
+
+      // FIXME: I have no idea what's going on here...
+      room.floor.body.setRectangle(
+        bounds.x.max - bounds.x.min + 2 * ROOM_WIDTH_GUTTER,
+        FLOOR_THICKNESS,
+        bounds.x.min + (bounds.x.max - bounds.x.min) / 2,
+        bounds.y.max - FLOOR_THICKNESS / 2
+      );
+
+      room.floor.body.setCollisionGroup(this.floorCollisionGroup);
+      room.floor.body.collides(this.characterCollisionGroup);
+
+      room.floor.body.static = true;
 
       if (DEBUG) {
         var debugShape = this.add.graphics();
 
         debugShape.lineStyle(1, 0x000000);
         debugShape.beginFill(0x000000, 0.5);
-        debugShape.drawPolygon(shape);
+        debugShape.drawPolygon(room.shape);
         debugShape.endFill();
       }
 
-      this.rooms[roomName] = {
-        shape: shape,
-      };
+      this.rooms[roomName] = room;
     }
   },
 
@@ -464,6 +468,7 @@ var mainState = {
   updateCharacterPosition: function updateCharacterPosition(character) {
     if (character.room) {
       character.body.data.gravityScale = 1;
+
       return;
     }
 
