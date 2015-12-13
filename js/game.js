@@ -9,7 +9,7 @@ var GAME_HEIGHT = 1080;
 
 var GRAVITY = 10000;
 
-var MAX_CHARACTER_SPEED = 50;
+var MAX_CHARACTER_SPEED = 1000;
 
 var FLOOR_THICKNESS    = 25;
 var ROOM_WIDTH_PADDING = 50;
@@ -39,8 +39,8 @@ var displayState = function displayState(game, stateLabel) {
 };
 
 var constrainVelocity = function constrainVelocity(sprite, maxVelocity) {
-  var vx = sprite.body.data.velocity[0];
-  var vy = sprite.body.data.velocity[1];
+  var vx = sprite.body.velocity.x;
+  var vy = sprite.body.velocity.y;
 
   if (vx * vx + vy * vy > maxVelocity * maxVelocity) {
     var angle = Math.atan2(vy, vx);
@@ -48,8 +48,8 @@ var constrainVelocity = function constrainVelocity(sprite, maxVelocity) {
     vx = Math.cos(angle) * maxVelocity;
     vy = Math.sin(angle) * maxVelocity;
 
-    sprite.body.data.velocity[0] = vx;
-    sprite.body.data.velocity[1] = vy;
+    sprite.body.velocity.x = vx;
+    sprite.body.velocity.y = vy;
   }
 };
 
