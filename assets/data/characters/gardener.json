@@ -2,8 +2,8 @@
   "name": "Roderick",
 
   "assets": [
-    "male",
-    "female"
+    "gardener-f",
+    "gardener-m"
   ],
 
   "rooms": {

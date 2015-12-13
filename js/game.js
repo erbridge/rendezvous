@@ -75,8 +75,13 @@ var loadState = {
     this.load.image('house-background', 'assets/house-background.png');
     this.load.image('house-foreground', 'assets/house-foreground.png');
 
-    this.load.image('male',   'assets/characters/male.png');
     this.load.image('female', 'assets/characters/female.png');
+    this.load.image('male',   'assets/characters/male.png');
+
+    this.load.image('cook-f',     'assets/characters/cook-f.png');
+    this.load.image('cook-m',     'assets/characters/cook-m.png');
+    this.load.image('gardener-f', 'assets/characters/gardener-f.png');
+    this.load.image('gardener-m', 'assets/characters/gardener-m.png');
 
     this.load.json('room-data',  'assets/data/rooms.json');
     this.load.json('trait-data', 'assets/data/traits.json');

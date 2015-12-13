@@ -2,8 +2,8 @@
   "name": "Gruel",
 
   "assets": [
-    "male",
-    "female"
+    "cook-f",
+    "cook-m"
   ],
 
   "rooms": {
