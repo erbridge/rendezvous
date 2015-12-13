@@ -11,6 +11,8 @@ var GRAVITY = 10000;
 
 var MAX_CHARACTER_SPEED = 50;
 
+var ROOM_WIDTH_PADDING = 50;
+
 window.WebFontConfig = {
   google: {
     families: [
@@ -249,7 +251,10 @@ var mainState = {
       var bounds = this.calculateRoomBounds(room);
 
       this.addCharacter(
-        this.rnd.integerInRange(bounds.x.min, bounds.x.max),
+        this.rnd.integerInRange(
+          bounds.x.min + ROOM_WIDTH_PADDING,
+          bounds.x.max - ROOM_WIDTH_PADDING
+        ),
         (bounds.y.min + bounds.y.max) / 2,
         this.rnd.pick(data.assets),
         type,
