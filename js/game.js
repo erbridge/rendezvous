@@ -360,12 +360,7 @@ var mainState = {
     this.characters.forEachExists(this.updateRoom, this);
 
     for (var roomName in this.rooms) {
-      var characters = this.characters.filter(
-        function isInRoom(character) {
-          return character.room === roomName;
-        },
-        true
-      );
+      var characters = this.getCharactersInRoom(roomName);
 
       var character = characters.first;
 
@@ -397,15 +392,37 @@ var mainState = {
       return;
     }
 
-    character.room = null;
+    var newRoomName;
 
     for (var roomName in this.rooms) {
       var room = this.rooms[roomName];
 
       if (room.shape.contains(character.position.x, character.position.y)) {
-        character.room = roomName;
+        newRoomName = roomName;
+
+        if (newRoomName !== character.room) {
+          this.resetResponses(character.room);
+          this.resetResponses(newRoomName);
+        }
+
+        break;
       }
     }
+
+    if (newRoomName) {
+      character.room = newRoomName;
+    } else {
+      delete character.room;
+    }
+  },
+
+  getCharactersInRoom: function getCharactersInRoom(roomName) {
+    return this.characters.filter(
+      function isInRoom(character) {
+        return character.room === roomName;
+      },
+      true
+    );
   },
 
   // Assume we only have one of each type.
@@ -522,6 +539,18 @@ var mainState = {
     }
 
     character.response = this.rnd.pick(character.personReaction.responses);
+  },
+
+  resetResponses: function resetResponses(roomName) {
+    var characters = this.getCharactersInRoom(roomName);
+
+    var character = characters.first;
+
+    while (characters.position < characters.total) {
+      delete character.response;
+
+      character = characters.next;
+    }
   },
 
   updateCharacterPosition: function updateCharacterPosition(character) {
