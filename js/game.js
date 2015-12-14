@@ -1210,6 +1210,7 @@ var resultsState = {
     this.stateDisplay = lastState.stateDisplay;
     this.babyData     = lastState.babyData || [];
     this.roundCount   = lastState.roundCount || 0;
+    this.rooms        = lastState.rooms || {};
   },
 
   create: function create() {
@@ -1258,8 +1259,14 @@ var resultsState = {
       resultText += score === 1 ? 'y' : 'ies';
       resultText += '!';
 
-      if (score > 0) {
+      var roomCount = Object.keys(this.rooms).length;
+
+      if (score >= roomCount) {
         subResultText = 'Just don\'t question their lineage...';
+      } else if (score > 0) {
+        subResultText = 'But ' + (roomCount - score) + ' room';
+        subResultText += (roomCount - score) === 1 ? '' : 's';
+        subResultText += ' were left joyless!';
       } else {
         subResultText = 'Looks like you kept them under control!';
       }
