@@ -36,7 +36,7 @@
     "negative": "Why don't you take your money somewhere else?!"
   },
   "servant": {
-    "positive": "I have always wondered what the poor do for fun. Care to show me?",
+    "positive": "I have always wondered what the service do for fun. Care to show me?",
     "negative": "Go away! Shoo! Damned riffraff..."
   },
   "smelly": {
@@ -53,6 +53,6 @@
   },
   "violent": {
     "positive": "Oh yes! I do like it rough...",
-    "negative": "Put your belt back on!"
+    "negative": "Don't be such a brute!"
   }
 }
