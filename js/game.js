@@ -489,19 +489,22 @@ var mainState = {
     for (var i = 0; i < this.lastBabyData.length; i++) {
       var data = this.lastBabyData[i];
 
-      this.addBaby(data.x, data.y, data.type);
+      this.addBaby(data.x, data.y, data.type, data.room);
     }
   },
 
-  addBaby: function addBaby(x, y, type) {
+  addBaby: function addBaby(x, y, type, roomName) {
     var baby = this.babies.create(x, y, type);
 
     baby.anchor.set(0.5, 1);
+
+    baby.room = roomName;
 
     this.babyData.push({
       x:    x,
       y:    y,
       type: type,
+      room: roomName,
     });
   },
 
@@ -568,6 +571,12 @@ var mainState = {
       };
 
       var labelY = -character.height / 2;
+
+      character.babyHappinessLabel = this.game.make.text(0, labelY, 0, style);
+      character.babyHappinessLabel.anchor.set(0.5, 1);
+      character.addChild(character.babyHappinessLabel);
+
+      labelY -= character.babyHappinessLabel.height;
 
       character.personHappinessLabel = this.game.make.text(0, labelY, 0, style);
       character.personHappinessLabel.anchor.set(0.5, 1);
@@ -648,6 +657,8 @@ var mainState = {
       var character = characters.first;
 
       while (characters.position < characters.total) {
+        character.babyReaction = this.getBabyReaction(roomName);
+
         character.personReaction = this.getPersonReaction(
           character.rawData, characters
         );
@@ -661,31 +672,21 @@ var mainState = {
           character.roomReaction.responses = [];
         }
 
-        var totalHappiness = character.personReaction.happiness +
+        var totalHappiness = character.babyReaction.happiness +
+          character.personReaction.happiness +
           character.roomReaction.happiness;
         var asset;
 
-        switch (totalHappiness) {
-          case (2): {
-            asset = character.assets.love;
-            break;
-          }
-          case (1): {
-            asset = character.assets.like;
-            break;
-          }
-          case (-1): {
-            asset = character.assets.dislike;
-            break;
-          }
-          case (-2): {
-            asset = character.assets.hate;
-            break;
-          }
-          default: {
-            asset = character.assets.base;
-            break;
-          }
+        if (totalHappiness > 1) {
+          asset = character.assets.love;
+        } else if (totalHappiness === 1) {
+          asset = character.assets.like;
+        } else if (totalHappiness === -1) {
+          asset = character.assets.dislike;
+        } else if (totalHappiness < -1) {
+          asset = character.assets.hate;
+        } else {
+          asset = character.assets.base;
         }
 
         if (asset !== character.key) {
@@ -744,6 +745,28 @@ var mainState = {
     );
   },
 
+  getBabyReaction: function getBabyReaction(roomName) {
+    var babies = this.babies.filter(
+      function isInRoom(baby) {
+        return baby.room === roomName;
+      }, true
+    );
+
+    if (babies.total) {
+      return {
+        happiness: -2,
+        responses: [
+          "Not with the baby around...",
+        ],
+      };
+    }
+
+    return {
+      happiness: 0,
+      responses: [],
+    };
+  },
+
   // Assume we only have one of each type.
   getPersonReaction: function getPersonReaction(characterData, characters) {
     var hatedTypes = Object.keys(characterData.people.hates);
@@ -799,7 +822,6 @@ var mainState = {
           responses.push(traitData[trait].negative);
         }
       }
-
 
       for (var m = 0; m < characterData.traits.likes.length; m++) {
         trait = characterData.traits.likes[m];
@@ -866,7 +888,12 @@ var mainState = {
 
     var response;
 
+    if (character.babyReaction.happiness < 0) {
+      response = this.rnd.pick(character.babyReaction.responses);
+    }
+
     if (
+      !response &&
       character.personReaction.happiness >= 0 &&
       character.roomReaction.happiness < 0
     ) {
@@ -916,9 +943,14 @@ var mainState = {
     while (characters.position < characters.total) {
       delete character.response;
 
-      if (character.roomReaction && character.personReaction) {
-        var happiness = character.roomReaction.happiness +
-          character.personReaction.happiness;
+      if (
+        character.babyReaction &&
+        character.roomReaction &&
+        character.personReaction
+      ) {
+        var happiness = character.babyReaction.happiness +
+          character.personReaction.happiness +
+          character.roomReaction.happiness;
 
         if (happiness < 1) {
           completed = false;
@@ -1096,6 +1128,10 @@ var mainState = {
 
   renderCharacterInfo: function renderCharacterInfo(character) {
     if (GAME_DEBUG) {
+      character.babyHappinessLabel.setText(
+        character.babyReaction ? character.babyReaction.happiness : 0
+      );
+
       character.personHappinessLabel.setText(
         character.personReaction ? character.personReaction.happiness : 0
       );
@@ -1136,7 +1172,7 @@ var mainState = {
 
       var type = 'baby-' + this.rnd.pick(babyTypes);
 
-      this.addBaby(x, y, type);
+      this.addBaby(x, y, type, roomName);
     }
   },
 
