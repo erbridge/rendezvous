@@ -183,15 +183,6 @@ var mainState = {
       true
     );
 
-    this.add.tween(axis).to(
-      {
-        rotation: Math.PI,
-      },
-      ROUND_DURATION_MS,
-      Phaser.Easing.Linear.InOut,
-      true
-    );
-
     this.add.tween(moon).to(
       {
         rotation: -Math.PI,
