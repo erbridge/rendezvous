@@ -540,7 +540,10 @@ var mainState = {
 
     var response;
 
-    if (character.personReaction.happiness >= 0 && character.roomReaction.happiness < 0) {
+    if (
+      character.personReaction.happiness >= 0 &&
+      character.roomReaction.happiness < 0
+    ) {
       response = this.rnd.pick(character.roomReaction.responses);
     }
 
