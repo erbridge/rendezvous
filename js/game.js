@@ -79,6 +79,13 @@ var loadState = {
     this.load.image('house-background', 'assets/house-background.png');
     this.load.image('house-foreground', 'assets/house-foreground.png');
 
+    this.load.image(
+      'house-background-night', 'assets/house-background-night.png'
+    );
+    this.load.image(
+      'house-foreground-night', 'assets/house-foreground-night.png'
+    );
+
     this.load.image('cook-f',       'assets/characters/cook-f.png');
     this.load.image('cook-m',       'assets/characters/cook-m.png');
     this.load.image('gardener-f',   'assets/characters/gardener-f.png');
@@ -204,6 +211,20 @@ var mainState = {
     );
 
     this.add.image(0, 0, 'house-background');
+
+    var houseBackgroundNight = this.add.image(0, 0, 'house-background-night');
+
+    houseBackgroundNight.alpha = 0;
+
+    this.add.tween(houseBackgroundNight).to(
+      {
+        alpha: 1,
+      },
+      ROUND_DURATION_MS / 100,
+      Phaser.Easing.Linear.InOut,
+      true,
+      ROUND_DURATION_MS / 8
+    );
   },
 
   setupRooms: function setupRooms() {
@@ -261,6 +282,20 @@ var mainState = {
 
   setupForeground: function setupForeground() {
     this.add.image(0, 0, 'house-foreground');
+
+    var houseForegroundNight = this.add.image(0, 0, 'house-foreground-night');
+
+    houseForegroundNight.alpha = 0;
+
+    this.add.tween(houseForegroundNight).to(
+      {
+        alpha: 1,
+      },
+      ROUND_DURATION_MS / 100,
+      Phaser.Easing.Linear.InOut,
+      true,
+      ROUND_DURATION_MS / 8
+    );
   },
 
   onPointerDown: function onPointerDown(pointer) {
