@@ -1177,9 +1177,9 @@ var resultsState = {
   restartMain: function restartMain() {
     this.add.tween(this.overlay).to(
       {
-        alpha: 0,
+        alpha: 1,
       },
-      250,
+      1000,
       Phaser.Easing.Linear.InOut,
       true
     ).onComplete.add(
