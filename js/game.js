@@ -181,7 +181,7 @@ var mainState = {
       ROUND_DURATION_MS,
       Phaser.Easing.Linear.InOut,
       true
-    );
+    ).onComplete.add(this.endRound, this);
 
     this.add.tween(moon).to(
       {
@@ -835,6 +835,24 @@ var mainState = {
       );
     }
   },
+
+  endRound: function endRound() {
+    this.state.start('results', false, false, this);
+  },
+};
+
+var resultsState = {
+  init: function init(lastState) {
+    Object.assign(this, lastState);
+  },
+
+  create: function create() {
+    if (GAME_DEBUG) {
+      this.stateDisplay.setText('state: results');
+    }
+
+    this.state.start('main', false, false, this);
+  },
 };
 
 window.startGame = function startGame() {
@@ -843,8 +861,9 @@ window.startGame = function startGame() {
     Phaser.AUTO
   );
 
-  game.state.add('load', loadState);
-  game.state.add('main', mainState);
+  game.state.add('load',    loadState);
+  game.state.add('main',    mainState);
+  game.state.add('results', resultsState);
 
   game.state.start('load');
 };
