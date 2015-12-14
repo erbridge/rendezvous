@@ -151,6 +151,10 @@ var mainState = {
     this.renderCharactersInfo();
   },
 
+  shutdown: function shutdown() {
+    this.settleFloaters();
+  },
+
   setupPhysics: function setupPhysics() {
     this.physics.startSystem(Phaser.Physics.P2JS);
 
@@ -846,6 +850,24 @@ var mainState = {
 
   endRound: function endRound() {
     this.state.start('results', false, false, this);
+  },
+
+  settleFloaters: function settleFloaters() {
+    if (this.touchedCharacter) {
+      var room   = this.rooms[this.touchedCharacter.room];
+      var bounds = this.calculateRoomBounds(room);
+
+      var x = this.rnd.integerInRange(
+        bounds.x.min + ROOM_WIDTH_PADDING,
+        bounds.x.max - ROOM_WIDTH_PADDING
+      );
+      var y = bounds.y.max - FLOOR_THICKNESS - this.touchedCharacter.height / 2;
+
+      this.touchedCharacter.body.x = x;
+      this.touchedCharacter.body.y = y;
+    }
+
+    this.onPointerUp();
   },
 };
 
