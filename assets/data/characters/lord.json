@@ -10,14 +10,24 @@
     "home": "master-bedroom",
 
     "likes": {
-      "dungeon": [],
-      "hallway": [],
-      "observatory": []
+      "dungeon": [
+        "I think it's play time..."
+      ],
+      "hallway": [
+        "The risk of discovery... excites me."
+      ],
+      "observatory": [
+        "Would you like to see my telescope?"
+      ]
     },
 
     "dislikes": {
-      "garden": [],
-      "master-bedroom": []
+      "garden": [
+        "These flowers remind me of that devil woman."
+      ],
+      "master-bedroom": [
+        "How about somewhere else for a change?"
+      ]
     }
   },
 
@@ -40,11 +50,16 @@
   "people": {
 
     "loves": {
-      "mother": []
+      "mother": [
+        "It is obvious where your daughter gets her looks. Shame she doesn't have your personality, too."
+      ]
     },
 
     "hates": {
-      "lady": []
+      "lady": [
+        "Out of my way!",
+        "Perform your witchfraft elsewhere, dear wife."
+      ]
     }
   }
 }

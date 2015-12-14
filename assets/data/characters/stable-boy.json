@@ -11,11 +11,16 @@
     "home": "stables",
 
     "likes": {
-      "stables": []
+      "stables": [
+        "I like horses.",
+        "That hay look comfortable."
+      ]
     },
 
     "dislikes": {
-      "study": []
+      "study": [
+        "No time for reading. I prefer things to be more physical."
+      ]
     }
   },
 

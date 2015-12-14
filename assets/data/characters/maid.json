@@ -11,13 +11,23 @@
     "home": "parlour",
 
     "likes": {
-      "attic": [],
-      "observatory": [],
-      "master-bedroom": []
+      "attic": [
+        "It is nice and quiet up here.",
+        "Mind if we blow out that candle?",
+        "Want to see inside my teasure chest?"
+      ],
+      "observatory": [
+        "The stars are beautiful tonight"
+      ],
+      "master-bedroom": [
+        "That bed looks so comfortable. I have always wanted to lie on it."
+      ]
     },
 
     "dislikes": {
-      "garden": []
+      "garden": [
+        "But we might ruin the flowers."
+      ]
     }
   },
 

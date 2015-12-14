@@ -10,15 +10,22 @@
     "home": "guest-bedroom",
 
     "likes": {
-      "dungeon": [],
-      "master-bedroom": []
+      "dungeon": [
+        "Hector always did like it down here."
+      ],
+      "master-bedroom": [
+        "This should have been my bedroom.",
+        "Let us despoil my daughter's sheets."
+      ]
     },
 
     "dislikes": {
       "attic": [
-        "Why would I want to lie in my late husband's mess?"
+        "Leave Hector's things alone."
       ],
-      "kitchen": []
+      "kitchen": [
+        "I eat food prepared on that table."
+      ]
     }
   },
 
@@ -47,8 +54,12 @@
     "loves": {},
 
     "hates": {
-      "lord": [],
-      "lady": []
+      "lord": [
+        "You are just simply vile."
+      ],
+      "lady": [
+        "Get a grip, girl."
+      ]
     }
   }
 }
