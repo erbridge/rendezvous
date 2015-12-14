@@ -457,7 +457,10 @@ var mainState = {
       };
     }
 
+    var traitData = this.cache.getJSON('trait-data');
+
     var happiness = 0;
+    var responses = [];
 
     for (var k = 0; k < characters.list.length; k++) {
       var target = characters.list[k];
@@ -473,6 +476,8 @@ var mainState = {
 
         if (target.rawData.traits.own.indexOf(trait) !== -1) {
           happiness--;
+
+          responses.push(traitData[trait].negative);
         }
       }
 
@@ -482,6 +487,8 @@ var mainState = {
 
         if (target.rawData.traits.own.indexOf(trait) !== -1) {
           happiness++;
+
+          responses.push(traitData[trait].positive);
         }
       }
     }
@@ -489,20 +496,20 @@ var mainState = {
     if (happiness < 0) {
       return {
         happiness: -1,
-        responses: [],
+        responses: responses,
       };
     }
 
     if (happiness > 0) {
       return {
         happiness: 1,
-        responses: [],
+        responses: responses,
       };
     }
 
     return {
       happiness: 0,
-      responses: [],
+      responses: responses,
     };
   },
 
