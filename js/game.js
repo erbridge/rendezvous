@@ -502,14 +502,14 @@ var mainState = {
       font:     'Lora',
       fontSize: 18,
 
-      fill:   '#000',
+      fill: '#000',
     };
 
     return new SpeechBubble(
       this.game,
       Math.round(character.position.x + character.width / 2),
       Math.round(character.position.y - character.height / 2),
-      400,
+      200,
       text,
       style
     );
