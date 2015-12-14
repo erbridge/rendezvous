@@ -360,8 +360,8 @@ var mainState = {
 
     return new SpeechBubble(
       this.game,
-      character.position.x + character.width / 2,
-      character.position.y - character.height / 2,
+      Math.round(character.position.x + character.width / 2),
+      Math.round(character.position.y - character.height / 2),
       400,
       text,
       style
@@ -750,11 +750,13 @@ var mainState = {
 
   updateSpeechBubble: function updateSpeechBubble(character) {
     if (character.speechBubble) {
-      character.speechBubble.position.x = character.position.x +
-        character.width / 2;
+      character.speechBubble.position.x = Math.round(
+        character.position.x + character.width / 2
+      );
 
-      character.speechBubble.position.y = character.position.y -
-        character.height / 2;
+      character.speechBubble.position.y = Math.round(
+        character.position.y - character.height / 2
+      );
     }
 
     var response = character.response || '';
