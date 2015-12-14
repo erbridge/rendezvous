@@ -855,6 +855,9 @@ var resultsState = {
   },
 
   create: function create() {
+    this.setupOverlay();
+    this.setupInput();
+
     if (GAME_DEBUG) {
       if (this.stateDisplay.parent) {
         this.stateDisplay.setText('state: main');
@@ -862,8 +865,58 @@ var resultsState = {
         this.stateDisplay = createStateDisplay(this.game, 'main');
       }
     }
+  },
 
-    this.state.start('main', true, false, this);
+  setupOverlay: function setupOverlay() {
+    this.overlay = this.add.graphics();
+
+    this.overlay.alpha = 0;
+
+    this.overlay.beginFill(0x000000, 1);
+    this.overlay.drawRect(0, 0, this.world.width, this.world.height);
+    this.overlay.endFill();
+
+    this.add.tween(this.overlay).to(
+      {
+        alpha: 0.7,
+      },
+      250,
+      Phaser.Easing.Linear.InOut,
+      true
+    );
+  },
+
+  setupInput: function setupInput() {
+    this.input.onDown.add(this.onPointerDown, this);
+    this.input.onUp.add(this.onPointerUp, this);
+  },
+
+  onPointerDown: function onPointerDown() {
+    this.pointerDown = true;
+  },
+
+  onPointerUp: function onPointerUp() {
+    if (this.pointerDown) {
+      this.restartMain();
+    }
+
+    delete this.pointerDown;
+  },
+
+  restartMain: function restartMain() {
+    this.add.tween(this.overlay).to(
+      {
+        alpha: 0,
+      },
+      250,
+      Phaser.Easing.Linear.InOut,
+      true
+    ).onComplete.add(
+      function restart() {
+        this.state.start('main', true, false, this);
+      },
+      this
+    );
   },
 };
 
