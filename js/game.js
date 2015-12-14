@@ -124,9 +124,27 @@ var loadState = {
 
     this.stage.disableVisibilityChange = true;
 
+    var style = {
+      font:     'Lora',
+      fontSize: 36,
+
+      fill:   '#fff',
+      stroke: '#000',
+
+      strokeThickness: 3,
+    };
+
+    var progressDisplay = this.add.text(
+      this.world.width, this.world.height, '', style
+    );
+
+    progressDisplay.anchor.set(1);
+
     if (GAME_DEBUG) {
       this.stateDisplay = createStateDisplay(this.game, 'load');
     }
+
+    this.load.image('splash', 'assets/splash.png');
 
     this.load.image('sun',  'assets/sun.png');
     this.load.image('moon', 'assets/moon.png');
@@ -194,8 +212,16 @@ var loadState = {
     this.load.json('mother-data',     'assets/data/characters/mother.json');
     this.load.json('stable-boy-data', 'assets/data/characters/stable-boy.json');
 
+   this.load.onFileComplete.add(function handleProgress(progress, cacheKey) {
+      progressDisplay.setText(progress + '%');
+
+      if (cacheKey === 'splash') {
+        this.world.sendToBack(this.add.image(0, 0, 'splash'));
+      }
+    }, this);
+
     this.load.onLoadComplete.add(function() {
-      this.state.start('results', false, false, this);
+      this.state.start('start', false, false, this);
     }, this);
 
     this.load.start();
@@ -208,6 +234,11 @@ var startState = {
   },
 
   create: function create() {
+    this.add.image(0, 0, 'splash');
+
+    this.setupOverlay();
+    this.setupInput();
+
     if (GAME_DEBUG) {
       if (this.stateDisplay.parent) {
         this.stateDisplay.setText('state: start');
@@ -215,9 +246,46 @@ var startState = {
         this.stateDisplay = createStateDisplay(this.game, 'start');
       }
     }
-
-    this.state.start('results', false, false, this);
   },
+
+  setupOverlay: function setupOverlay() {
+    this.overlay = createOverlay(this.game);
+
+    this.overlay.alpha = 0;
+  },
+
+  setupInput: function setupInput() {
+    this.input.onDown.add(this.onPointerDown, this);
+    this.input.onUp.add(this.onPointerUp, this);
+  },
+
+  onPointerDown: function onPointerDown() {
+    this.pointerDown = true;
+  },
+
+  onPointerUp: function onPointerUp() {
+    if (this.pointerDown) {
+      this.startGame();
+    }
+
+    delete this.pointerDown;
+  },
+
+  startGame: function startGame() {
+    this.add.tween(this.overlay).to(
+      {
+        alpha: 1,
+      },
+      2000,
+      Phaser.Easing.Linear.InOut,
+      true
+    ).onComplete.add(
+      function start() {
+        this.state.start('results', false, false, this);
+      },
+      this
+    );
+  }
 };
 
 var mainState = {
