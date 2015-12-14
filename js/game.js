@@ -25,6 +25,22 @@ window.WebFontConfig = {
   },
 };
 
+var createStateDisplay = function createStateDisplay(game, stateName) {
+  return game.add.text(
+    0, 0,
+    'state: ' + stateName,
+    {
+      font:     'Lora',
+      fontSize: 36,
+
+      fill:   '#fff',
+      stroke: '#000',
+
+      strokeThickness: 3,
+    }
+  );
+};
+
 var constrainVelocity = function constrainVelocity(sprite, maxVelocity) {
   var vx = sprite.body.velocity.x;
   var vy = sprite.body.velocity.y;
@@ -54,19 +70,7 @@ var loadState = {
     this.scale.pageAlignVertically   = true;
 
     if (GAME_DEBUG) {
-      this.stateDisplay = this.add.text(
-        0, 0,
-        'state: load',
-        {
-          font:     'Lora',
-          fontSize: 36,
-
-          fill:   '#fff',
-          stroke: '#000',
-
-          strokeThickness: 3,
-        }
-      );
+      this.stateDisplay = createStateDisplay(this.game, 'load');
     }
 
     this.load.image('sun',  'assets/sun.png');
@@ -128,7 +132,11 @@ var mainState = {
     this.world.bringToTop(this.speechBubbles);
 
     if (GAME_DEBUG) {
-      this.stateDisplay.setText('state: main');
+      if (this.stateDisplay.parent) {
+        this.stateDisplay.setText('state: main');
+      } else {
+        this.stateDisplay = createStateDisplay(this.game, 'main');
+      }
     }
   },
 
@@ -846,7 +854,11 @@ var resultsState = {
 
   create: function create() {
     if (GAME_DEBUG) {
-      this.stateDisplay.setText('state: results');
+      if (this.stateDisplay.parent) {
+        this.stateDisplay.setText('state: main');
+      } else {
+        this.stateDisplay = createStateDisplay(this.game, 'main');
+      }
     }
 
     this.state.start('main', true, false, this);
