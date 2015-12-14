@@ -7,7 +7,7 @@
       "like":    "lord-like",
       "base":    "lord",
       "dislike": "lord-dislike",
-      "hate":    "lord-base"
+      "hate":    "lord-hate"
     }
   ],
 

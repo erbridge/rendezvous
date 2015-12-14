@@ -7,14 +7,14 @@
       "like":    "maid-f-like",
       "base":    "maid-f",
       "dislike": "maid-f-dislike",
-      "hate":    "maid-f-base"
+      "hate":    "maid-f-hate"
     },
     {
       "love":    "maid-m-love",
       "like":    "maid-m-like",
       "base":    "maid-m",
       "dislike": "maid-m-dislike",
-      "hate":    "maid-m-base"
+      "hate":    "maid-m-hate"
     }
   ],
 

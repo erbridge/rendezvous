@@ -7,14 +7,14 @@
       "like":    "gardener-f-like",
       "base":    "gardener-f",
       "dislike": "gardener-f-dislike",
-      "hate":    "gardener-f-base"
+      "hate":    "gardener-f-hate"
     },
     {
       "love":    "gardener-m-love",
       "like":    "gardener-m-like",
       "base":    "gardener-m",
       "dislike": "gardener-m-dislike",
-      "hate":    "gardener-m-base"
+      "hate":    "gardener-m-hate"
     }
   ],
 

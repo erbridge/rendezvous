@@ -7,14 +7,14 @@
       "like":    "stable-boy-f-like",
       "base":    "stable-boy-f",
       "dislike": "stable-boy-f-dislike",
-      "hate":    "stable-boy-f-base"
+      "hate":    "stable-boy-f-hate"
     },
     {
       "love":    "stable-boy-m-love",
       "like":    "stable-boy-m-like",
       "base":    "stable-boy-m",
       "dislike": "stable-boy-m-dislike",
-      "hate":    "stable-boy-m-base"
+      "hate":    "stable-boy-m-hate"
     }
   ],
 
