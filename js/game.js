@@ -15,6 +15,8 @@ var MAX_CHARACTER_SPEED = 1000;
 var FLOOR_THICKNESS    = 25;
 var ROOM_WIDTH_PADDING = 60;
 
+var ROUND_DURATION_MS = 2 * 60 * 1000;
+
 window.WebFontConfig = {
   google: {
     families: [
@@ -71,6 +73,7 @@ var loadState = {
       displayState(this.game, 'loading');
     }
 
+    this.load.image('sun',  'assets/sun.png');
     this.load.image('moon', 'assets/moon.png');
 
     this.load.image('treeline',         'assets/treeline.png');
@@ -153,7 +156,42 @@ var mainState = {
   },
 
   setupScene: function setupScene() {
-    this.add.image(80, 100, 'moon');
+    var axis = this.add.graphics(
+      this.game.world.centerX + 50, this.game.world.centerY + 200
+    );
+
+    var sun = this.make.image(this.game.world.centerX - 140, 0, 'sun');
+
+    sun.anchor.set(0.5);
+
+    var moon = this.make.image(50 - this.game.world.centerX, 0, 'moon');
+
+    moon.anchor.set(0.5);
+
+    axis.addChild(sun);
+    axis.addChild(moon);
+
+    moon.rotation = Math.PI / 8;
+    axis.rotation = -Math.PI / 8;
+
+    this.add.tween(axis).to(
+      {
+        rotation: Math.PI,
+      },
+      ROUND_DURATION_MS,
+      Phaser.Easing.Linear.InOut,
+      true
+    );
+
+    this.add.tween(moon).to(
+      {
+        rotation: -Math.PI,
+      },
+      ROUND_DURATION_MS,
+      Phaser.Easing.Linear.InOut,
+      true
+    );
+
     this.add.image(0, 0, 'treeline');
     this.add.image(0, 0, 'house-background');
   },
@@ -324,25 +362,25 @@ var mainState = {
 
       var labelY = -character.height / 2;
 
-      character.personHappinessLabel = this.game.add.text(0, labelY, 0, style);
+      character.personHappinessLabel = this.game.make.text(0, labelY, 0, style);
       character.personHappinessLabel.anchor.set(0.5, 1);
       character.addChild(character.personHappinessLabel);
 
       labelY -= character.personHappinessLabel.height;
 
-      character.roomHappinessLabel = this.game.add.text(0, labelY, 0, style);
+      character.roomHappinessLabel = this.game.make.text(0, labelY, 0, style);
       character.roomHappinessLabel.anchor.set(0.5, 1);
       character.addChild(character.roomHappinessLabel);
 
       labelY -= character.roomHappinessLabel.height;
 
-      var typeLabel = this.game.add.text(0, labelY, character.type, style);
+      var typeLabel = this.game.make.text(0, labelY, character.type, style);
       typeLabel.anchor.set(0.5, 1);
       character.addChild(typeLabel);
 
       labelY -= typeLabel.height;
 
-      var nameLabel = this.game.add.text(0, labelY, character.name, style);
+      var nameLabel = this.game.make.text(0, labelY, character.name, style);
       nameLabel.anchor.set(0.5, 1);
       character.addChild(nameLabel);
     }
