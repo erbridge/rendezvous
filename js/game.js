@@ -849,7 +849,7 @@ var resultsState = {
       this.stateDisplay.setText('state: results');
     }
 
-    this.state.start('main', false, false, this);
+    this.state.start('main', true, false, this);
   },
 };
 
