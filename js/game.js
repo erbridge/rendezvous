@@ -311,10 +311,6 @@ var mainState = {
     character.body.setCollisionGroup(this.characterCollisionGroup);
     character.body.collides(this.floorCollisionGroup);
 
-    character.speechBubble = this.speechBubbles.add(
-      this.createSpeechBubble(character)
-    );
-
     if (GAME_DEBUG) {
       var style = {
         font:     'Lora',
@@ -753,17 +749,26 @@ var mainState = {
   },
 
   updateSpeechBubble: function updateSpeechBubble(character) {
-    character.speechBubble.position.x = character.position.x +
-      character.width / 2;
+    if (character.speechBubble) {
+      character.speechBubble.position.x = character.position.x +
+        character.width / 2;
 
-    character.speechBubble.position.y = character.position.y -
-      character.height / 2;
+      character.speechBubble.position.y = character.position.y -
+        character.height / 2;
+    }
 
     var response = character.response || '';
 
-    if (response !== character.speechBubble.text.text) {
+    if (
+      character.speechBubble &&
+      response !== character.speechBubble.text.text
+    ) {
       character.speechBubble.destroy();
 
+      delete character.speechBubble;
+    }
+
+    if (response && !character.speechBubble) {
       character.speechBubble = this.speechBubbles.add(
         this.createSpeechBubble(character, response)
       );
