@@ -2,7 +2,7 @@
 
 'use strict';
 
-var GAME_DEBUG    = true;
+var GAME_DEBUG    = false;
 var PHYSICS_DEBUG = false;
 
 var GAME_WIDTH  = 1920;
