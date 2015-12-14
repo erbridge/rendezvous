@@ -2,7 +2,13 @@
   "name": "Sir John",
 
   "assets": [
-    "lord"
+    {
+      "love":    "lord-love",
+      "like":    "lord-like",
+      "base":    "lord",
+      "dislike": "lord-dislike",
+      "hate":    "lord-base"
+    }
   ],
 
   "rooms": {

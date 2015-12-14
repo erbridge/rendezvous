@@ -2,8 +2,20 @@
   "name": "Gruel",
 
   "assets": [
-    "cook-f",
-    "cook-m"
+    {
+      "love":    "cook-f-love",
+      "like":    "cook-f-like",
+      "base":    "cook-f",
+      "dislike": "cook-f-dislike",
+      "hate":    "cook-f-base"
+    },
+    {
+      "love":    "cook-m-love",
+      "like":    "cook-m-like",
+      "base":    "cook-m",
+      "dislike": "cook-m-dislike",
+      "hate":    "cook-m-base"
+    }
   ],
 
   "rooms": {

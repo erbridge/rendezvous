@@ -2,8 +2,20 @@
   "name": "James",
 
   "assets": [
-    "stable-boy-f",
-    "stable-boy-m"
+    {
+      "love":    "stable-boy-f-love",
+      "like":    "stable-boy-f-like",
+      "base":    "stable-boy-f",
+      "dislike": "stable-boy-f-dislike",
+      "hate":    "stable-boy-f-base"
+    },
+    {
+      "love":    "stable-boy-m-love",
+      "like":    "stable-boy-m-like",
+      "base":    "stable-boy-m",
+      "dislike": "stable-boy-m-dislike",
+      "hate":    "stable-boy-m-base"
+    }
   ],
 
   "rooms": {

@@ -2,7 +2,13 @@
   "name": "Gertrude",
 
   "assets": [
-    "mother"
+    {
+      "love":    "mother-love",
+      "like":    "mother-like",
+      "base":    "mother",
+      "dislike": "mother-dislike",
+      "hate":    "mother-base"
+    }
   ],
 
   "rooms": {

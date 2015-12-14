@@ -126,17 +126,39 @@ var loadState = {
       'house-foreground-night', 'assets/house-foreground-night.png'
     );
 
-    this.load.image('cook-f',       'assets/characters/cook-f.png');
-    this.load.image('cook-m',       'assets/characters/cook-m.png');
-    this.load.image('gardener-f',   'assets/characters/gardener-f.png');
-    this.load.image('gardener-m',   'assets/characters/gardener-m.png');
-    this.load.image('lady',         'assets/characters/lady.png');
-    this.load.image('lord',         'assets/characters/lord.png');
-    this.load.image('maid-f',       'assets/characters/maid-f.png');
-    this.load.image('maid-m',       'assets/characters/maid-m.png');
-    this.load.image('mother',       'assets/characters/mother.png');
-    this.load.image('stable-boy-f', 'assets/characters/stable-boy-f.png');
-    this.load.image('stable-boy-m', 'assets/characters/stable-boy-m.png');
+    var characters = [
+      'cook-f',
+      'cook-m',
+      'gardener-f',
+      'gardener-m',
+      'lady',
+      'lord',
+      'maid-f',
+      'maid-m',
+      'mother',
+      'stable-boy-f',
+      'stable-boy-m',
+    ];
+
+    for (var i = 0; i < characters.length; i++) {
+      var type = characters[i];
+
+      this.load.image(
+        type + '-love', 'assets/characters/' + type + '/love.png'
+      );
+      this.load.image(
+        type + '-like', 'assets/characters/' + type + '/like.png'
+      );
+      this.load.image(
+        type, 'assets/characters/' + type + '/base.png'
+      );
+      this.load.image(
+        type + '-dislike', 'assets/characters/' + type + '/dislike.png'
+      );
+      this.load.image(
+        type + '-hate', 'assets/characters/' + type + '/hate.png'
+      );
+    }
 
     this.load.spritesheet('speech-bubble', 'assets/speech-bubble.png', 15, 15);
     this.load.image('speech-bubble-tail', 'assets/speech-bubble-tail.png');
@@ -457,12 +479,13 @@ var mainState = {
     this.createRandomSpeechBubble();
   },
 
-  addCharacter: function addCharacter(x, y, assetName, type, rawData) {
-    var character = this.characters.create(x, y, assetName);
+  addCharacter: function addCharacter(x, y, assets, type, rawData) {
+    var character = this.characters.create(x, y, assets.base);
 
     character.position.y -= character.height / 2;
 
     character.type    = type;
+    character.assets  = assets;
     character.name    = rawData.name;
     character.rawData = rawData;
 

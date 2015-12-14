@@ -2,8 +2,20 @@
   "name": "Roderick",
 
   "assets": [
-    "gardener-f",
-    "gardener-m"
+    {
+      "love":    "gardener-f-love",
+      "like":    "gardener-f-like",
+      "base":    "gardener-f",
+      "dislike": "gardener-f-dislike",
+      "hate":    "gardener-f-base"
+    },
+    {
+      "love":    "gardener-m-love",
+      "like":    "gardener-m-like",
+      "base":    "gardener-m",
+      "dislike": "gardener-m-dislike",
+      "hate":    "gardener-m-base"
+    }
   ],
 
   "rooms": {

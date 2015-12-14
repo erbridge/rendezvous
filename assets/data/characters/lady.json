@@ -2,7 +2,13 @@
   "name": "Lady Josephine",
 
   "assets": [
-    "lady"
+    {
+      "love":    "lady-love",
+      "like":    "lady-like",
+      "base":    "lady",
+      "dislike": "lady-dislike",
+      "hate":    "lady-base"
+    }
   ],
 
   "rooms": {

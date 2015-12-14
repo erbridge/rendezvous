@@ -2,8 +2,20 @@
   "name": "Isabella",
 
   "assets": [
-    "maid-f",
-    "maid-m"
+    {
+      "love":    "maid-f-love",
+      "like":    "maid-f-like",
+      "base":    "maid-f",
+      "dislike": "maid-f-dislike",
+      "hate":    "maid-f-base"
+    },
+    {
+      "love":    "maid-m-love",
+      "like":    "maid-m-like",
+      "base":    "maid-m",
+      "dislike": "maid-m-dislike",
+      "hate":    "maid-m-base"
+    }
   ],
 
   "rooms": {
