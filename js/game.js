@@ -147,6 +147,7 @@ var loadState = {
 
     this.load.image('house-background', 'assets/house-background.png');
     this.load.image('house-foreground', 'assets/house-foreground.png');
+    this.load.image('house-external',   'assets/house-external.png');
 
     this.load.image(
       'house-background-night', 'assets/house-background-night.png'
@@ -423,6 +424,18 @@ var mainState = {
 
     this.houseForegroundNight = this.add.image(0, 0, 'house-foreground-night');
     this.houseForegroundNight.alpha = 0;
+
+    var houseExternal = this.add.image(0, 0, 'house-external');
+
+    this.add.tween(houseExternal).to(
+      {
+        alpha: 0,
+      },
+      1000,
+      Phaser.Easing.Linear.InOut,
+      true,
+      3000
+    );
   },
 
   setupTransitions: function setupTransitions() {
