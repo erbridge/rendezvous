@@ -13,7 +13,7 @@ var GRAVITY = 10000;
 var MAX_CHARACTER_SPEED = 1000;
 
 var FLOOR_THICKNESS    = 25;
-var ROOM_WIDTH_PADDING = 50;
+var ROOM_WIDTH_PADDING = 60;
 
 window.WebFontConfig = {
   google: {
