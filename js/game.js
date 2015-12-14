@@ -495,7 +495,7 @@ var mainState = {
       {
         alpha: 1,
       },
-      ROUND_DURATION_MS / 100,
+      ROUND_DURATION_MS / 50,
       Phaser.Easing.Linear.InOut,
       true,
       ROUND_DURATION_MS / 8
@@ -505,7 +505,7 @@ var mainState = {
       {
         alpha: 1,
       },
-      ROUND_DURATION_MS / 100,
+      ROUND_DURATION_MS / 50,
       Phaser.Easing.Linear.InOut,
       true,
       ROUND_DURATION_MS / 8
