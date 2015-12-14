@@ -202,6 +202,24 @@ var loadState = {
   },
 };
 
+var startState = {
+  init: function init(lastState) {
+    this.stateDisplay = lastState.stateDisplay;
+  },
+
+  create: function create() {
+    if (GAME_DEBUG) {
+      if (this.stateDisplay.parent) {
+        this.stateDisplay.setText('state: start');
+      } else {
+        this.stateDisplay = createStateDisplay(this.game, 'start');
+      }
+    }
+
+    this.state.start('results', false, false, this);
+  },
+};
+
 var mainState = {
   init: function init(lastState) {
     this.stateDisplay = lastState.stateDisplay;
@@ -1361,8 +1379,11 @@ var resultsState = {
       1250
     ).onComplete.add(
       function restart() {
-        // FIXME: If we've finished return to the splash screen instead.
-        this.state.start('main', true, false, this);
+        if (this.roundsToGo > 0) {
+          this.state.start('main', true, false, this);
+        } else {
+          this.state.start('start', false, false, this);
+        }
       },
       this
     );
@@ -1376,6 +1397,7 @@ window.startGame = function startGame() {
   );
 
   game.state.add('load',    loadState);
+  game.state.add('start',   startState);
   game.state.add('main',    mainState);
   game.state.add('results', resultsState);
 
