@@ -2,7 +2,8 @@
   "name": "Isabella",
 
   "assets": [
-    "female"
+    "maid-f",
+    "maid-m"
   ],
 
   "rooms": {
