@@ -164,7 +164,7 @@ var mainState = {
 
     sun.anchor.set(0.5);
 
-    var moon = this.make.image(50 - this.game.world.centerX, 0, 'moon');
+    var moon = this.make.image(100 - this.game.world.centerX, 0, 'moon');
 
     moon.anchor.set(0.5);
 
