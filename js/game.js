@@ -112,7 +112,7 @@ var loadState = {
 
 var mainState = {
   init: function init(lastState) {
-    Object.assign(this, lastState);
+    this.stateDisplay = lastState.stateDisplay;
   },
 
   create: function create() {
@@ -841,7 +841,7 @@ var mainState = {
 
 var resultsState = {
   init: function init(lastState) {
-    Object.assign(this, lastState);
+    Phaser.Utils.extend(this, lastState);
   },
 
   create: function create() {
