@@ -431,9 +431,14 @@ var mainState = {
           character.rawData, characters
         );
 
-        character.roomReaction = this.getRoomReaction(
-          character.rawData, roomName
-        );
+        // Don't react to a room unless someone else is in it, too.
+        if (characters.total > 1) {
+          character.roomReaction = this.getRoomReaction(
+            character.rawData, roomName
+          );
+        } else {
+          character.roomReaction = 0;
+        }
 
         character = characters.next;
       }
