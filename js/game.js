@@ -597,7 +597,7 @@ var mainState = {
           character.rawData, roomName
         );
 
-        if (characters.total > 1) {
+        if (characters.total <= 1) {
           character.roomReaction.responses = [];
         }
 
