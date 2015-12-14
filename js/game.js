@@ -507,17 +507,17 @@ var mainState = {
   },
 
   getRoomReaction: function getRoomReaction(characterData, roomName) {
-    if (characterData.rooms.dislikes.indexOf(roomName) !== -1) {
+    if (characterData.rooms.dislikes[roomName]) {
       return {
         happiness: -1,
-        responses: [],
+        responses: characterData.rooms.dislikes[roomName],
       };
     }
 
-    if (characterData.rooms.likes.indexOf(roomName) !== -1) {
+    if (characterData.rooms.likes[roomName]) {
       return {
         happiness: 1,
-        responses: [],
+        responses: characterData.rooms.likes[roomName],
       };
     }
 
@@ -538,7 +538,25 @@ var mainState = {
       return;
     }
 
-    character.response = this.rnd.pick(character.personReaction.responses);
+    var response;
+
+    if (character.personReaction.happiness >= 0 && character.roomReaction.happiness < 0) {
+      response = this.rnd.pick(character.roomReaction.responses);
+    }
+
+    if (!response && character.personReaction.happiness < 0) {
+      response = this.rnd.pick(character.personReaction.responses);
+    }
+
+    if (!response) {
+      var allResponses = character.personReaction.responses.concat(
+        character.roomReaction.responses
+      );
+
+      response = this.rnd.pick(allResponses);
+    }
+
+    character.response = response;
   },
 
   resetResponses: function resetResponses(roomName) {

@@ -9,15 +9,17 @@
 
     "home": "guest-bedroom",
 
-    "likes": [
-      "master-bedroom",
-      "dungeon"
-    ],
+    "likes": {
+      "dungeon": [],
+      "master-bedroom": []
+    },
 
-    "dislikes": [
-      "attic",
-      "kitchen"
-    ]
+    "dislikes": {
+      "attic": [
+        "Why would I want to lie in my late husband's mess?"
+      ],
+      "kitchen": []
+    }
   },
 
   "traits": {

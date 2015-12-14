@@ -9,15 +9,15 @@
 
     "home": "parlour",
 
-    "likes": [
-      "attic",
-      "observatory",
-      "master-bedroom"
-    ],
+    "likes": {
+      "attic": [],
+      "observatory": [],
+      "master-bedroom": []
+    },
 
-    "dislikes": [
-      "garden"
-    ]
+    "dislikes": {
+      "garden": []
+    }
   },
 
   "traits": {

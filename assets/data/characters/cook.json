@@ -10,17 +10,17 @@
 
     "home": "kitchen",
 
-    "likes": [
-      "bathroom",
-      "guest-bedroom"
-    ],
+    "likes": {
+      "bathroom": [],
+      "guest-bedroom": []
+    },
 
-    "dislikes": [
-      "kitchen",
-      "stables",
-      "attic",
-      "dungeon"
-    ]
+    "dislikes": {
+      "attic": [],
+      "dungeon": [],
+      "kitchen": [],
+      "stables": []
+    }
   },
 
   "traits": {

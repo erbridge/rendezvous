@@ -9,16 +9,18 @@
 
     "home": "master-bedroom",
 
-    "likes": [
-      "bathroom",
-      "garden",
-      "stables"
-    ],
+    "likes": {
+      "bathroom": [],
+      "garden": [],
+      "stables": []
+    },
 
-    "dislikes": [
-      "dungeon",
-      "master-bedroom"
-    ]
+    "dislikes": {
+      "dungeon": [],
+      "master-bedroom": [
+        "And sleep in my husband's filth? I don't think so."
+      ]
+    }
   },
 
   "traits": {

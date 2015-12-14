@@ -10,15 +10,15 @@
 
     "home": "garden",
 
-    "likes": [
-      "garden"
-    ],
+    "likes": {
+      "garden": []
+    },
 
-    "dislikes": [
-      "dungeon",
-      "study",
-      "observatory"
-    ]
+    "dislikes": {
+      "dungeon": [],
+      "observatory": [],
+      "study": []
+    }
   },
 
   "traits": {

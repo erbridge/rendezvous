@@ -10,13 +10,13 @@
 
     "home": "stables",
 
-    "likes": [
-      "stables"
-    ],
+    "likes": {
+      "stables": []
+    },
 
-    "dislikes": [
-      "study"
-    ]
+    "dislikes": {
+      "study": []
+    }
   },
 
   "traits": {

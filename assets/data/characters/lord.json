@@ -9,16 +9,16 @@
 
     "home": "master-bedroom",
 
-    "likes": [
-      "hallway",
-      "dungeon",
-      "observatory"
-    ],
+    "likes": {
+      "dungeon": [],
+      "hallway": [],
+      "observatory": []
+    },
 
-    "dislikes": [
-      "master-bedroom",
-      "garden"
-    ]
+    "dislikes": {
+      "garden": [],
+      "master-bedroom": []
+    }
   },
 
   "traits": {
