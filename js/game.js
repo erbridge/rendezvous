@@ -76,15 +76,16 @@ var loadState = {
     this.load.image('house-background', 'assets/house-background.png');
     this.load.image('house-foreground', 'assets/house-foreground.png');
 
-    this.load.image('female', 'assets/characters/female.png');
-    this.load.image('male',   'assets/characters/male.png');
+    this.load.image('male', 'assets/characters/male.png');
 
     this.load.image('cook-f',       'assets/characters/cook-f.png');
     this.load.image('cook-m',       'assets/characters/cook-m.png');
     this.load.image('gardener-f',   'assets/characters/gardener-f.png');
     this.load.image('gardener-m',   'assets/characters/gardener-m.png');
+    this.load.image('lady',         'assets/characters/lady.png');
     this.load.image('maid-f',       'assets/characters/maid-f.png');
     this.load.image('maid-m',       'assets/characters/maid-m.png');
+    this.load.image('mother',       'assets/characters/mother.png');
     this.load.image('stable-boy-f', 'assets/characters/stable-boy-f.png');
     this.load.image('stable-boy-m', 'assets/characters/stable-boy-m.png');
 
