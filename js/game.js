@@ -134,11 +134,7 @@ var loadState = {
       strokeThickness: 3,
     };
 
-    var progressDisplay = this.add.text(
-      this.world.width, this.world.height, '', style
-    );
-
-    progressDisplay.anchor.set(1);
+    var progressDisplay = this.add.text(0, 0, '', style);
 
     if (GAME_DEBUG) {
       this.stateDisplay = createStateDisplay(this.game, 'load');
