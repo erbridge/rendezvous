@@ -17,12 +17,21 @@ var ROOM_WIDTH_PADDING = 60;
 
 var ROUND_DURATION_MS = 2.5 * 60 * 1000;
 
+var DAY_COLOUR   = 0x6bbfc9;
+var NIGHT_COLOUR = 0x03031b;
+
 window.WebFontConfig = {
   google: {
     families: [
       'Lora',
     ],
   },
+};
+
+var setBackgroundColour = function setBackgroundColour(value) {
+  var hex = value.toString(16);
+
+  document.body.style.backgroundColor = '#' + hex.substr(hex.length - 6);
 };
 
 var createStateDisplay = function createStateDisplay(game, stateName) {
@@ -39,6 +48,35 @@ var createStateDisplay = function createStateDisplay(game, stateName) {
       strokeThickness: 3,
     }
   );
+};
+
+var tweenBackgroundColour = function tweenBackgroundColour(
+  game, startColour, endColour, duration, delay
+) {
+  var colourBlend = {
+    step: 0,
+  };
+
+  // create the tween on this object and tween its step property to 100
+  var colourTween = game.add.tween(colourBlend).to(
+    {
+      step: 100
+    },
+    duration,
+    Phaser.Easing.Linear.InOut,
+    false,
+    delay
+  );
+
+  colourTween.onUpdateCallback(function setColour() {
+    setBackgroundColour(Phaser.Color.interpolateColor(
+      startColour, endColour, 100, colourBlend.step, 1
+    ));
+  });
+
+  setBackgroundColour(startColour);
+
+  colourTween.start();
 };
 
 var constrainVelocity = function constrainVelocity(sprite, maxVelocity) {
@@ -135,6 +173,7 @@ var mainState = {
     this.addCharacters();
 
     this.setupForeground();
+    this.setupTransitions();
 
     this.world.bringToTop(this.speechBubbles);
 
@@ -174,57 +213,23 @@ var mainState = {
   },
 
   setupScene: function setupScene() {
-    var axis = this.add.graphics(
+    this.skyAxis = this.add.graphics(
       this.world.centerX + 50, this.world.centerY + 200
     );
 
-    var sun = this.make.image(this.world.centerX - 140, 0, 'sun');
+    this.sun = this.make.image(this.world.centerX - 140, 0, 'sun');
+    this.sun.anchor.set(0.5);
 
-    sun.anchor.set(0.5);
+    this.moon = this.make.image(100 - this.world.centerX, 0, 'moon');
+    this.moon.anchor.set(0.5);
 
-    var moon = this.make.image(100 - this.world.centerX, 0, 'moon');
-
-    moon.anchor.set(0.5);
-
-    axis.addChild(sun);
-    axis.addChild(moon);
-
-    axis.rotation -= Math.PI / 4;
-    moon.rotation += Math.PI / 4;
-
-    this.add.tween(axis).to(
-      {
-        rotation: Math.PI,
-      },
-      ROUND_DURATION_MS,
-      Phaser.Easing.Linear.InOut,
-      true
-    ).onComplete.add(this.endRound, this);
-
-    this.add.tween(moon).to(
-      {
-        rotation: -Math.PI,
-      },
-      ROUND_DURATION_MS,
-      Phaser.Easing.Linear.InOut,
-      true
-    );
+    this.skyAxis.addChild(this.sun);
+    this.skyAxis.addChild(this.moon);
 
     this.add.image(0, 0, 'house-background');
 
-    var houseBackgroundNight = this.add.image(0, 0, 'house-background-night');
-
-    houseBackgroundNight.alpha = 0;
-
-    this.add.tween(houseBackgroundNight).to(
-      {
-        alpha: 1,
-      },
-      ROUND_DURATION_MS / 100,
-      Phaser.Easing.Linear.InOut,
-      true,
-      ROUND_DURATION_MS / 8
-    );
+    this.houseBackgroundNight = this.add.image(0, 0, 'house-background-night');
+    this.houseBackgroundNight.alpha = 0;
   },
 
   setupRooms: function setupRooms() {
@@ -283,11 +288,62 @@ var mainState = {
   setupForeground: function setupForeground() {
     this.add.image(0, 0, 'house-foreground');
 
-    var houseForegroundNight = this.add.image(0, 0, 'house-foreground-night');
+    this.houseForegroundNight = this.add.image(0, 0, 'house-foreground-night');
+    this.houseForegroundNight.alpha = 0;
+  },
 
-    houseForegroundNight.alpha = 0;
+  setupTransitions: function setupTransitions() {
+    var skyColourNow = Phaser.Color.interpolateColor(
+      DAY_COLOUR, NIGHT_COLOUR, 8, 2, 1
+    );
 
-    this.add.tween(houseForegroundNight).to(
+    tweenBackgroundColour(
+      this.game,
+      DAY_COLOUR,
+      skyColourNow,
+      250
+    );
+
+    tweenBackgroundColour(
+      this.game,
+      skyColourNow,
+      NIGHT_COLOUR,
+      ROUND_DURATION_MS / 6,
+      250
+    );
+
+    this.skyAxis.rotation -= Math.PI / 4;
+    this.moon.rotation    += Math.PI / 4;
+
+    this.add.tween(this.skyAxis).to(
+      {
+        rotation: Math.PI,
+      },
+      ROUND_DURATION_MS,
+      Phaser.Easing.Linear.InOut,
+      true
+    ).onComplete.add(this.endRound, this);
+
+    this.add.tween(this.moon).to(
+      {
+        rotation: -Math.PI,
+      },
+      ROUND_DURATION_MS,
+      Phaser.Easing.Linear.InOut,
+      true
+    );
+
+    this.add.tween(this.houseBackgroundNight).to(
+      {
+        alpha: 1,
+      },
+      ROUND_DURATION_MS / 100,
+      Phaser.Easing.Linear.InOut,
+      true,
+      ROUND_DURATION_MS / 8
+    );
+
+    this.add.tween(this.houseForegroundNight).to(
       {
         alpha: 1,
       },
@@ -976,6 +1032,10 @@ window.startGame = function startGame() {
     GAME_WIDTH, GAME_HEIGHT,
     Phaser.AUTO
   );
+
+  game.transparent = true;
+
+  setBackgroundColour(DAY_COLOUR);
 
   game.state.add('load',    loadState);
   game.state.add('main',    mainState);
