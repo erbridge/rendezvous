@@ -107,6 +107,8 @@ var loadState = {
     this.scale.pageAlignHorizontally = true;
     this.scale.pageAlignVertically   = true;
 
+    this.stage.disableVisibilityChange = true;
+
     if (GAME_DEBUG) {
       this.stateDisplay = createStateDisplay(this.game, 'load');
     }
