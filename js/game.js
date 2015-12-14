@@ -142,6 +142,13 @@ var loadState = {
 
     this.load.image('splash', 'assets/splash.png');
 
+    this.load.audio(
+      'night-sfx', 'assets/sfx/202988__tonant__nightsounds3.mp3'
+    );
+    this.load.audio(
+      'owl-sfx', 'assets/sfx/101345__raoul-slayer__littleowl.mp3'
+    );
+
     this.load.image('sun',  'assets/sun.png');
     this.load.image('moon', 'assets/moon.png');
 
@@ -214,6 +221,18 @@ var loadState = {
 
       if (cacheKey === 'splash') {
         this.world.sendToBack(this.add.image(0, 0, 'splash'));
+      }
+
+      if (cacheKey === 'night-sfx') {
+        var nightSfx = this.add.audio('night-sfx');
+
+        nightSfx.loopFull();
+      }
+
+      if (cacheKey === 'owl-sfx') {
+        var owlSfx = this.add.audio('owl-sfx');
+
+        owlSfx.loopFull();
       }
     }, this);
 
