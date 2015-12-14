@@ -849,7 +849,7 @@ var mainState = {
 
 var resultsState = {
   init: function init(lastState) {
-    Phaser.Utils.extend(this, lastState);
+    this.stateDisplay = lastState.stateDisplay;
   },
 
   create: function create() {
