@@ -592,13 +592,46 @@ var mainState = {
           character.rawData, characters
         );
 
-        // Don't react to a room unless someone else is in it, too.
+        // Don't respond to a room unless someone else is in it, too.
+        character.roomReaction = this.getRoomReaction(
+          character.rawData, roomName
+        );
+
         if (characters.total > 1) {
-          character.roomReaction = this.getRoomReaction(
-            character.rawData, roomName
-          );
-        } else {
-          character.roomReaction = 0;
+          character.roomReaction.responses = [];
+        }
+
+        var totalHappiness = character.personReaction.happiness +
+          character.roomReaction.happiness;
+        var asset;
+
+        switch (totalHappiness) {
+          case (2): {
+            asset = character.assets.love;
+            break;
+          }
+          case (1): {
+            asset = character.assets.like;
+            break;
+          }
+          case (-1): {
+            asset = character.assets.dislike;
+            break;
+          }
+          case (-2): {
+            asset = character.assets.hate;
+            break;
+          }
+          default: {
+            asset = character.assets.base;
+            break;
+          }
+        }
+
+        console.log(asset, character.key)
+
+        if (asset !== character.key) {
+          character.loadTexture(asset);
         }
 
         character = characters.next;
