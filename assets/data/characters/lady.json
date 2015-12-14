@@ -10,7 +10,9 @@
     "home": "master-bedroom",
 
     "likes": {
-      "bathroom": [],
+      "bathroom": [
+        "A cheeky bubble bath sounds perfect!"
+      ],
       "garden": [],
       "stables": []
     },
