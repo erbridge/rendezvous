@@ -628,8 +628,6 @@ var mainState = {
           }
         }
 
-        console.log(asset, character.key)
-
         if (asset !== character.key) {
           character.loadTexture(asset);
         }
