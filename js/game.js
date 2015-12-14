@@ -294,7 +294,11 @@ var mainState = {
 
   setupTransitions: function setupTransitions() {
     var skyColourNow = Phaser.Color.interpolateColor(
-      DAY_COLOUR, NIGHT_COLOUR, 8, 2, 1
+      DAY_COLOUR, NIGHT_COLOUR, 4, 1, 1
+    );
+
+    var skyColourAtEnd = Phaser.Color.interpolateColor(
+      NIGHT_COLOUR, DAY_COLOUR, 24, 5, 1
     );
 
     tweenBackgroundColour(
@@ -310,6 +314,14 @@ var mainState = {
       NIGHT_COLOUR,
       ROUND_DURATION_MS / 6,
       250
+    );
+
+    tweenBackgroundColour(
+      this.game,
+      NIGHT_COLOUR,
+      skyColourAtEnd,
+      5 * ROUND_DURATION_MS / 24,
+      19 * ROUND_DURATION_MS / 24
     );
 
     this.skyAxis.rotation -= Math.PI / 4;
