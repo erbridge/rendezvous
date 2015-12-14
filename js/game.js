@@ -214,7 +214,7 @@ var mainState = {
   },
 
   setupScene: function setupScene() {
-    this.skyAxis = this.add.graphics(
+    this.sky = this.add.graphics(
       this.world.centerX + 50, this.world.centerY + 200
     );
 
@@ -224,8 +224,8 @@ var mainState = {
     this.moon = this.make.image(100 - this.world.centerX, 0, 'moon');
     this.moon.anchor.set(0.5);
 
-    this.skyAxis.addChild(this.sun);
-    this.skyAxis.addChild(this.moon);
+    this.sky.addChild(this.sun);
+    this.sky.addChild(this.moon);
 
     this.add.image(0, 0, 'house-background');
 
@@ -325,10 +325,10 @@ var mainState = {
       19 * ROUND_DURATION_MS / 24
     );
 
-    this.skyAxis.rotation -= Math.PI / 4;
-    this.moon.rotation    += Math.PI / 4;
+    this.sky.rotation  -= Math.PI / 4;
+    this.moon.rotation += Math.PI / 4;
 
-    this.add.tween(this.skyAxis).to(
+    this.add.tween(this.sky).to(
       {
         rotation: Math.PI,
       },
