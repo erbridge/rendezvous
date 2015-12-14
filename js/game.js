@@ -386,12 +386,6 @@ var mainState = {
 
       labelY -= character.roomHappinessLabel.height;
 
-      var typeLabel = this.game.make.text(0, labelY, character.type, style);
-      typeLabel.anchor.set(0.5, 1);
-      character.addChild(typeLabel);
-
-      labelY -= typeLabel.height;
-
       var nameLabel = this.game.make.text(0, labelY, character.name, style);
       nameLabel.anchor.set(0.5, 1);
       character.addChild(nameLabel);
