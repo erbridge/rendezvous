@@ -160,6 +160,10 @@ var loadState = {
       );
     }
 
+    this.load.image('baby-black', 'assets/characters/baby/black.png');
+    this.load.image('baby-blond', 'assets/characters/baby/blond.png');
+    this.load.image('baby-brown', 'assets/characters/baby/brown.png');
+
     this.load.spritesheet('speech-bubble', 'assets/speech-bubble.png', 15, 15);
     this.load.image('speech-bubble-tail', 'assets/speech-bubble-tail.png');
 
@@ -186,6 +190,7 @@ var loadState = {
 var mainState = {
   init: function init(lastState) {
     this.stateDisplay = lastState.stateDisplay;
+    this.lastBabies   = lastState.babies;
   },
 
   create: function create() {
@@ -194,6 +199,7 @@ var mainState = {
     this.setupRooms();
     this.setupInput();
 
+    this.addBabies();
     this.addCharacters();
 
     this.setupForeground();
@@ -445,6 +451,15 @@ var mainState = {
     this.pointerBody.position[1] = this.physics.p2.pxmi(pointer.position.y);
   },
 
+  addBabies: function addBabies() {
+    this.babies = this.add.group();
+
+    if (this.lastBabies) {
+      // FIXME: We need to add babies created in previous runs.
+      this.lastBabies.forEachExists(console.log, this);
+    }
+  },
+
   addCharacters: function addCharacters() {
     this.characters    = this.add.group();
     this.speechBubbles = this.add.group();
@@ -592,12 +607,12 @@ var mainState = {
           character.rawData, characters
         );
 
-        // Don't respond to a room unless someone else is in it, too.
         character.roomReaction = this.getRoomReaction(
           character.rawData, roomName
         );
 
-        if (characters.total <= 1) {
+        // Don't respond to a room unless someone else is in it, too.
+        if (characters.total < 2) {
           character.roomReaction.responses = [];
         }
 
@@ -636,6 +651,7 @@ var mainState = {
       }
     }
 
+    this.characters.forEachExists(this.updateRoomStates, this);
     this.characters.forEachExists(this.maybeSetResponse, this);
     this.characters.forEachExists(this.updateCharacterPosition, this);
   },
@@ -659,16 +675,15 @@ var mainState = {
       if (room.shape.contains(character.position.x, character.position.y)) {
         newRoomName = roomName;
 
-        if (newRoomName !== character.room) {
-          this.resetResponses(character.room);
-          this.resetResponses(newRoomName);
-        }
-
         break;
       }
     }
 
     if (newRoomName) {
+      if (newRoomName !== character.room) {
+        character.previousRoom = character.room;
+      }
+
       character.room = newRoomName;
     } else {
       delete character.room;
@@ -828,16 +843,49 @@ var mainState = {
     character.response = response;
   },
 
-  resetResponses: function resetResponses(roomName) {
+  updateRoomStates: function updateRoomStates(character) {
+    if (character.previousRoom) {
+      this.updateRoomState(character.previousRoom);
+    }
+
+    if (character.room) {
+      this.updateRoomState(character.room);
+    }
+  },
+
+  updateRoomState: function updateRoomState(roomName) {
+    var room = this.rooms[roomName];
+
+    room.completed = false;
+
     var characters = this.getCharactersInRoom(roomName);
+
+    if (characters.total < 1) {
+      return;
+    }
+
+    var completed = characters.total > 1;
 
     var character = characters.first;
 
     while (characters.position < characters.total) {
       delete character.response;
 
+      if (character.roomReaction && character.personReaction) {
+        var happiness = character.roomReaction.happiness +
+          character.personReaction.happiness;
+
+        if (happiness < 1) {
+          completed = false;
+        }
+      } else {
+        completed = false;
+      }
+
       character = characters.next;
     }
+
+    room.completed = completed;
   },
 
   updateCharacterPosition: function updateCharacterPosition(character) {
@@ -1014,7 +1062,37 @@ var mainState = {
   },
 
   endRound: function endRound() {
+    this.createBabies();
+
     this.state.start('results', false, false, this);
+  },
+
+  createBabies: function createBabies() {
+    var babyTypes = [
+      'black',
+      'brown',
+      'blond',
+    ];
+
+    for (var roomName in this.rooms) {
+      var room = this.rooms[roomName];
+
+      if (!room.completed) {
+        continue;
+      }
+
+      var bounds = this.calculateRoomBounds(room);
+
+      var x = this.rnd.integerInRange(
+        bounds.x.min + ROOM_WIDTH_PADDING,
+        bounds.x.max - ROOM_WIDTH_PADDING
+      );
+      var y = bounds.y.max - FLOOR_THICKNESS;
+
+      var baby = this.babies.create(x, y, 'baby-' + this.rnd.pick(babyTypes));
+
+      baby.anchor.set(0.5, 1);
+    }
   },
 
   settleFloaters: function settleFloaters() {
@@ -1044,6 +1122,7 @@ var mainState = {
 var resultsState = {
   init: function init(lastState) {
     this.stateDisplay = lastState.stateDisplay;
+    this.babies       = lastState.babies;
   },
 
   create: function create() {
