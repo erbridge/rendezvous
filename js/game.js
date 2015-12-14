@@ -15,7 +15,7 @@ var MAX_CHARACTER_SPEED = 1000;
 var FLOOR_THICKNESS    = 25;
 var ROOM_WIDTH_PADDING = 60;
 
-var ROUND_DURATION_MS = 2.5 * 60 * 1000;
+var ROUND_DURATION_MS = 2.5 * Phaser.Timer.MINUTE;
 
 var DAY_COLOUR   = 0x6bbfc9;
 var NIGHT_COLOUR = 0x03031b;
@@ -199,6 +199,7 @@ var mainState = {
 
   shutdown: function shutdown() {
     this.settleFloaters();
+    this.stopSpeechBubbles();
   },
 
   setupPhysics: function setupPhysics() {
@@ -446,6 +447,12 @@ var mainState = {
         data
       );
     }
+
+    this.speechBubbleTimer = this.time.events.loop(
+      5 * Phaser.Timer.SECOND, this.createRandomSpeechBubble, this
+    );
+
+    this.createRandomSpeechBubble();
   },
 
   addCharacter: function addCharacter(x, y, assetName, type, rawData) {
@@ -489,6 +496,32 @@ var mainState = {
     }
 
     return character;
+  },
+
+  createRandomSpeechBubble: function createRandomSpeechBubble() {
+    var character = this.characters.getRandom();
+
+    if (!character.response || character.speechBubble) {
+      this.time.events.add(
+        Phaser.Timer.SECOND / 100, this.createRandomSpeechBubble, this
+      );
+
+      return;
+    }
+
+    character.speechBubble = this.speechBubbles.add(
+      this.createSpeechBubble(character, character.response)
+    );
+
+    this.time.events.add(
+      5 * Phaser.Timer.SECOND,
+      function destroy() {
+        character.speechBubble.destroy();
+
+        delete character.speechBubble;
+      },
+      this
+    );
   },
 
   createSpeechBubble: function createSpeechBubble(character, text) {
@@ -895,32 +928,17 @@ var mainState = {
   },
 
   updateSpeechBubble: function updateSpeechBubble(character) {
-    if (character.speechBubble) {
-      character.speechBubble.position.x = Math.round(
-        character.position.x + character.width / 2
-      );
-
-      character.speechBubble.position.y = Math.round(
-        character.position.y - character.height / 2
-      );
+    if (!character.speechBubble) {
+      return;
     }
 
-    var response = character.response || '';
+    character.speechBubble.position.x = Math.round(
+      character.position.x + character.width / 2
+    );
 
-    if (
-      character.speechBubble &&
-      response !== character.speechBubble.text.text
-    ) {
-      character.speechBubble.destroy();
-
-      delete character.speechBubble;
-    }
-
-    if (response && !character.speechBubble) {
-      character.speechBubble = this.speechBubbles.add(
-        this.createSpeechBubble(character, response)
-      );
-    }
+    character.speechBubble.position.y = Math.round(
+      character.position.y - character.height / 2
+    );
   },
 
   renderCharactersInfo: function renderCharactersInfo() {
@@ -959,6 +977,11 @@ var mainState = {
     }
 
     this.onPointerUp();
+  },
+
+  stopSpeechBubbles: function stopSpeechBubbles() {
+    this.time.events.remove(this.speechBubbleTimer);
+    this.speechBubbles.destroy();
   },
 };
 
