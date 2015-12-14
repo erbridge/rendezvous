@@ -203,7 +203,7 @@ var loadState = {
 var mainState = {
   init: function init(lastState) {
     this.stateDisplay = lastState.stateDisplay;
-    this.lastBabies   = lastState.babies;
+    this.lastBabyData = lastState.babyData || [];
   },
 
   create: function create() {
@@ -483,12 +483,26 @@ var mainState = {
   },
 
   addBabies: function addBabies() {
-    this.babies = this.add.group();
+    this.babies   = this.add.group();
+    this.babyData = [];
 
-    if (this.lastBabies) {
-      // FIXME: We need to add babies created in previous runs.
-      this.lastBabies.forEachExists(console.log, this);
+    for (var i = 0; i < this.lastBabyData.length; i++) {
+      var data = this.lastBabyData[i];
+
+      this.addBaby(data.x, data.y, data.type);
     }
+  },
+
+  addBaby: function addBaby(x, y, type) {
+    var baby = this.babies.create(x, y, type);
+
+    baby.anchor.set(0.5, 1);
+
+    this.babyData.push({
+      x:    x,
+      y:    y,
+      type: type,
+    });
   },
 
   addCharacters: function addCharacters() {
@@ -1120,9 +1134,9 @@ var mainState = {
       );
       var y = bounds.y.max - FLOOR_THICKNESS;
 
-      var baby = this.babies.create(x, y, 'baby-' + this.rnd.pick(babyTypes));
+      var type = 'baby-' + this.rnd.pick(babyTypes);
 
-      baby.anchor.set(0.5, 1);
+      this.addBaby(x, y, type);
     }
   },
 
@@ -1153,7 +1167,7 @@ var mainState = {
 var resultsState = {
   init: function init(lastState) {
     this.stateDisplay = lastState.stateDisplay;
-    this.babies       = lastState.babies;
+    this.babyData     = lastState.babyData;
   },
 
   create: function create() {
