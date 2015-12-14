@@ -89,6 +89,9 @@ var loadState = {
     this.load.image('stable-boy-f', 'assets/characters/stable-boy-f.png');
     this.load.image('stable-boy-m', 'assets/characters/stable-boy-m.png');
 
+    this.load.spritesheet('speech-bubble', 'assets/speech-bubble.png', 15, 15);
+    this.load.image('speech-bubble-tail', 'assets/speech-bubble-tail.png');
+
     this.load.json('room-data',  'assets/data/rooms.json');
     this.load.json('trait-data', 'assets/data/traits.json');
 
@@ -120,6 +123,8 @@ var mainState = {
 
     this.setupForeground();
 
+    this.world.bringToTop(this.speechBubbles);
+
     if (GAME_DEBUG) {
       displayState(this.game, 'main');
     }
@@ -129,6 +134,7 @@ var mainState = {
     this.constrainCharacters();
 
     this.updateCharacters();
+    this.updateSpeechBubbles();
   },
 
   render: function render() {
@@ -262,7 +268,8 @@ var mainState = {
   },
 
   addCharacters: function addCharacters() {
-    this.characters = this.add.group();
+    this.characters    = this.add.group();
+    this.speechBubbles = this.add.group();
 
     var characterData = this.cache.getJSON('character-data');
 
@@ -304,6 +311,10 @@ var mainState = {
     character.body.setCollisionGroup(this.characterCollisionGroup);
     character.body.collides(this.floorCollisionGroup);
 
+    character.speechBubble = this.speechBubbles.add(
+      this.createSpeechBubble(character)
+    );
+
     if (GAME_DEBUG) {
       var style = {
         font:     'Lora',
@@ -329,12 +340,6 @@ var mainState = {
 
       labelY -= character.roomHappinessLabel.height;
 
-      character.responseLabel = this.game.add.text(0, labelY, '', style);
-      character.responseLabel.anchor.set(0.5, 1);
-      character.addChild(character.responseLabel);
-
-      labelY -= character.responseLabel.height;
-
       var typeLabel = this.game.add.text(0, labelY, character.type, style);
       typeLabel.anchor.set(0.5, 1);
       character.addChild(typeLabel);
@@ -347,6 +352,24 @@ var mainState = {
     }
 
     return character;
+  },
+
+  createSpeechBubble: function createSpeechBubble(character, text) {
+    var style = {
+      font:     'Lora',
+      fontSize: 18,
+
+      fill:   '#000',
+    };
+
+    return new SpeechBubble(
+      this.game,
+      character.position.x + character.width / 2,
+      character.position.y - character.height / 2,
+      400,
+      text,
+      style
+    );
   },
 
   constrainCharacters: function constrainCharacters() {
@@ -725,6 +748,28 @@ var mainState = {
     };
   },
 
+  updateSpeechBubbles: function updateSpeechBubbles() {
+    this.characters.forEachExists(this.updateSpeechBubble, this);
+  },
+
+  updateSpeechBubble: function updateSpeechBubble(character) {
+    character.speechBubble.position.x = character.position.x +
+      character.width / 2;
+
+    character.speechBubble.position.y = character.position.y -
+      character.height / 2;
+
+    var response = character.response || '';
+
+    if (response !== character.speechBubble.text.text) {
+      character.speechBubble.destroy();
+
+      character.speechBubble = this.speechBubbles.add(
+        this.createSpeechBubble(character, response)
+      );
+    }
+  },
+
   renderCharactersInfo: function renderCharactersInfo() {
     this.characters.forEachExists(this.renderCharacterInfo, this);
   },
@@ -738,8 +783,6 @@ var mainState = {
       character.roomHappinessLabel.setText(
         character.roomReaction ? character.roomReaction.happiness : 0
       );
-
-      character.responseLabel.setText(character.response || '');
     }
   },
 };
