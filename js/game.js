@@ -150,8 +150,8 @@ var mainState = {
     this.floorCollisionGroup     = this.physics.p2.createCollisionGroup();
     this.characterCollisionGroup = this.physics.p2.createCollisionGroup();
 
-    this.physics.p2.gravity.y = GRAVITY;
-    this.physics.p2.friction = 1;
+    this.physics.p2.gravity.y   = GRAVITY;
+    this.physics.p2.friction    = 1;
     this.physics.p2.restitution = 0;
   },
 
