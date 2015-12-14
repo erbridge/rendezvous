@@ -13,7 +13,7 @@
   },
   "clever": {
     "positive": "Oh do tell me about that device again. How does it work?",
-    "negative": "Put the book down or go away..."
+    "negative": "Nobody likes a smart arse. Oh. Well, if you put it like that..."
   },
   "dexterous": {
     "positive": "What lovely hands you have. How about a back rub?",
@@ -24,7 +24,7 @@
     "negative": "Go and wash..."
   },
   "innocent": {
-    "positive": "Such innocence. Now come here!",
+    "positive": "Come now, don't be shy. I won't bite... much.",
     "negative": "Come back when you have more... experience."
   },
   "kind": {
