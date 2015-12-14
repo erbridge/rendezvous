@@ -13,12 +13,19 @@
       "bathroom": [
         "A cheeky bubble bath sounds perfect!"
       ],
-      "garden": [],
-      "stables": []
+      "garden": [
+        "Ah, the roses. Why don't you take a look at my flower?"
+      ],
+      "stables": [
+        "Come on, handsome... The horses aren't going to talk."
+      ]
     },
 
     "dislikes": {
-      "dungeon": [],
+      "dungeon": [
+        "I don't think Father would approve.",
+        "This place reminds of my husband... I am no longer in the mood."
+      ],
       "master-bedroom": [
         "And sleep in my husband's filth? I don't think so."
       ]
@@ -57,7 +64,7 @@
         "Shoo!"
       ],
       "mother": [
-        "Stop fussing, mother!"
+        "Stop fussing, Mother!"
       ]
     }
   }

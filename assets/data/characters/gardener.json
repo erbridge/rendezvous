@@ -11,13 +11,19 @@
     "home": "garden",
 
     "likes": {
-      "garden": []
+      "garden": [
+        "Let us go behind the bushes and whisper sweet nothings to one another.",
+        "Nothing like sleeping under the stars..."
+      ]
     },
 
     "dislikes": {
-      "dungeon": [],
-      "observatory": [],
-      "study": []
+      "dungeon": [
+        "It is so dark down here."
+      ],
+      "study": [
+        "I would leaf through your tome... But not here."
+      ]
     }
   },
 
