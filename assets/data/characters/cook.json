@@ -11,15 +11,27 @@
     "home": "kitchen",
 
     "likes": {
-      "bathroom": [],
-      "guest-bedroom": []
+      "bathroom": [
+        "Oh yes! Tug on that faucet!"
+      ],
+      "guest-bedroom": [
+        "That four poster is divine. Now where did I put the ropes?"
+      ]
     },
 
     "dislikes": {
-      "attic": [],
-      "dungeon": [],
-      "kitchen": [],
-      "stables": []
+      "attic": [
+        "Look at all this dust!"
+      ],
+      "dungeon": [
+        "Was that a rat?"
+      ],
+      "kitchen": [
+        "Don't mess up my surfaces!"
+      ],
+      "stables": [
+        "In front of the horses? Have some decency!"
+      ]
     }
   },
 
