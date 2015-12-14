@@ -421,9 +421,10 @@ var mainState = {
       {
         alpha: 0,
       },
-      500,
+      1000,
       Phaser.Easing.Linear.InOut,
-      true
+      true,
+      250
     );
   },
 
