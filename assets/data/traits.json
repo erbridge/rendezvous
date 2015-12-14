@@ -4,28 +4,28 @@
     "negative": "Yes, we all get it. You're so very special."
   },
   "beautiful": {
-    "positive": "",
-    "negative": ""
+    "positive": "Your visage is a vision!",
+    "negative": "If you could tear yourself away from that mirror for one moment..."
   },
   "boring": {
-    "positive": "",
+    "positive": "No, do continue. It's good to let your mind wander sometimes.",
     "negative": "Yaaawn..."
   },
   "clever": {
-    "positive": "",
-    "negative": ""
+    "positive": "Oh do tell me about that device again. How does it work?",
+    "negative": "Put the book down or go away..."
   },
   "dexterous": {
-    "positive": "",
-    "negative": ""
+    "positive": "What lovely hands you have. How about a back rub?",
+    "negative": "Put your back into it, {gender}!"
   },
   "dirty": {
-    "positive": "",
-    "negative": ""
+    "positive": "It that mud? Oh I do like it rustic.",
+    "negative": "Go and wash..."
   },
   "innocent": {
-    "positive": "",
-    "negative": ""
+    "positive": "Such innocence. Now come here!",
+    "negative": "Come back when you have more... experience."
   },
   "kind": {
     "positive": "You're too kind.",
@@ -36,23 +36,23 @@
     "negative": "Why don't you take your money somewhere else, {title}?"
   },
   "servant": {
-    "positive": "",
-    "negative": ""
+    "positive": "And what do they call this in the workhouse?",
+    "negative": "Go away! Shoo! Damned riffraff..."
   },
   "smelly": {
-    "positive": "",
-    "negative": ""
+    "positive": "Natural aromas are so delightful.",
+    "negative": "Pooey! When was the last time you took a bath?!"
   },
   "stupid": {
-    "positive": "",
-    "negative": ""
+    "positive": "Let's play a game. I say what I want, and you do it. Ok?",
+    "negative": "Watch where you put that thing! Idiot."
   },
   "vegetarian": {
-    "positive": "",
+    "positive": "Save the animals!",
     "negative": "You can't trust someone who doesn't eat meat..."
   },
   "violent": {
-    "positive": "",
-    "negative": ""
+    "positive": "Oh yes... I do like it rough...",
+    "negative": "No thanks. I'm not into that sort of play."
   }
 }
