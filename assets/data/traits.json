@@ -1,72 +1,58 @@
 {
   "arrogant": {
     "positive": "I love a {gender} who's sure of themself!",
-    "neutral": "",
     "negative": ""
   },
   "beautiful": {
     "positive": "",
-    "neutral": "",
     "negative": ""
   },
   "boring": {
     "positive": "",
-    "neutral": "",
     "negative": "Yaaawn..."
   },
   "clever": {
     "positive": "",
-    "neutral": "",
     "negative": ""
   },
   "dexterous": {
     "positive": "",
-    "neutral": "",
     "negative": ""
   },
   "dirty": {
     "positive": "",
-    "neutral": "",
     "negative": ""
   },
   "innocent": {
     "positive": "",
-    "neutral": "",
     "negative": ""
   },
   "kind": {
     "positive": "You're too kind.",
-    "neutral": "",
     "negative": "Why do you have to always be so nice?!"
   },
   "rich": {
     "positive": "Oh, {name}. What a lovely ring. I bet it was expensive.",
-    "neutral": "",
     "negative": "Why don't you take your money somewhere else, {title}?"
   },
   "servant": {
     "positive": "",
-    "neutral": "",
     "negative": ""
   },
   "smelly": {
     "positive": "",
-    "neutral": "",
     "negative": ""
   },
   "stupid": {
     "positive": "",
-    "neutral": "",
     "negative": ""
   },
   "vegetarian": {
     "positive": "",
-    "neutral": "",
     "negative": "You can't trust someone who doesn't eat meat..."
   },
   "violent": {
     "positive": "",
-    "neutral": "",
     "negative": ""
   }
 }
