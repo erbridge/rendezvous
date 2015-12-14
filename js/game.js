@@ -73,6 +73,7 @@ var loadState = {
 
     this.load.image('moon', 'assets/moon.png');
 
+    this.load.image('treeline',         'assets/treeline.png');
     this.load.image('house-background', 'assets/house-background.png');
     this.load.image('house-foreground', 'assets/house-foreground.png');
 
@@ -152,9 +153,9 @@ var mainState = {
   },
 
   setupScene: function setupScene() {
-    this.add.image(0, 0, 'house-background');
-
     this.add.image(80, 100, 'moon');
+    this.add.image(0, 0, 'treeline');
+    this.add.image(0, 0, 'house-background');
   },
 
   setupRooms: function setupRooms() {
