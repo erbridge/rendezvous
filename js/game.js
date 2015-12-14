@@ -28,10 +28,10 @@ window.WebFontConfig = {
   },
 };
 
-var setBackgroundColour = function setBackgroundColour(value) {
+var setBackgroundColour = function setBackgroundColour(game, value) {
   var hex = value.toString(16);
 
-  document.body.style.backgroundColor = '#' + hex.substr(hex.length - 6);
+  game.stage.backgroundColor = '#' + hex.substr(hex.length - 6);
 };
 
 var createStateDisplay = function createStateDisplay(game, stateName) {
@@ -69,12 +69,15 @@ var tweenBackgroundColour = function tweenBackgroundColour(
   );
 
   colourTween.onUpdateCallback(function setColour() {
-    setBackgroundColour(Phaser.Color.interpolateColor(
-      startColour, endColour, 100, colourBlend.step, 1
-    ));
+    setBackgroundColour(
+      game,
+      Phaser.Color.interpolateColor(
+        startColour, endColour, 100, colourBlend.step, 1
+      )
+    );
   });
 
-  setBackgroundColour(startColour);
+  setBackgroundColour(game, startColour);
 
   colourTween.start();
 };
@@ -92,6 +95,16 @@ var constrainVelocity = function constrainVelocity(sprite, maxVelocity) {
     sprite.body.velocity.x = vx;
     sprite.body.velocity.y = vy;
   }
+};
+
+var createOverlay = function createOverlay(game) {
+  var overlay = game.add.graphics();
+
+  overlay.beginFill(0x000000, 1);
+  overlay.drawRect(0, 0, game.world.width, game.world.height);
+  overlay.endFill();
+
+  return overlay;
 };
 
 var loadState = {
@@ -207,6 +220,8 @@ var mainState = {
 
     this.world.bringToTop(this.speechBubbles);
 
+    this.setupOverlay();
+
     if (GAME_DEBUG) {
       if (this.stateDisplay.parent) {
         this.stateDisplay.setText('state: main');
@@ -244,6 +259,8 @@ var mainState = {
   },
 
   setupScene: function setupScene() {
+    setBackgroundColour(this.game, DAY_COLOUR);
+
     this.sky = this.add.graphics(
       this.world.centerX + 50, this.world.centerY + 200
     );
@@ -394,6 +411,19 @@ var mainState = {
       Phaser.Easing.Linear.InOut,
       true,
       ROUND_DURATION_MS / 8
+    );
+  },
+
+  setupOverlay: function setupOverlay() {
+    this.overlay = createOverlay(this.game);
+
+    this.add.tween(this.overlay).to(
+      {
+        alpha: 0,
+      },
+      500,
+      Phaser.Easing.Linear.InOut,
+      true
     );
   },
 
@@ -1139,13 +1169,9 @@ var resultsState = {
   },
 
   setupOverlay: function setupOverlay() {
-    this.overlay = this.add.graphics();
+    this.overlay = createOverlay(this.game);
 
     this.overlay.alpha = 0;
-
-    this.overlay.beginFill(0x000000, 1);
-    this.overlay.drawRect(0, 0, this.world.width, this.world.height);
-    this.overlay.endFill();
 
     this.add.tween(this.overlay).to(
       {
@@ -1196,10 +1222,6 @@ window.startGame = function startGame() {
     GAME_WIDTH, GAME_HEIGHT,
     Phaser.AUTO
   );
-
-  game.transparent = true;
-
-  setBackgroundColour(DAY_COLOUR);
 
   game.state.add('load',    loadState);
   game.state.add('main',    mainState);
