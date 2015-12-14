@@ -20,6 +20,8 @@ var ROUND_DURATION_MS = 2.5 * Phaser.Timer.MINUTE;
 var DAY_COLOUR   = 0x6bbfc9;
 var NIGHT_COLOUR = 0x03031b;
 
+var MAX_ROUND_COUNT = 5;
+
 window.WebFontConfig = {
   google: {
     families: [
@@ -193,7 +195,7 @@ var loadState = {
     this.load.json('stable-boy-data', 'assets/data/characters/stable-boy.json');
 
     this.load.onLoadComplete.add(function() {
-      this.state.start('main', false, false, this);
+      this.state.start('results', false, false, this);
     }, this);
 
     this.load.start();
@@ -204,6 +206,7 @@ var mainState = {
   init: function init(lastState) {
     this.stateDisplay = lastState.stateDisplay;
     this.lastBabyData = lastState.babyData || [];
+    this.roundCount   = lastState.roundCount || 0;
   },
 
   create: function create() {
@@ -424,7 +427,7 @@ var mainState = {
       1000,
       Phaser.Easing.Linear.InOut,
       true,
-      250
+      500
     );
   },
 
@@ -1145,6 +1148,8 @@ var mainState = {
   endRound: function endRound() {
     this.createBabies();
 
+    this.roundCount++;
+
     this.state.start('results', false, false, this);
   },
 
@@ -1203,11 +1208,13 @@ var mainState = {
 var resultsState = {
   init: function init(lastState) {
     this.stateDisplay = lastState.stateDisplay;
-    this.babyData     = lastState.babyData;
+    this.babyData     = lastState.babyData || [];
+    this.roundCount   = lastState.roundCount || 0;
   },
 
   create: function create() {
     this.setupOverlay();
+    this.setupResultsInfo();
     this.setupInput();
 
     if (GAME_DEBUG) {
@@ -1234,6 +1241,68 @@ var resultsState = {
     );
   },
 
+  setupResultsInfo: function setupResultsInfo() {
+    this.roundsToGo = MAX_ROUND_COUNT - this.roundCount;
+
+    var resultText;
+    var subResultText;
+
+    if (this.roundsToGo > 0) {
+      resultText = this.roundsToGo + ' year';
+      resultText += this.roundsToGo === 1 ? '' : 's';
+      resultText += ' ago...';
+    } else {
+      var score =  this.getScore();
+
+      resultText = 'Congratulations! You had ' + score + ' bab';
+      resultText += score === 1 ? 'y' : 'ies';
+      resultText += '!';
+
+      if (score > 0) {
+        subResultText = 'Just don\'t question their lineage...';
+      } else {
+        subResultText = 'Looks like you kept them under control!';
+      }
+    }
+
+    var resultStyle = {
+      font:     'Lora',
+      fontSize: 36,
+
+      align: 'center',
+
+      fill:   '#fff',
+      stroke: '#000',
+
+      strokeThickness: 2,
+    };
+
+    this.result = this.add.text(
+      this.world.centerX, this.world.centerY, resultText, resultStyle
+    );
+
+    this.result.anchor.set(0.5);
+
+    var subResultStyle = {
+      font:     'Lora',
+      fontSize: 24,
+
+      align: 'center',
+
+      fill:   '#fff',
+      stroke: '#000',
+
+      strokeThickness: 2,
+    };
+
+    this.subResult = this.add.text(
+      this.world.centerX, this.world.centerY + 48,
+      subResultText, subResultStyle
+    );
+
+    this.subResult.anchor.set(0.5);
+  },
+
   setupInput: function setupInput() {
     this.input.onDown.add(this.onPointerDown, this);
     this.input.onUp.add(this.onPointerUp, this);
@@ -1251,16 +1320,41 @@ var resultsState = {
     delete this.pointerDown;
   },
 
+  getScore: function getScore() {
+    return this.babyData.length;
+  },
+
   restartMain: function restartMain() {
     this.add.tween(this.overlay).to(
       {
         alpha: 1,
       },
-      1000,
+      1500,
       Phaser.Easing.Linear.InOut,
       true
+    );
+
+    this.add.tween(this.subResult).to(
+      {
+        alpha: 0,
+      },
+      250,
+      Phaser.Easing.Linear.InOut,
+      true,
+      1000
+    );
+
+    this.add.tween(this.result).to(
+      {
+        alpha: 0,
+      },
+      500,
+      Phaser.Easing.Linear.InOut,
+      true,
+      1250
     ).onComplete.add(
       function restart() {
+        // FIXME: If we've finished return to the splash screen instead.
         this.state.start('main', true, false, this);
       },
       this
