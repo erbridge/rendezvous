@@ -25,22 +25,6 @@ window.WebFontConfig = {
   },
 };
 
-var displayState = function displayState(game, stateLabel) {
-  var stateDisplay = game.add.text(
-    0, 0,
-    'state: ' + stateLabel,
-    {
-      font:     'Lora',
-      fontSize: 36,
-
-      fill:   '#fff',
-      stroke: '#000',
-
-      strokeThickness: 3,
-    }
-  );
-};
-
 var constrainVelocity = function constrainVelocity(sprite, maxVelocity) {
   var vx = sprite.body.velocity.x;
   var vy = sprite.body.velocity.y;
@@ -70,7 +54,19 @@ var loadState = {
     this.scale.pageAlignVertically   = true;
 
     if (GAME_DEBUG) {
-      displayState(this.game, 'loading');
+      this.stateDisplay = this.add.text(
+        0, 0,
+        'state: load',
+        {
+          font:     'Lora',
+          fontSize: 36,
+
+          fill:   '#fff',
+          stroke: '#000',
+
+          strokeThickness: 3,
+        }
+      );
     }
 
     this.load.image('sun',  'assets/sun.png');
@@ -108,7 +104,7 @@ var loadState = {
     this.load.json('stable-boy-data', 'assets/data/characters/stable-boy.json');
 
     this.load.onLoadComplete.add(function() {
-      this.state.start('main');
+      this.state.start('main', false, false, this);
     }, this);
 
     this.load.start();
@@ -116,6 +112,10 @@ var loadState = {
 };
 
 var mainState = {
+  init: function init(lastState) {
+    Object.assign(this, lastState);
+  },
+
   create: function create() {
     this.setupPhysics();
     this.setupScene();
@@ -129,7 +129,7 @@ var mainState = {
     this.world.bringToTop(this.speechBubbles);
 
     if (GAME_DEBUG) {
-      displayState(this.game, 'main');
+      this.stateDisplay.setText('state: main');
     }
   },
 
