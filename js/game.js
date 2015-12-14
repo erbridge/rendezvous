@@ -149,8 +149,9 @@ var loadState = {
       'owl-sfx', 'assets/sfx/101345__raoul-slayer__littleowl.mp3'
     );
 
-    this.load.image('sun',  'assets/sun.png');
-    this.load.image('moon', 'assets/moon.png');
+    this.load.image('sun',   'assets/sun.png');
+    this.load.image('moon',  'assets/moon.png');
+    this.load.image('stars', 'assets/stars.png');
 
     this.load.image('house-background', 'assets/house-background.png');
     this.load.image('house-foreground', 'assets/house-foreground.png');
@@ -366,6 +367,9 @@ var mainState = {
   setupScene: function setupScene() {
     setBackgroundColour(this.game, DAY_COLOUR);
 
+    this.stars = this.add.image(0, 0, 'stars');
+    this.stars.alpha = 0;
+
     this.sky = this.add.graphics(
       this.world.centerX + 50, this.world.centerY + 200
     );
@@ -487,6 +491,16 @@ var mainState = {
       skyColourAtEnd,
       5 * ROUND_DURATION_MS / 24,
       19 * ROUND_DURATION_MS / 24
+    );
+
+    this.add.tween(this.stars).to(
+      {
+        alpha: 1,
+      },
+      ROUND_DURATION_MS / 6,
+      Phaser.Easing.Linear.InOut,
+      true,
+      ROUND_DURATION_MS / 8
     );
 
     this.sky.rotation  -= Math.PI / 4;
