@@ -164,14 +164,14 @@ var mainState = {
 
   setupScene: function setupScene() {
     var axis = this.add.graphics(
-      this.game.world.centerX + 50, this.game.world.centerY + 200
+      this.world.centerX + 50, this.world.centerY + 200
     );
 
-    var sun = this.make.image(this.game.world.centerX - 140, 0, 'sun');
+    var sun = this.make.image(this.world.centerX - 140, 0, 'sun');
 
     sun.anchor.set(0.5);
 
-    var moon = this.make.image(100 - this.game.world.centerX, 0, 'moon');
+    var moon = this.make.image(100 - this.world.centerX, 0, 'moon');
 
     moon.anchor.set(0.5);
 
