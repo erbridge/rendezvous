@@ -295,7 +295,7 @@ var mainState = {
 
   setupTransitions: function setupTransitions() {
     var skyColourNow = Phaser.Color.interpolateColor(
-      DAY_COLOUR, NIGHT_COLOUR, 4, 1, 1
+      DAY_COLOUR, NIGHT_COLOUR, 6, 1, 1
     );
 
     var skyColourAtEnd = Phaser.Color.interpolateColor(
