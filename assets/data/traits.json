@@ -1,7 +1,7 @@
 {
   "arrogant": {
-    "positive": "I love a {gender} who's sure of themself!",
-    "negative": "Yes, we all get it. You're so very special."
+    "positive": "I love it when you know what you want!",
+    "negative": "Yes, we all get it. You are ever so special."
   },
   "beautiful": {
     "positive": "Your visage is a vision!",
@@ -13,15 +13,15 @@
   },
   "clever": {
     "positive": "Oh do tell me about that device again. How does it work?",
-    "negative": "Nobody likes a smart arse. Oh. Well, if you put it like that..."
+    "negative": "Pedantry is never a virtue, you know?"
   },
   "dexterous": {
-    "positive": "What lovely hands you have. How about a back rub?",
-    "negative": "Put your back into it, {gender}!"
+    "positive": "What strong hands you have. Perhaps... a back rub?",
+    "negative": ""
   },
   "dirty": {
-    "positive": "It that mud? Oh I do like it rustic.",
-    "negative": "Go and wash..."
+    "positive": "It that mud? Oh I do like things rustic.",
+    "negative": "Do I look like an animal to you?"
   },
   "innocent": {
     "positive": "Come now, don't be shy. I won't bite... much.",
@@ -32,11 +32,11 @@
     "negative": "Why do you have to always be so nice?!"
   },
   "rich": {
-    "positive": "Oh, {name}. What a lovely ring. I bet it was expensive.",
-    "negative": "Why don't you take your money somewhere else, {title}?"
+    "positive": "What a lovely ring. I bet it was expensive.",
+    "negative": "Why don't you take your money somewhere else?!"
   },
   "servant": {
-    "positive": "And what do they call this in the workhouse?",
+    "positive": "I have always wondered what the poor do for fun. Care to show me?",
     "negative": "Go away! Shoo! Damned riffraff..."
   },
   "smelly": {
@@ -44,15 +44,15 @@
     "negative": "Pooey! When was the last time you took a bath?!"
   },
   "stupid": {
-    "positive": "Let's play a game. I say what I want, and you do it. Ok?",
+    "positive": "Let's play a game. I say what I want, and you do it. Okay?",
     "negative": "Watch where you put that thing! Idiot."
   },
   "vegetarian": {
-    "positive": "Save the animals!",
+    "positive": "Is that a carrot in your pocket?",
     "negative": "You can't trust someone who doesn't eat meat..."
   },
   "violent": {
-    "positive": "Oh yes... I do like it rough...",
-    "negative": "No thanks. I'm not into that sort of play."
+    "positive": "Oh yes! I do like it rough...",
+    "negative": "Put your belt back on!"
   }
 }
