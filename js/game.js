@@ -15,7 +15,7 @@ var MAX_CHARACTER_SPEED = 1000;
 var FLOOR_THICKNESS    = 25;
 var ROOM_WIDTH_PADDING = 60;
 
-var ROUND_DURATION_MS = 2 * 60 * 1000;
+var ROUND_DURATION_MS = 2.5 * 60 * 1000;
 
 window.WebFontConfig = {
   google: {
@@ -171,8 +171,17 @@ var mainState = {
     axis.addChild(sun);
     axis.addChild(moon);
 
-    moon.rotation = Math.PI / 8;
-    axis.rotation = -Math.PI / 8;
+    axis.rotation -= Math.PI / 4;
+    moon.rotation += Math.PI / 4;
+
+    this.add.tween(axis).to(
+      {
+        rotation: Math.PI,
+      },
+      ROUND_DURATION_MS,
+      Phaser.Easing.Linear.InOut,
+      true
+    );
 
     this.add.tween(axis).to(
       {
