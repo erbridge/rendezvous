@@ -300,7 +300,9 @@ var mainState = {
     }
 
     if (this.touchedCharacter) {
-      this.touchedCharacter.body.collides(this.floorCollisionGroup);
+      if (this.touchedCharacter.body) {
+        this.touchedCharacter.body.collides(this.floorCollisionGroup);
+      }
 
       delete this.touchedCharacter;
     }
