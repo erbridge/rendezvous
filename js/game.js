@@ -1389,7 +1389,7 @@ var resultsState = {
 
     this.add.tween(this.overlay).to(
       {
-        alpha: 0.7,
+        alpha: 0.5,
       },
       250,
       Phaser.Easing.Linear.InOut,
