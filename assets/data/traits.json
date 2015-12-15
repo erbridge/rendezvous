@@ -8,7 +8,7 @@
     "negative": "If you could tear yourself away from that mirror for one moment..."
   },
   "boring": {
-    "positive": "No, do continue. It's good to let your mind wander sometimes.",
+    "positive": "No, do continue. I'm happy to just look at you.",
     "negative": "Yaaawn..."
   },
   "clever": {
@@ -20,7 +20,7 @@
     "negative": ""
   },
   "dirty": {
-    "positive": "It that mud? Oh I do like things rustic.",
+    "positive": "Is that mud? Oh I do like things rustic.",
     "negative": "Do I look like an animal to you? Clean yourself up."
   },
   "innocent": {
@@ -52,7 +52,7 @@
     "negative": "You can't trust someone who doesn't eat meat..."
   },
   "violent": {
-    "positive": "Oh yes! I do like it rough...",
+    "positive": "Oh yes! I do like a bit of rough and tumble...",
     "negative": "Don't be such a brute!"
   }
 }

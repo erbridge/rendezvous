@@ -24,7 +24,6 @@
 
     "likes": {
       "attic": [
-        "It is nice and quiet up here.",
         "Mind if we blow out that candle?",
         "Want to see inside my teasure chest?"
       ],
@@ -38,7 +37,7 @@
 
     "dislikes": {
       "garden": [
-        "But we might ruin the flowers."
+        "But we might ruin the flowers..."
       ]
     }
   },

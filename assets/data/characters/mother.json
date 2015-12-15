@@ -21,16 +21,16 @@
       ],
       "master-bedroom": [
         "This should have been my bedroom.",
-        "Let us despoil my daughter's sheets."
+        "Let us despoil my daughter's sheets. That will teach her."
       ]
     },
 
     "dislikes": {
       "attic": [
-        "Leave Hector's things alone."
+        "Leave Hector's things alone. I'm saving them."
       ],
       "kitchen": [
-        "I eat food prepared on that table."
+        "Move. I eat food prepared on that table."
       ]
     }
   },
