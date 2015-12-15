@@ -822,15 +822,22 @@ var mainState = {
           character.rawData, roomName
         );
 
-        // Don't respond to a room unless someone else is in it, too.
-        if (characters.total < 2) {
-          character.roomReaction.responses = [];
-        }
-
         var totalHappiness = character.babyReaction.happiness +
           character.personReaction.happiness +
           character.roomReaction.happiness;
         var asset;
+
+        // Don't respond to a room unless someone else is in it, too.
+        if (characters.total < 2) {
+          asset = character.assets.base;
+          character.roomReaction.responses = [];
+        } else if (totalHappiness > 0) {
+          asset = character.assets.love;
+        } else if (totalHappiness < 0) {
+          asset = character.assets.hate;
+        } else {
+          asset = character.assets.base;
+        }
 
         // if (totalHappiness > 1) {
         //   asset = character.assets.love;
@@ -843,14 +850,6 @@ var mainState = {
         // } else {
         //   asset = character.assets.base;
         // }
-
-        if (totalHappiness > 0) {
-          asset = character.assets.love;
-        } else if (totalHappiness < 0) {
-          asset = character.assets.hate;
-        } else {
-          asset = character.assets.base;
-        }
 
         if (asset !== character.key) {
           character.loadTexture(asset);
