@@ -832,13 +832,21 @@ var mainState = {
           character.roomReaction.happiness;
         var asset;
 
-        if (totalHappiness > 1) {
+        // if (totalHappiness > 1) {
+        //   asset = character.assets.love;
+        // } else if (totalHappiness === 1) {
+        //   asset = character.assets.like;
+        // } else if (totalHappiness === -1) {
+        //   asset = character.assets.dislike;
+        // } else if (totalHappiness < -1) {
+        //   asset = character.assets.hate;
+        // } else {
+        //   asset = character.assets.base;
+        // }
+
+        if (totalHappiness > 0) {
           asset = character.assets.love;
-        } else if (totalHappiness === 1) {
-          asset = character.assets.like;
-        } else if (totalHappiness === -1) {
-          asset = character.assets.dislike;
-        } else if (totalHappiness < -1) {
+        } else if (totalHappiness < 0) {
           asset = character.assets.hate;
         } else {
           asset = character.assets.base;
