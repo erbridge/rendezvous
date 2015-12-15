@@ -307,9 +307,10 @@ var startState = {
 
 var mainState = {
   init: function init(lastState) {
-    this.stateDisplay = lastState.stateDisplay;
-    this.lastBabyData = lastState.babyData || [];
-    this.roundCount   = lastState.roundCount || 0;
+    this.stateDisplay    = lastState.stateDisplay;
+    this.characterAssets = lastState.characterAssets || {};
+    this.lastBabyData    = lastState.babyData || [];
+    this.roundCount      = lastState.roundCount || 0;
   },
 
   create: function create() {
@@ -678,13 +679,17 @@ var mainState = {
 
       var bounds = this.calculateRoomBounds(room);
 
+      if (!this.characterAssets[type]) {
+        this.characterAssets[type] = this.rnd.pick(data.assets);
+      }
+
       this.addCharacter(
         this.rnd.integerInRange(
           bounds.x.min + ROOM_WIDTH_PADDING,
           bounds.x.max - ROOM_WIDTH_PADDING
         ),
         bounds.y.max - FLOOR_THICKNESS,
-        this.rnd.pick(data.assets),
+        this.characterAssets[type],
         type,
         data
       );
@@ -1366,10 +1371,11 @@ var mainState = {
 
 var resultsState = {
   init: function init(lastState) {
-    this.stateDisplay = lastState.stateDisplay;
-    this.babyData     = lastState.babyData || [];
-    this.roundCount   = lastState.roundCount || 0;
-    this.rooms        = lastState.rooms || {};
+    this.stateDisplay    = lastState.stateDisplay;
+    this.characterAssets = lastState.characterAssets || {};
+    this.babyData        = lastState.babyData || [];
+    this.roundCount      = lastState.roundCount || 0;
+    this.rooms           = lastState.rooms || {};
   },
 
   create: function create() {
