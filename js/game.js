@@ -145,9 +145,6 @@ var loadState = {
     this.load.audio(
       'night-sfx', 'assets/sfx/202988__tonant__nightsounds3.mp3'
     );
-    this.load.audio(
-      'owl-sfx', 'assets/sfx/101345__raoul-slayer__littleowl.mp3'
-    );
 
     this.load.image('sun',   'assets/sun.png');
     this.load.image('moon',  'assets/moon.png');
@@ -228,12 +225,6 @@ var loadState = {
         var nightSfx = this.add.audio('night-sfx');
 
         nightSfx.loopFull();
-      }
-
-      if (cacheKey === 'owl-sfx') {
-        var owlSfx = this.add.audio('owl-sfx');
-
-        owlSfx.loopFull();
       }
     }, this);
 
@@ -466,7 +457,6 @@ var mainState = {
   setupSounds: function setupSounds() {
     this.nightSounds = [
       this.add.audio('night-sfx', 0),
-      this.add.audio('owl-sfx', 0),
     ];
 
     for (var i = 0; i < this.nightSounds.length; i++) {
