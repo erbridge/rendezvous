@@ -146,6 +146,10 @@ var loadState = {
       'night-sfx', 'assets/sfx/202988__tonant__nightsounds3.mp3'
     );
 
+    this.load.audio(
+      'bird-sfx', 'assets/sfx/182502__swiftoid__birds-chirping-02.mp3'
+    );
+
     this.load.image('sun',   'assets/sun.png');
     this.load.image('moon',  'assets/moon.png');
     this.load.image('stars', 'assets/stars.png');
@@ -380,6 +384,8 @@ var mainState = {
 
     this.houseBackgroundNight = this.add.image(0, 0, 'house-background-night');
     this.houseBackgroundNight.alpha = 0;
+
+    this.add.audio('bird-sfx', 0.2).play();
   },
 
   setupRooms: function setupRooms() {
@@ -555,7 +561,7 @@ var mainState = {
         ROUND_DURATION_MS / 10,
         Phaser.Easing.Linear.InOut,
         true,
-        ROUND_DURATION_MS / 7
+        ROUND_DURATION_MS / 5
       );
     }
   },
