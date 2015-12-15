@@ -322,6 +322,7 @@ var mainState = {
     this.addCharacters();
 
     this.setupForeground();
+    this.setupSounds();
     this.setupTransitions();
 
     this.world.bringToTop(this.speechBubbles);
@@ -461,6 +462,17 @@ var mainState = {
     );
   },
 
+  setupSounds: function setupSounds() {
+    this.nightSounds = [
+      this.add.audio('night-sfx', 0),
+      this.add.audio('owl-sfx', 0),
+    ];
+
+    for (var i = 0; i < this.nightSounds.length; i++) {
+      this.nightSounds[i].loopFull();
+    }
+  },
+
   setupTransitions: function setupTransitions() {
     var skyColourNow = Phaser.Color.interpolateColor(
       DAY_COLOUR, NIGHT_COLOUR, 6, 1, 1
@@ -543,6 +555,18 @@ var mainState = {
       true,
       ROUND_DURATION_MS / 8
     );
+
+    for (var i = 0; i < this.nightSounds.length; i++) {
+      this.add.tween(this.nightSounds[i]).to(
+        {
+          volume: 1,
+        },
+        ROUND_DURATION_MS / 10,
+        Phaser.Easing.Linear.InOut,
+        true,
+        ROUND_DURATION_MS / 7
+      );
+    }
   },
 
   setupOverlay: function setupOverlay() {
@@ -1460,6 +1484,22 @@ var resultsState = {
   },
 
   restartMain: function restartMain() {
+    this.add.tween(this.sound).to(
+      {
+        volume: 0
+      },
+      1000,
+      Phaser.Easing.Linear.InOut,
+      true
+    ).onComplete.add(
+      function removeNightSounds() {
+        this.sound.destroy();
+
+        this.sound.volume = 1;
+      },
+      this
+    );
+
     this.add.tween(this.overlay).to(
       {
         alpha: 1,
