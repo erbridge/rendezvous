@@ -25,3 +25,8 @@ $ bundle install --path="./bundle"
 ```
 $ bundle exec jekyll serve --watch
 ```
+
+
+## Assets
+
+Sounds were retrieved from freesound.org and are licenced under CC0.
