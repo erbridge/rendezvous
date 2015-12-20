@@ -5,7 +5,7 @@ This is a game originally made for Ludum Dare 34 in collaboration with [Maike Vi
 
 ## Install
 
-Either play [online](http://erbridge.co.uk/rendezvous/) or download the appropriate [distribution for your system](/dist/).
+Either play [online](http://erbridge.co.uk/rendezvous/) or download the appropriate [distribution for your system](https://github.com/erbridge/rendezvous/releases).
 
 
 ## Develop
