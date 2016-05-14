@@ -1,17 +1,17 @@
 'use strict';
 
-const app           = require('app');
-const BrowserWindow = require('browser-window');
+const electron      = require('electron');
 
-// Prevent the main window from being GCed.
+const app = electron.app;
+
+// Prevent the main window from being garbage collected.
 let mainWindow;
-
 function onClosed() {
   mainWindow = null;
 }
 
 function createMainWindow() {
-  const win = new BrowserWindow({
+  const win = new electron.BrowserWindow({
     width:     1920,
     height:    1080,
     resizable: true
