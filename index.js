@@ -6,15 +6,16 @@ const app = electron.app;
 
 // Prevent the main window from being garbage collected.
 let mainWindow;
-function onClosed() {
-  mainWindow = null;
-}
 
-function createMainWindow() {
+const onClosed = function onClosed() {
+  mainWindow = null;
+};
+
+const createMainWindow = function createMainWindow() {
   const win = new electron.BrowserWindow({
     width:     1920,
     height:    1080,
-    resizable: true
+    resizable: true,
   });
 
   win.loadURL(`file://${__dirname}/index.html`);
@@ -22,20 +23,20 @@ function createMainWindow() {
   win.on('closed', onClosed);
 
   return win;
-}
+};
 
-app.on('window-all-closed', function() {
+app.on('window-all-closed', function onAllClosed() {
   if (process.platform !== 'darwin') {
     app.quit();
   }
 });
 
-app.on('activate-with-no-open-windows', function() {
+app.on('activate-with-no-open-windows', function onActivate() {
   if (!mainWindow) {
     mainWindow = createMainWindow();
   }
 });
 
-app.on('ready', function() {
+app.on('ready', function onReady() {
   mainWindow = createMainWindow();
 });

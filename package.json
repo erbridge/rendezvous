@@ -11,6 +11,7 @@
   },
   "scripts": {
     "start": "electron .",
+    "lint": "eslint .",
     "clean": "rm -rf ./build",
     "clean:linux": "rm -rf ./build/linux",
     "clean:darwin": "rm -rf ./build/darwin",
@@ -39,6 +40,7 @@
   "electronVersion": "1.0.2",
   "devDependencies": {
     "electron-packager": "^7.0.1",
-    "electron-prebuilt": "^1.0.2"
+    "electron-prebuilt": "^1.0.2",
+    "eslint": "^2.10.0"
   }
 }
