@@ -5,12 +5,6 @@ const config = require('../config');
 const debugUtils = require('../utils/debug');
 
 module.exports = {
-  preload() {
-    this.load.script(
-      'webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js'
-    );
-  },
-
   create() {
     this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 

@@ -2,14 +2,6 @@
 
 'use strict';
 
-window.WebFontConfig = {
-  google: {
-    families: [
-      'Lora',
-    ],
-  },
-};
-
 module.exports = {
   game: {
     width:  1920,
