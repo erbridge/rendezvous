@@ -5,60 +5,54 @@ This is a game originally made for Ludum Dare 34 in collaboration with [Maike Vi
 
 ## Install
 
-Either play [online](http://erbridge.co.uk/rendezvous/) or download the appropriate [distribution for your system](https://github.com/erbridge/rendezvous/releases).
+Download the appropriate [distribution for your system](https://squarebridges.itch.io/midnight-rendezvous).
 
 
 ## Develop
 
-This game can be run directly in the browser, or run as a standalone executable using [Electron](http://electron.atom.io).
+This game can be run as a standalone executable using [Electron](http://electron.atom.io).
 
 
-### Web
-
-Since the site is hosted on GitHub Pages (hence `gh-pages` being the main branch), I use Jekyll when developing it. Any webserver would do, however.
-
-
-#### Install
-
-```
-$ bundle install --path="./bundle"
-```
-
-
-#### Run
-
-```
-$ bundle exec jekyll serve --watch
-```
-
-
-### Electron
-
-#### Install
+### Install
 
 ```
 $ npm install
 ```
 
 
-#### Run
+### Run
 
 ```
 $ npm start
 ```
 
 
-#### Build
+### Build
 
 ```
 $ npm run build
 ```
 
 
-#### Distribute
+### Distribute
+
+To create a compressed file for distribution, run:
 
 ```
 $ npm run dist
+```
+
+To upload directly to itch.io, run:
+
+
+```
+$ npm run push:beta
+```
+
+or
+
+```
+$ npm run push:release
 ```
 
 
