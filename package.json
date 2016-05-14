@@ -2,6 +2,7 @@
   "name": "rendezvous",
   "productName": "MidnightRendezvous",
   "version": "0.1.2",
+  "private": true,
   "scripts": {
     "postinstall": "cd app/ && npm install",
     "start": "electron app/",
@@ -15,14 +16,14 @@
     "dist:darwin": "npm run build:darwin && mkdir -p \"dist/\" && tar -czf \"dist/$npm_package_productName-darwin-x64-$npm_package_version.tar.gz\" -C build/ \"$npm_package_productName-darwin-x64\"",
     "dist:linux": "npm run build:linux && mkdir -p \"dist/\" && tar -czf \"dist/$npm_package_productName-linux-x64-$npm_package_version.tar.gz\" -C build/ \"$npm_package_productName-linux-x64\"",
     "dist:win32": "npm run build:win32 && mkdir -p \"dist/\" && pushd build/ && zip -q -r \"../dist/$npm_package_productName-win32-ia32-$npm_package_version.zip\" \"$npm_package_productName-win32-ia32\" && popd",
-    "push:beta": "npm run push:linux-beta && npm run push:darwin-beta && npm run push:win32-beta",
-    "push:darwin-beta": "butler push \"build/$npm_package_productName-darwin-x64/\" squarebridges/midnight-rendezvous-beta:osx-x64 --userversion=\"$npm_package_version\"",
-    "push:linux-beta": "butler push \"build/$npm_package_productName-linux-x64/\" squarebridges/midnight-rendezvous-beta:linux-x64 --userversion=\"$npm_package_version\"",
-    "push:win32-beta": "butler push \"build/$npm_package_productName-win32-ia32/\" squarebridges/midnight-rendezvous-beta:win32-ia32 --userversion=\"$npm_package_version\"",
-    "push:release": "npm run push:linux-release && npm run push:darwin-release && npm run push:win32-release",
-    "push:darwin-release": "butler push \"build/$npm_package_productName-darwin-x64/\" squarebridges/midnight-rendezvous:osx-x64 --userversion=\"$npm_package_version\"",
-    "push:linux-release": "butler push \"build/$npm_package_productName-linux-x64/\" squarebridges/midnight-rendezvous:linux-x64 --userversion=\"$npm_package_version\"",
-    "push:win32-release": "butler push \"build/$npm_package_productName-win32-ia32/\" squarebridges/midnight-rendezvous:win32-ia32 --userversion=\"$npm_package_version\""
+    "publish:beta": "npm run publish:linux-beta && npm run publish:darwin-beta && npm run publish:win32-beta",
+    "publish:darwin-beta": "butler push \"build/$npm_package_productName-darwin-x64/\" squarebridges/midnight-rendezvous-beta:osx-x64 --userversion=\"$npm_package_version\"",
+    "publish:linux-beta": "butler push \"build/$npm_package_productName-linux-x64/\" squarebridges/midnight-rendezvous-beta:linux-x64 --userversion=\"$npm_package_version\"",
+    "publish:win32-beta": "butler push \"build/$npm_package_productName-win32-ia32/\" squarebridges/midnight-rendezvous-beta:win32-ia32 --userversion=\"$npm_package_version\"",
+    "publish:release": "npm run publish:linux-release && npm run publish:darwin-release && npm run publish:win32-release",
+    "publish:darwin-release": "butler push \"build/$npm_package_productName-darwin-x64/\" squarebridges/midnight-rendezvous:osx-x64 --userversion=\"$npm_package_version\"",
+    "publish:linux-release": "butler push \"build/$npm_package_productName-linux-x64/\" squarebridges/midnight-rendezvous:linux-x64 --userversion=\"$npm_package_version\"",
+    "publish:win32-release": "butler push \"build/$npm_package_productName-win32-ia32/\" squarebridges/midnight-rendezvous:win32-ia32 --userversion=\"$npm_package_version\""
   },
   "devDependencies": {
     "electron-packager": "^7.0.1",

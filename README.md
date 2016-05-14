@@ -46,13 +46,13 @@ To upload directly to itch.io, run:
 
 
 ```
-$ npm run push:beta
+$ npm run publish:beta
 ```
 
 or
 
 ```
-$ npm run push:release
+$ npm run publish:release
 ```
 
 

@@ -1,5 +1,6 @@
 {
   "main": "app.js",
+  "private": true,
   "dependencies": {
     "phaser": "^2.4.7"
   }
