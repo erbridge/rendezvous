@@ -42,8 +42,7 @@ To create a compressed file for distribution, run:
 $ npm run dist
 ```
 
-To upload directly to itch.io, run:
-
+To upload directly to itch.io using [`butler`](https://github.com/itchio/butler), run:
 
 ```
 $ npm run publish:beta
