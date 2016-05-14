@@ -66,6 +66,7 @@ module.exports = {
     this.characterAssets = lastState.characterAssets || {};
     this.lastBabyData = lastState.babyData || [];
     this.roundCount = lastState.roundCount || 0;
+    this.sounds = lastState.sounds || [];
   },
 
   create() {
@@ -145,7 +146,11 @@ module.exports = {
     this.houseBackgroundNight = this.add.image(0, 0, 'house-background-night');
     this.houseBackgroundNight.alpha = 0;
 
-    this.add.audio('bird-sfx', 0.2).play();
+    const birdSfx = this.add.audio('bird-sfx', 0.2);
+
+    birdSfx.play();
+
+    this.sounds.push(birdSfx);
   },
 
   setupRooms() {
@@ -224,6 +229,8 @@ module.exports = {
     this.nightSounds = [
       this.add.audio('night-sfx', 0),
     ];
+
+    this.sounds = this.sounds.concat(this.nightSounds);
 
     for (let i = 0; i < this.nightSounds.length; i++) {
       this.nightSounds[i].loopFull();

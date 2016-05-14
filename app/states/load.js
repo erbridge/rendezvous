@@ -99,6 +99,8 @@ module.exports = {
     this.load.json('mother-data', 'assets/data/characters/mother.json');
     this.load.json('stable-boy-data', 'assets/data/characters/stable-boy.json');
 
+    this.sounds = [];
+
     this.load.onFileComplete.add(function handleProgress(progress, cacheKey) {
       progressDisplay.setText(`${progress}%`);
 
@@ -110,6 +112,8 @@ module.exports = {
         const nightSfx = this.add.audio('night-sfx');
 
         nightSfx.loopFull();
+
+        this.sounds.push(nightSfx);
       }
     }, this);
 

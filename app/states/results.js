@@ -13,6 +13,7 @@ module.exports = {
     this.babyData = lastState.babyData || [];
     this.roundCount = lastState.roundCount || 0;
     this.rooms = lastState.rooms || {};
+    this.sounds = lastState.sounds || [];
   },
 
   create: function create() {
@@ -142,8 +143,12 @@ module.exports = {
       Phaser.Easing.Linear.InOut,
       true
     ).onComplete.add(
-      function removeNightSounds() {
-        this.sound.destroy();
+      function removeSounds() {
+        this.sounds.forEach(function destroySound(sound) {
+          sound.destroy();
+        });
+
+        this.sounds = [];
 
         this.sound.volume = 1;
       },

@@ -9,6 +9,7 @@ const debugUtils = require('../utils/debug');
 module.exports = {
   init(lastState) {
     this.stateDisplay = lastState.stateDisplay;
+    this.sounds = lastState.sounds || [];
   },
 
   create() {

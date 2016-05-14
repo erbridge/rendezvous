@@ -1,6 +1,6 @@
 {
   "main": "app.js",
   "dependencies": {
-    "phaser": "2.4.4"
+    "phaser": "^2.4.7"
   }
 }
