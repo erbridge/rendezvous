@@ -13,9 +13,10 @@ const onClosed = function onClosed() {
 
 const createMainWindow = function createMainWindow() {
   const win = new electron.BrowserWindow({
-    width:     1920,
-    height:    1080,
-    resizable: true,
+    width:      1920,
+    height:     1080,
+    fullscreen: true,
+    frame:      false,
   });
 
   win.loadURL(`file://${__dirname}/index.html`);
