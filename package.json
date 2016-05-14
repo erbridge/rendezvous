@@ -14,7 +14,15 @@
     "dist": "npm run dist:linux && npm run dist:darwin && npm run dist:win32",
     "dist:darwin": "npm run build:darwin && mkdir -p \"dist/\" && tar -czf \"dist/$npm_package_productName-darwin-x64-$npm_package_version.tar.gz\" -C build/ \"$npm_package_productName-darwin-x64\"",
     "dist:linux": "npm run build:linux && mkdir -p \"dist/\" && tar -czf \"dist/$npm_package_productName-linux-x64-$npm_package_version.tar.gz\" -C build/ \"$npm_package_productName-linux-x64\"",
-    "dist:win32": "npm run build:win32 && mkdir -p \"dist/\" && pushd build/ && zip -q -r \"../dist/$npm_package_productName-win32-x64-$npm_package_version.zip\" \"$npm_package_productName-win32-x64\" && popd"
+    "dist:win32": "npm run build:win32 && mkdir -p \"dist/\" && pushd build/ && zip -q -r \"../dist/$npm_package_productName-win32-x64-$npm_package_version.zip\" \"$npm_package_productName-win32-x64\" && popd",
+    "push:beta": "npm run push:linux-beta && npm run push:darwin-beta && npm run push:win32-beta",
+    "push:darwin-beta": "butler push \"build/$npm_package_productName-darwin-x64/\" squarebridges/midnight-rendezvous:osx-beta --userversion=\"$npm_package_version\"",
+    "push:linux-beta": "butler push \"build/$npm_package_productName-linux-x64/\" squarebridges/midnight-rendezvous:linux-beta --userversion=\"$npm_package_version\"",
+    "push:win32-beta": "butler push \"build/$npm_package_productName-win32-x64/\" squarebridges/midnight-rendezvous:win32-beta --userversion=\"$npm_package_version\"",
+    "push:release": "npm run push:linux-release && npm run push:darwin-release && npm run push:win32-release",
+    "push:darwin-release": "butler push \"build/$npm_package_productName-darwin-x64/\" squarebridges/midnight-rendezvous:osx-release --userversion=\"$npm_package_version\"",
+    "push:linux-release": "butler push \"build/$npm_package_productName-linux-x64/\" squarebridges/midnight-rendezvous:linux-release --userversion=\"$npm_package_version\"",
+    "push:win32-release": "butler push \"build/$npm_package_productName-win32-x64/\" squarebridges/midnight-rendezvous:win32-release --userversion=\"$npm_package_version\""
   },
   "devDependencies": {
     "electron-packager": "^7.0.1",
