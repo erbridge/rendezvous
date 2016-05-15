@@ -8,29 +8,33 @@
     "lint": "eslint ./app/",
     "clean": "rm -rf ./build/",
     "build": "npm run build:linux && npm run build:osx && npm run build:win32",
-    "build:osx": "itchy build osx",
     "build:linux": "itchy build linux",
+    "build:osx": "itchy build osx",
     "build:win32": "itchy build win32",
     "dist": "npm run dist:linux && npm run dist:osx && npm run dist:win32",
-    "dist:osx": "npm run build:osx && mkdir -p \"dist/\" && tar -czf \"dist/$npm_package_productName-darwin-x64-$npm_package_version.tar.gz\" -C build/ \"$npm_package_productName-darwin-x64\"",
     "dist:linux": "npm run build:linux && mkdir -p \"dist/\" && tar -czf \"dist/$npm_package_productName-linux-x64-$npm_package_version.tar.gz\" -C build/ \"$npm_package_productName-linux-x64\"",
+    "dist:osx": "npm run build:osx && mkdir -p \"dist/\" && tar -czf \"dist/$npm_package_productName-darwin-x64-$npm_package_version.tar.gz\" -C build/ \"$npm_package_productName-darwin-x64\"",
     "dist:win32": "npm run build:win32 && mkdir -p \"dist/\" && pushd build/ && zip -q -r \"../dist/$npm_package_productName-win32-ia32-$npm_package_version.zip\" \"$npm_package_productName-win32-ia32\" && popd",
     "publish:beta": "npm run publish:linux-beta && npm run publish:osx-beta && npm run publish:win32-beta",
-    "publish:osx-beta": "butler push \"build/$npm_package_productName-darwin-x64/\" squarebridges/midnight-rendezvous-beta:osx-x64 --userversion=\"$npm_package_version\"",
-    "publish:linux-beta": "butler push \"build/$npm_package_productName-linux-x64/\" squarebridges/midnight-rendezvous-beta:linux-x64 --userversion=\"$npm_package_version\"",
-    "publish:win32-beta": "butler push \"build/$npm_package_productName-win32-ia32/\" squarebridges/midnight-rendezvous-beta:win32-ia32 --userversion=\"$npm_package_version\"",
+    "publish:linux-beta": "itchy publish beta linux",
+    "publish:osx-beta": "itchy publish beta osx",
+    "publish:win32-beta": "itchy publish beta win32",
     "publish:release": "npm run publish:linux-release && npm run publish:osx-release && npm run publish:win32-release",
-    "publish:osx-release": "butler push \"build/$npm_package_productName-darwin-x64/\" squarebridges/midnight-rendezvous:osx-x64 --userversion=\"$npm_package_version\"",
-    "publish:linux-release": "butler push \"build/$npm_package_productName-linux-x64/\" squarebridges/midnight-rendezvous:linux-x64 --userversion=\"$npm_package_version\"",
-    "publish:win32-release": "butler push \"build/$npm_package_productName-win32-ia32/\" squarebridges/midnight-rendezvous:win32-ia32 --userversion=\"$npm_package_version\""
+    "publish:linux-release": "itchy publish release linux",
+    "publish:osx-release": "itchy publish release osx",
+    "publish:win32-release": "itchy publish release win32"
   },
   "itchyElectron": {
     "productName": "MidnightRendezvous",
-    "appDir": "./app"
+    "appDir": "./app",
+    "itchTargets": {
+      "beta": "squarebridges/midnight-rendezvous-beta",
+      "release": "squarebridges/midnight-rendezvous"
+    }
   },
   "devDependencies": {
     "electron-prebuilt": "1.0.2",
     "eslint": "^2.10.0",
-    "itchy-electron": "^0.1.1"
+    "itchy-electron": "^0.2.0"
   }
 }
